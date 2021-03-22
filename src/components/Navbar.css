@@ -1,0 +1,19 @@
+.Bookshelf {
+    color:"white"
+}
+
+.space-between{
+    display: flex;
+    justify-content: space-between;
+}
+
+.listBook{
+    width:100px;
+    
+}
+
+.listDiv{
+    width:50px;
+   
+    /* position: absolute; */
+}
