@@ -38,19 +38,11 @@ export default function Navbar() {
 
         
         <div className="collpase navbar-collapse">
-          <Link to="/" className="navbar-brand">Bookshelf</Link>
+          <Link to="/" className="navbar-brand">Job Board</Link>
           <ul className="navbar-nav mr-auto">
             
             <li className="navbar-item">
-            <Link to="/test" className="nav-link">Add a user</Link>
-            </li>
-
-            <li className="navbar-item">
-            <Link to="/booksearch" className="nav-link">Book Search</Link>
-            </li>
-
-            <li className="navbar-item">
-            <Link to="/lists" className="nav-link">Lists</Link>
+            <Link to="/signup" className="nav-link">Add a user</Link>
             </li>
 
             <li className="navbar-item">

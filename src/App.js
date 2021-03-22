@@ -6,12 +6,8 @@ import axios from "axios"
 import Navbar from "./components/Navbar"
 import HomePage from "./pages/HomePage"
 import Adduser from "./pages/Adduser"
-import AddBook from "./pages/AddBook"
 import Profile from "./pages/Profile"
-import AddList from "./pages/AddList"
-import ViewBook from "./idPages/ViewBook"
-import ViewUser from "./idPages/ViewUser"
-// import FireAuth from "./components/fireAuth"
+import ViewJobPost from "./idPages/ViewJobPost"
 
 axios.defaults.withCredentials = true
 
@@ -25,12 +21,9 @@ function App() {
       <div>
       <br/>
         <Route path="/" exact component={HomePage} />
-        <Route path="/test" exact component={Adduser} />
-        <Route path="/booksearch" component={AddBook} />
-        <Route path="/lists" component={AddList} />
+        <Route path="/signup" exact component={Adduser} />
         <Route path="/profile" component={Profile} />
-        <Route path="/book/:id" component={ViewBook} />
-        <Route path="/user/:id" component={ViewUser} />
+        <Route path="/book/:id" component={ViewJobPost} />
       </div>
     </Router>
   );

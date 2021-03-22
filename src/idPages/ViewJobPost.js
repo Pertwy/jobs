@@ -3,14 +3,9 @@ import axios from 'axios';
 // import '../components/HomePage.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import UserDropDown from "../components/UserDropDown"
-import Radio from '@material-ui/core/Radio';
-  import RadioGroup from '@material-ui/core/RadioGroup';
-  import FormControlLabel from '@material-ui/core/FormControlLabel';
-  import FormControl from '@material-ui/core/FormControl';
-  import FormLabel from '@material-ui/core/FormLabel';
 
 
-export default function ViewBook(props){
+export default function ViewJobPost(props){
   const [book, setBook] = useState({})  
   const [currentUser, setCurrentUser] = useState("john@gmail.com")
   const [review, setReview] = useState("")
@@ -67,22 +62,7 @@ export default function ViewBook(props){
               setReview(target.value)}
             placeholder="Add a Review"
           />
-          <FormControl className="row" component="fieldset">
-            <FormLabel component="legend">Rating</FormLabel>
-            <RadioGroup row aria-label="rating" name="rating" value={value} onChange={handleChange}>
-              <FormControlLabel value= "1" labelPlacement="top" control={<Radio />} label= "1" />
-              <FormControlLabel value= "2" labelPlacement="top" control={<Radio />} label= "2" />
-              <FormControlLabel value= "3" labelPlacement="top" control={<Radio />} label= "3" />
-              <FormControlLabel value= "4" labelPlacement="top" control={<Radio />} label= "4" />
-              <FormControlLabel value= "5" labelPlacement="top" control={<Radio />} label= "5" />
-              <FormControlLabel value= "6" labelPlacement="top" control={<Radio />} label= "6" />
-              <FormControlLabel value= "7" labelPlacement="top" control={<Radio />} label= "7" />
-              <FormControlLabel value= "8" labelPlacement="top" control={<Radio />} label= "8" />
-              <FormControlLabel value= "9" labelPlacement="top" control={<Radio />} label= "9" />
-              <FormControlLabel value= "10" labelPlacement="top" control={<Radio />} label= "10" />
 
-            </RadioGroup>
-          </FormControl>
 
           <button type="submit">submit</button>
         </form>
