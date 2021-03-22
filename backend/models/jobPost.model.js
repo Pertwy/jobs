@@ -3,7 +3,7 @@ const Joi = require('joi');
 
 const Schema = mongoose.Schema;
 
-const bookSchema = new Schema({
+const jobPostSchema = new Schema({
     title:{type: String, required: true},
     description:{},
     salary:{},
@@ -23,19 +23,18 @@ const bookSchema = new Schema({
     timestamps: true
 })
 
-const Book = mongoose.model('Book', bookSchema)
+const JobPost = mongoose.model('JobPost', jobPostSchema)
 
-function validateBook(book) {
+function validateBook(jobPost) {
     const schema = {
       title: Joi.string().min(5).max(50).required(),
       author: Joi.string().min(5).max(255).required(),
       image: Joi.string().min(5).required()
     };
   
-    return Joi.validate(book, schema);
+    return Joi.validate(jobPost, schema);
   }
   
 
 exports.validate = validateBook;
-exports.Book = Book;
-//module.exports = Book
+exports.JobPost = JobPost;

@@ -46,7 +46,7 @@ export default function Navbar() {
             </li>
 
             <li className="navbar-item">
-            <Link to="/recruiterProfile" className="nav-link">Profile</Link>
+            <Link to="/recruiterProfile" className="nav-link">Recruiter</Link>
             </li>
 
           </ul>

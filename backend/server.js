@@ -30,14 +30,12 @@ connection.once('open', () => {
 
 
 
-const booksRouter = require('./routes/books')
+const jobpostsRouter = require('./routes/jobPosts')
 const usersRouter = require('./routes/users')
-const testusersRouter = require('./routes/testusers')
 const authRouter = require('./routes/auth')
 
-app.use('/books', booksRouter)
+app.use('/books', jobpostsRouter)
 app.use('/users', usersRouter)
-app.use('/testusers', testusersRouter)
 app.use('/auth', authRouter)
 
 
