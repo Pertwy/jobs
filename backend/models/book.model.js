@@ -5,60 +5,20 @@ const Schema = mongoose.Schema;
 
 const bookSchema = new Schema({
     title:{type: String, required: true},
-    author:{type: String, required: true},
-    image:{type: String, required: true},
-    numberOfTimesRead:{type:Number, default:0},
-    numberOfTimesFavorited:{type:Number, default:0},
-    bookshelf:[ {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Testuser" //This is the Schema name
-    }],
-    reviews:[ {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Review" //This is the Schema name
-    }],
-    rating:{
-      one:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Testuser" //This is the Schema name
-      }],
-      two:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Testuser" //This is the Schema name
-      }],
-      three:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Testuser" //This is the Schema name
-      }],
-      four:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Testuser" //This is the Schema name
-      }],
-      five:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Testuser" //This is the Schema name
-      }],
-      six:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Testuser" //This is the Schema name
-      }],
-      seven:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Testuser" //This is the Schema name
-      }],
-      eight:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Testuser" //This is the Schema name
-      }],
-      nine:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Testuser" //This is the Schema name
-      }],
-      ten:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Testuser" //This is the Schema name
-      }]
-    }
+    description:{},
+    salary:{},
+    company:{},
+    location:{},
+    tags:{},
+    industry:{},
+    remote:{},
+    easyApplyBool:{},
+    coverLetterBool:{},
+    applyOnCompanySiteBool:{},
+    applyOnCompanySiteLink:{},
+    tags:{},
+    type:{}
+
 },{
     timestamps: true
 })

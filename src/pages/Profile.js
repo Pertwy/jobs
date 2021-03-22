@@ -42,9 +42,6 @@ export default function Profile(){
             <img className="card-img-top" src={image} alt={title}></img>
           </Link>
 
-          <div className="button">
-            <button onClick={() => handleDeleteBook(_id)}>Remove</button>
-          </div> 
         </section>
       )
     })
@@ -72,7 +69,7 @@ export default function Profile(){
 
 
       <div className="book-row-section">
-        <h3 className="book-row-title" >BOOKS I'VE READ</h3>
+        <h3 className="book-row-title" >APPLIED TO</h3>
         <div className="row book-row">
           <BookList books={userData.books} type="books"/>
         </div>

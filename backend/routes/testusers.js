@@ -6,8 +6,6 @@
 const router = require("express").Router();
 let {Testuser} = require("../models/testuser.model")
 let {Book} = require("../models/book.model")
-let {List} = require("../models/list.model")
-const {Review} = require("../models/review.model")
 const _ = require("lodash")
 const config = require("config")
 const express = require('express');
@@ -40,7 +38,6 @@ router.post('/', async (req, res) => {
         .populate("books")
         .populate("favorites")
         .populate("readList")
-        .populate("lists") 
         .populate({
             path: 'following',
             populate: { path: 'books' }
@@ -83,21 +80,7 @@ router.post('/grablists', async (req, res) => {
 });
 
 
-//Add a list 
-router.put('/addListToUser', async (req, res) => {
 
-    let user = await Testuser.findOne({email: req.body.email})
-    console.log(user)
-
-    let newList = new List({title:req.body.title, books:req.body.books, creator:user._id})
-    newList = await newList.save();
-    
-    user.lists.push(newList._id)
-
-    await user.save()
-        .then(() => res.json('User updated!'))
-        .catch(err => res.status(400).json('Error: ' + err));
-});
 
 
 //Add book to favorites///////////////////////////////////////////////////////////////////////////////////

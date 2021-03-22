@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar"
 import HomePage from "./pages/HomePage"
 import Adduser from "./pages/Adduser"
 import Profile from "./pages/Profile"
+import RecruiterProfile from "./pages/RecruiterProfile"
 import ViewJobPost from "./idPages/ViewJobPost"
 
 axios.defaults.withCredentials = true
@@ -23,6 +24,7 @@ function App() {
         <Route path="/" exact component={HomePage} />
         <Route path="/signup" exact component={Adduser} />
         <Route path="/profile" component={Profile} />
+        <Route path="/recruiterProfile" component={RecruiterProfile} />
         <Route path="/book/:id" component={ViewJobPost} />
       </div>
     </Router>
