@@ -37,13 +37,14 @@ export default function HomePage(){
       const {title, description, salary, company, location, tags, industry, remote, easyApplyBool, coverLetterBool, applyOnCompanySiteBool, applyOnCompanySiteLink, type, _id} = currentJobPost
       return (
 
-        <section className="col-sm-4 border" key={_id} >
+        <section className="col-sm-4" key={_id} >
             
-            <div>
-              <h1>{title}</h1>
-              <h3>£{salary}</h3>
-            </div>
-            
+            <Link>
+              <div className="border p-3">
+                <h1>{title}</h1>
+                <h3>£{salary}</h3>
+              </div>
+            </Link>
             
             {/* <Link to={"/book/"+_id}>
               <img className="card-img-top" src={image} alt={title}></img>
@@ -60,7 +61,7 @@ export default function HomePage(){
 
         <div className="container">
           <h2 className="book-row-title">OPEN POSITONS</h2>
-          <div className="row">
+          <div className="row d-flex justify-content-between">
             <JobList/>
           </div>
         </div>
