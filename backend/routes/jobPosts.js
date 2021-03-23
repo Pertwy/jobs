@@ -17,12 +17,7 @@ router.route("/").get((req, res) => {
 
 router.route("/:_id").get((req, res) => {
     JobPost.findById(req.params._id)
-        // .populate("reviews")
-        .populate({
-            path: 'reviews',
-            populate: { path: 'author' }
-        })
-        .then(book => res.json(book))
+        .then(jobPost => res.json(jobPost))
         .catch(err => res.status(400).json("Error " + err))
 })
 

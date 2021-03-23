@@ -9,6 +9,7 @@ import Adduser from "./pages/Adduser"
 import Profile from "./pages/Profile"
 import RecruiterProfile from "./pages/RecruiterProfile"
 import ViewJobPost from "./idPages/ViewJobPost"
+// import TestForm from "./pages/TestForm"
 
 axios.defaults.withCredentials = true
 
@@ -25,7 +26,8 @@ function App() {
         <Route path="/signup" exact component={Adduser} />
         <Route path="/profile" component={Profile} />
         <Route path="/recruiterProfile" component={RecruiterProfile} />
-        <Route path="/book/:id" component={ViewJobPost} />
+        <Route path="/jobPosts/:id" component={ViewJobPost} />
+        {/* <Route path="/testForm" component={TestForm}></Route> */}
       </div>
     </Router>
   );

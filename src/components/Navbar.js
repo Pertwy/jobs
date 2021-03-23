@@ -49,6 +49,10 @@ export default function Navbar() {
             <Link to="/recruiterProfile" className="nav-link">Recruiter</Link>
             </li>
 
+            {/* <li className="navbar-item">
+            <Link to="/testForm" className="nav-link">Test Form</Link>
+            </li> */}
+
           </ul>
         </div>
    

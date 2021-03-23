@@ -1,13 +1,16 @@
-const { string } = require('joi');
 const mongoose = require('mongoose');
 const config = require('config');
 const jwt = require('jsonwebtoken');
 
 const userSchema = new mongoose.Schema({
-  name: {
+  givenName: {
     type: String,
     required: true,
-    minlength: 5,
+    maxlength: 50
+  },
+  surname: {
+    type: String,
+    required: true,
     maxlength: 50
   },
   email: {
@@ -23,9 +26,20 @@ const userSchema = new mongoose.Schema({
     minlength: 5,
     maxlength: 255
   },
-  bio:{
-    type: String,
+  photo:{
+    type: String
   },
+  CV:{
+    type: String
+  },
+  appliedTo:[{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "JobPost" //This is the Schema name
+    }],
+  savedJobs:[{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "JobPost" //This is the Schema name
+  }]
 
 });
 

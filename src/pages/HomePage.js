@@ -39,7 +39,7 @@ export default function HomePage(){
 
         <section className="col-sm-4" key={_id} >
             
-            <Link>
+            <Link className="link" to={"/jobPosts/"+_id}>
               <div className="border p-3">
                 <h1>{title}</h1>
                 <h3>£{salary}</h3>

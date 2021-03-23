@@ -18,12 +18,12 @@ export default function Adduser(){
 
   function newUserInDB(){
     let newUser = {
-      "email":email, "name":name, "password":password
+      "email":email, "givenName":givenName, "surname":surname, "password":password
     }
     console.log(newUser)
 
     try{
-      axios.post('http://localhost:5000/testusers/add', newUser)
+      axios.post('http://localhost:5000/users/add', newUser)
         .then(res => console.log(res.data));
       }catch(e){
         console.error(e)
@@ -69,8 +69,12 @@ export default function Adduser(){
       <div className="d-flex container justify-content-center">  
         <form className={classes.root, "col-sm-6"} noValidate autoComplete="off" onSubmit={handleSignUp}>
             <h3 className={classes.input}>Create an account</h3>  
-            <TextField  fullWidth className={classes.input} onChange={({ target }) =>     
-                  setName(target.value)} id="standard-basic" label="Name" />
+            
+            <TextField fullWidth className={classes.input} onChange={({ target }) =>     
+                  setGivenName(target.value)} id="standard-basic" label="Given Name" />
+
+            <TextField fullWidth className={classes.input} onChange={({ target }) =>     
+                  setSurname(target.value)} id="standard-basic" label="Surname" />
 
             <TextField fullWidth className={classes.input} onChange={({ target }) =>     
                   setEmail(target.value)} id="standard-basic" label="Email" />
@@ -78,19 +82,16 @@ export default function Adduser(){
             <TextField fullWidth className={classes.input} onChange={({ target }) =>     
                   setPassword(target.value)} id="standard-basic" label="Password" />
 
-            <TextField fullWidth className={classes.input} onChange={({ target }) =>     
+            {/* <TextField fullWidth className={classes.input} onChange={({ target }) =>     
                   setBio(target.value)} id="standard-basic" label="Bio" />
 
             <TextField fullWidth className={classes.input} onChange={({ target }) =>     
                   setUserName(target.value)} id="standard-basic" label="User Name" />
 
-            {/* <TextField fullWidth className={classes.input} onChange={({ target }) =>     
-                  setGivenName(target.value)} id="standard-basic" label="Given Name" />
-            <TextField fullWidth className={classes.input} onChange={({ target }) =>     
-                  setSurname(target.value)} id="standard-basic" label="Surname" /> */}
+            
 
             <TextField fullWidth className={classes.input} onChange={({ target }) =>     
-                  setPronoun(target.value)} id="standard-basic" label="Pronoun" />
+                  setPronoun(target.value)} id="standard-basic" label="Pronoun" /> */}
             {/* <button type="submit">
                 Sign up
             </button> */}

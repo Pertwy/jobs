@@ -16,36 +16,20 @@ export default function Profile(){
 
   useEffect(() => {
     console.log(currentUser)
-    if(currentUser){
-      let email = {"email":currentUser}
-      axios.post('http://localhost:5000/testusers/',email)
+
+    try {
+      axios.post('http://localhost:5000/users/')
         .then(response => (setUserData(response.data)))
         .then(console.log(userData))
+    } catch (error) {
+      console.log(error)
     }
-    else{
-      axios.get('http://localhost:5000/books/')
-        .then(response => (setBooks(response.data)))
-    }
+
+  
   },[currentUser, update])
 
 
 
-
-  function BookList(books) {
-    return (books.books.map(currentBook => {
-
-      const {title, author, image,  _id} = currentBook
-      return (
-
-        <section className="book" key={_id} >
-          <Link className="link" to={"/book/"+_id}>
-            <img className="card-img-top" src={image} alt={title}></img>
-          </Link>
-
-        </section>
-      )
-    })
-  )}
 
  
   return (
@@ -71,7 +55,14 @@ export default function Profile(){
       <div className="book-row-section">
         <h3 className="book-row-title" >APPLIED TO</h3>
         <div className="row book-row">
-          <BookList books={userData.books} type="books"/>
+          {/* jobs */}
+        </div>
+      </div>
+
+      <div className="book-row-section">
+        <h3 className="book-row-title" >SAVED</h3>
+        <div className="row book-row">
+          {/* jobs */}
         </div>
       </div>
 

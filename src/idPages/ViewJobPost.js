@@ -6,48 +6,53 @@ import UserDropDown from "../components/UserDropDown"
 
 
 export default function ViewJobPost(props){
-  const [book, setBook] = useState({})  
+  const [jobPost, setJobPost] = useState({})  
   const [currentUser, setCurrentUser] = useState("john@gmail.com")
   const [review, setReview] = useState("")
   const [value, setValue] = useState("");
 
   useEffect(() => {
     axios.get("http://localhost:5000/jobPosts/"+props.location.pathname.replace("/jobPosts/", ""))
-      .then(response => (setBook(response.data)))
+      .then(response => (setJobPost(response.data)))
+      //.then(response => (console.log(response.data)))
       
   },[])
-
-
-    const handleChange = (event) => {
-      setValue(event.target.value);
-    };
-  
 
   return (
     <div>
 
-      <UserDropDown setEmail={setCurrentUser}/>
+      <h1>{jobPost.title}</h1>
+      <h3>Salary: {jobPost.salary}</h3>
+      <p>{jobPost.description}</p>
+      <br></br>
+      <br></br>
+      <br></br>
+      
+      <h5>Company: {jobPost.company}</h5>
+      <h5>Location: {jobPost.location}</h5>
+      
+      <h5>Industry: {jobPost.industry}</h5>
+      <h5>{jobPost.remote}</h5>
+      <h5>Easy apply? {jobPost.easyApplyBool}</h5>
+      <h5>Cover Letter Needed? {jobPost.coverLetterBool}</h5>
+      <h5>Apply on Company site? {jobPost.applyOnCompanySiteBool}</h5>
+      <h5>Company site Link: {jobPost.applyOnCompanySiteLink}</h5>
+      <h5>Type: {jobPost.type}</h5>
 
-      <div className="content">
-        <h2>{book.title}</h2>
-        <h3>{book.author}</h3>
-        <h4>Number of times read {book.numberOfTimesRead}</h4>
-        <h4>Number of times favorited {book.numberOfTimesFavorited}</h4>
-        {/* <h4>Number of reviews {book.reviews.length}</h4> */}
-        <img src={book.image} alt={book.title}></img>
+      {/* {jobPost.tags} */}
+
+      {/* <UserDropDown setEmail={setCurrentUser}/> */}
+
+
+      {/* <div className="content">
+        <h2>{jobPost.title}</h2>
+        <h3>{jobPost.author}</h3>
+        <h4>Number of times read {jobPost.numberOfTimesRead}</h4>
+        <h4>Number of times favorited {jobPost.numberOfTimesFavorited}</h4>
+        <img src={jobPost.image} alt={jobPost.title}></img>
         
 
-        {/* {book.reviews &&(
-          <div>
-            <h2>Reviews</h2>
-            <Reviews/>
-          </div>
-        )} */}
-
-{/* //numberOfTimesRead
-//rating */}
-
-      </div>
+      </div> */}
     </div>
   )
 }
