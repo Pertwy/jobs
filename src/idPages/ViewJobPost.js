@@ -12,29 +12,11 @@ export default function ViewJobPost(props){
   const [value, setValue] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:5000/books/"+props.location.pathname.replace("/book/", ""))
+    axios.get("http://localhost:5000/jobPosts/"+props.location.pathname.replace("/jobPosts/", ""))
       .then(response => (setBook(response.data)))
       
   },[])
 
-
-  function Reviews(){
-    return (book.reviews.map(review => {
-      return(
-      <div>
-        <h3>{review.author.name}</h3>
-        <p>{review.review}</p>
-      </div>
-    )
-    }))
-  }
-
-  function handleAddReview(e){
-    e.preventDefault();
-    let info = {"email":currentUser, "_id":props.location.pathname.replace("/book/", ""), "review":review, "rating":value}
-      axios.post('http://localhost:5000/testusers/addreview',info)
-        .then(response => (console.log(response.data)))
-  }
 
     const handleChange = (event) => {
       setValue(event.target.value);
@@ -54,20 +36,9 @@ export default function ViewJobPost(props){
         {/* <h4>Number of reviews {book.reviews.length}</h4> */}
         <img src={book.image} alt={book.title}></img>
 
-        <form onSubmit={handleAddReview}>
-          <label>Add a review</label>
-          <input
-            type="text"
-            onChange={({ target }) =>     
-              setReview(target.value)}
-            placeholder="Add a Review"
-          />
+ 
 
 
-          <button type="submit">submit</button>
-        </form>
-
-        {console.log(book)}
         
 
         {book.reviews &&(

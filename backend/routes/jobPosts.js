@@ -1,7 +1,7 @@
 const auth = require("../middleware/auth")
 const admin = require("../middleware/admin")
 const router = require("express").Router();
-const {JobPost, validate} = require("../models/jobPost.model")
+const {JobPost} = require("../models/jobPost.model")
 const _ = require("lodash")
 const mongoose = require("mongoose")
 const Fawn = require("fawn");
@@ -11,7 +11,7 @@ Fawn.init(mongoose)
 
 router.route("/").get((req, res) => {
     JobPost.find()
-        .then(books => res.json(books))
+        .then(jobPosts => res.json(jobPosts))
         .catch(err => res.status(400).json("Error " + err))
 })
 
@@ -36,11 +36,10 @@ router.route("/admin").get((req, res) => {
 
 router.post('/add', async (req, res) => {
 
-    let newBook = new JobPost(_.pick(req.body, ["title", "author", "image"]))
-    newBook = await newBook.save();
+    let newJobPost = new JobPost(_.pick(req.body, ["title", "description", "salary", "company", "location", "tags", "industry", "remote", "easyApplyBool", "coverLetterBool", "applyOnCompanySiteBool", "applyOnCompanySiteLink", "type" ]))
+    newJobPost = await newJobPost.save();
 
-    res.send(newBook._id);
+    res.send(newJobPost);
 });
-
 
 module.exports = router;
