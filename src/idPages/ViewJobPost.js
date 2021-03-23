@@ -18,6 +18,28 @@ export default function ViewJobPost(props){
       
   },[])
 
+
+  function handleApply(){
+
+    let jobID = {
+      "job":props.location.pathname.replace("/jobPosts/", "")
+    }
+    axios.post("http://localhost:5000/users/apply", jobID)
+      .then(response => console.log(response))
+  }
+
+
+  function handleSave(){
+
+    let jobID = {
+      "job":props.location.pathname.replace("/jobPosts/", "")
+    }
+    axios.post("http://localhost:5000/users/save", jobID)
+      .then(response => console.log(response))
+  }
+
+
+
   return (
     <div>
 
@@ -38,6 +60,9 @@ export default function ViewJobPost(props){
       <h5>Apply on Company site? {jobPost.applyOnCompanySiteBool}</h5>
       <h5>Company site Link: {jobPost.applyOnCompanySiteLink}</h5>
       <h5>Type: {jobPost.type}</h5>
+
+      <button onClick={()=>handleSave()}>SAVE</button>
+      <button onClick={()=>handleApply()}>APPLY</button>
 
       {/* {jobPost.tags} */}
 

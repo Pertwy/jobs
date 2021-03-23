@@ -28,13 +28,12 @@ router.post('/add', async (req, res) => {
 
 
 //Return user data with fields populated
-router.post('/', async (req, res) => {
-    let user = await User.findOne({email: req.body.email})
-        .populate("books")
-        .populate({
-            path: 'following',
-            populate: { path: 'books' }
-          });; 
+router.get('/', auth, async (req, res) => {
+
+
+    let user = await User.findById(req.user._id)
+        .populate("appliedTo")
+        .populate("savedJobs");
 
     res.send(user);
 });
@@ -55,5 +54,30 @@ router.get("/:_id", async (req, res) => {
         .then(user => res.json(user))
         .catch(err => res.status(400).json("Error " + err))
 })
+
+//Save a job
+router.post('/save', auth, async (req, res) => {
+
+    let user = await User.findById(req.user._id)
+
+    user.savedJobs.push(req.body.job)
+
+    await user.save()
+        .then(() => res.json('Job Saved!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+//Save a job
+router.post('/apply', auth, async (req, res) => {
+
+    let user = await User.findById(req.user._id)
+
+    user.appliedTo.push(req.body.job)
+
+    await user.save()
+        .then(() => res.json('Applied to this job'))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
 
 module.exports = router;

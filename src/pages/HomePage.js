@@ -46,9 +46,6 @@ export default function HomePage(){
               </div>
             </Link>
             
-            {/* <Link to={"/book/"+_id}>
-              <img className="card-img-top" src={image} alt={title}></img>
-            </Link> */}
         </section>
       )
     })
