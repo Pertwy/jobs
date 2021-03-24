@@ -5,6 +5,7 @@ import './HomePage.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import UserDropDown from "../components/UserDropDown"
 import "./AddList.css"
+import JobPostProfile from "../components/JobPostProfile"
 
 export default function Profile(){
   const [userData, setUserData] = useState({
@@ -31,20 +32,8 @@ export default function Profile(){
   //Display applied to jobs
   function AppliedTo() {
     return userData.appliedTo.map(currentJobPost => {
-
-      const {title, description, salary, company, location, tags, industry, remote, easyApplyBool, coverLetterBool, applyOnCompanySiteBool, applyOnCompanySiteLink, type, _id} = currentJobPost
       return (
-
-        <section key={_id} >
-            
-            <Link className="link" to={"/jobPosts/"+_id}>
-              <div className="p-3">
-                <h3>{title}</h3>
-                <h3>£{salary}</h3>
-              </div>
-            </Link>
-            
-        </section>
+        <JobPostProfile props={currentJobPost}/>
       )
     })
   }
@@ -52,23 +41,11 @@ export default function Profile(){
 
   //Display applied to jobs
   function SavedJobs() {
-    return userData.savedJobs.map(currentJobPost => {
-
-      const {title, description, salary, company, location, tags, industry, remote, easyApplyBool, coverLetterBool, applyOnCompanySiteBool, applyOnCompanySiteLink, type, _id} = currentJobPost
-      return (
-
-        <section key={_id} >
-            
-            <Link className="link" to={"/jobPosts/"+_id}>
-              <div className="p-3">
-                <h3>{title}</h3>
-                <h3>£{salary}</h3>
-              </div>
-            </Link>
-            
-        </section>
-      )
-    })
+      return userData.appliedTo.map(currentJobPost => {
+        return (
+          <JobPostProfile props={currentJobPost}/>
+        )
+      })
   }
 
 

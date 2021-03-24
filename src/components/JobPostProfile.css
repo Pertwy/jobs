@@ -1,14 +1,14 @@
 h4{
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: bold;
   color: black;
   line-height: 20px;
 }
 
 h5{
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: black;
-  line-height: 14px;
+  line-height: 12px;
 }
 
 h6{
@@ -25,13 +25,9 @@ p{
   -webkit-box-orient: vertical;
 }
 
-.job-box{
-  border: black;
-  border-radius: 5;
-  border-width: 2;
-  border-style: solid;
-  
-}
+/* .job-box{
+
+} */
 
 .description-box{
   overflow: hidden;
@@ -55,7 +51,7 @@ html {
 }
 .overflow::before {
   position: absolute;
-  /* content: "..."; */
+  content: "...";
 /*   inset-block-end: 0;
   inset-inline-end: 0; */
   bottom: 0;
