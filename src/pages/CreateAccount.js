@@ -14,6 +14,7 @@ export default function CreateAccount(){
   const [surname, setSurname] = useState("")
   const [pronoun, setPronoun] = useState("")
   const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
   
 
   function newUserInDB(){
@@ -69,6 +70,9 @@ export default function CreateAccount(){
 
             <TextField fullWidth className={classes.input} onChange={({ target }) =>     
                   setPassword(target.value)} id="standard-basic" label="Password" />
+
+            <TextField fullWidth className={classes.input} onChange={({ target }) =>     
+                  setConfirmPassword(target.value)} id="standard-basic" label="Confirm Password" />
 
             <Button type="submit" variant="outlined">
               Sign Up

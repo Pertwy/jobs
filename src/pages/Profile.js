@@ -8,6 +8,9 @@ import "./AddList.css"
 
 export default function Profile(){
   const [userData, setUserData] = useState({
+    givenName:"",
+    surname:"",
+    email:"",
     appliedTo:[{title:"", salary:"", _id:""}],
     savedJobs:[{title:"", salary:"", _id:""}]
   })
@@ -32,11 +35,11 @@ export default function Profile(){
       const {title, description, salary, company, location, tags, industry, remote, easyApplyBool, coverLetterBool, applyOnCompanySiteBool, applyOnCompanySiteLink, type, _id} = currentJobPost
       return (
 
-        <section className="col-sm-4" key={_id} >
+        <section key={_id} >
             
             <Link className="link" to={"/jobPosts/"+_id}>
-              <div className="border p-3">
-                <h1>{title}</h1>
+              <div className="p-3">
+                <h3>{title}</h3>
                 <h3>£{salary}</h3>
               </div>
             </Link>
@@ -54,10 +57,10 @@ export default function Profile(){
       const {title, description, salary, company, location, tags, industry, remote, easyApplyBool, coverLetterBool, applyOnCompanySiteBool, applyOnCompanySiteLink, type, _id} = currentJobPost
       return (
 
-        <section className="col-sm-4" key={_id} >
+        <section key={_id} >
             
             <Link className="link" to={"/jobPosts/"+_id}>
-              <div className="border p-3">
+              <div className="p-3">
                 <h3>{title}</h3>
                 <h3>£{salary}</h3>
               </div>
@@ -69,19 +72,38 @@ export default function Profile(){
   }
 
 
-
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 
  
   return (
     <div className="container">
 
-      <div className="py-5 row container-fluid">
-        <div className="col-sm-5 row">
-          <h1 className="pr-5">Photo</h1>
 
-          <div>
-            <h4>Name: {userData.givenName} {userData.surname}</h4>
-            <h4>Email: {userData.email}</h4>
+      <div className="row container-fluid">
+          <div className="mb-4">
+            <h4>{capitalizeFirstLetter(userData.givenName)} {capitalizeFirstLetter(userData.surname)} - {userData.email}</h4>
+            <h5>Location</h5>
+          </div>
+      </div>
+      
+
+      <div className="row container-fluid">
+        
+        <div className={"col-sm-8"} >
+        <h3 className="book-row-title" >About Me</h3>
+        </div>
+
+        <div className={"col-sm-4"} >
+          <h3 className="book-row-title" >SAVED</h3>
+          <div className="row book-row">
+            <SavedJobs/>
+          </div>
+
+          <h3 className="book-row-title" >APPLIED TO</h3>
+          <div className="row book-row">
+            <AppliedTo/>
           </div>
         </div>
 
@@ -89,19 +111,12 @@ export default function Profile(){
 
 
 
-      <div className="book-row-section">
-        <h3 className="book-row-title" >APPLIED TO</h3>
-        <div className="row book-row">
-          <AppliedTo/>
-        </div>
-      </div>
-
-      <div className="book-row-section">
+      {/* <div className="book-row-section">
         <h3 className="book-row-title" >SAVED</h3>
         <div className="row book-row">
           <SavedJobs/>
         </div>
-      </div>
+      </div> */}
 
 
     </div>
