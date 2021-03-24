@@ -58,7 +58,7 @@ export default function Profile(){
             
             <Link className="link" to={"/jobPosts/"+_id}>
               <div className="border p-3">
-                <h1>{title}</h1>
+                <h3>{title}</h3>
                 <h3>£{salary}</h3>
               </div>
             </Link>

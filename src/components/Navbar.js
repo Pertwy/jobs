@@ -29,16 +29,26 @@ export default function Navbar() {
   const classes = useStyles();
 
     return (
+      
+     
       <div className= "container-fullwidth">
       <nav className= "space-between navrow navbar navbar-dark bg-dark navbar-expand-lg">
 
         
         <div className="collpase navbar-collapse">
+          
+          
           <Link to="/" className="navbar-brand">Job Board</Link>
-          <ul className="navbar-nav mr-auto">
+          
+          
+          <ul className="navbar-nav ml-auto">
             
             <li className="navbar-item">
-            <Link to="/signup" className="nav-link">Add a user</Link>
+            <Link to="/signin" className="nav-link">Sign In</Link>
+            </li>
+
+            <li className="navbar-item">
+            <Link to="/createaccount" className="nav-link">Sign Up</Link>
             </li>
 
             <li className="navbar-item">

@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './HomePage.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 
 export default function HomePage(){
@@ -12,6 +14,9 @@ export default function HomePage(){
   const [userData, setUserData] = useState({books:[],favorites:[],readList:[],lists:[], following:[]})
   const [jobPostList, setJobPostList] = useState([])
   const [listSize, setListSize] = useState(6)
+  const [postCode, setPostCode] = useState("")
+  const [job, setJob] = useState("")
+  const [salary, setSalary] = useState("")
 
 
 
@@ -41,8 +46,9 @@ export default function HomePage(){
             
             <Link className="link" to={"/jobPosts/"+_id}>
               <div className="border p-3">
-                <h1>{title}</h1>
-                <h3>£{salary}</h3>
+                <h5>{title}</h5>
+                <h5>£{salary}</h5>
+                <p>{description}</p>
               </div>
             </Link>
             
@@ -51,8 +57,52 @@ export default function HomePage(){
     })
   }
 
+
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      '& > *': {
+        margin: theme.spacing(1),
+        width: '50ch',
+      },
+    },
+    input:{
+      display:"inline-block",
+      margin:"10px"
+    }
+  }));
+
+  const classes = useStyles();
+
+
   return (
     <div>
+      
+      <div id="example-box">
+        <div id="example1">
+          <div className="central-box">
+            <h3>Find your dream job and let's move on</h3>
+            
+            <form className={classes.root, "col-sm-6"} noValidate autoComplete="off" >
+
+              {/* <div className={"col-sm-3"}>...</div> */}
+
+              <TextField className={"col-sm-3 form-text"} id="standard-search" label="Job" type="search" 
+                          onChange={({ target }) => setJob(target.value)} />
+
+
+              <TextField className={"col-sm-3 form-text"} id="standard-search" onChange={({ target }) =>     
+                    setPostCode(target.value)} label="Post Code" />
+
+              <TextField className={"col-sm-3 form-text"} id="standard-search" onChange={({ target }) =>     
+                    setSalary(target.value)} label="Salary" />
+
+              {/* <Button onClick={() => handleLogin()} variant="outlined">
+                Log in
+              </Button> */}
+            </form>
+          </div>
+        </div>
+      </div>
 
       <div className="container">
 
