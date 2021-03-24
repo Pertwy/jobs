@@ -5,6 +5,7 @@ const config = require("config")
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
 require('dotenv').config()
+//require('../backend/startup/prod')(app)
 
 const app = express()
 const port = process.env.PORT || 5000

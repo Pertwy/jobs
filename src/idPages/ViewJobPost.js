@@ -41,7 +41,8 @@ export default function ViewJobPost(props){
 
 
   return (
-    <div>
+    <div >
+      <div className="container">
 
       <h1>{jobPost.title}</h1>
       <h3>Salary: {jobPost.salary}</h3>
@@ -78,6 +79,8 @@ export default function ViewJobPost(props){
         
 
       </div> */}
+
+      </div>
     </div>
   )
 }

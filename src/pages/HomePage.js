@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
+import JobPostFrontPage from "../components/JobPostFrontPage"
 
 export default function HomePage(){
   const [books, setBooks] = useState([])  
@@ -38,21 +38,8 @@ export default function HomePage(){
   //Display all jobs
   function JobList() {
     return jobPostList.map(currentJobPost => {
-
-      const {title, description, salary, company, location, tags, industry, remote, easyApplyBool, coverLetterBool, applyOnCompanySiteBool, applyOnCompanySiteLink, type, _id} = currentJobPost
       return (
-
-        <section className="col-sm-4" key={_id} >
-            
-            <Link className="link" to={"/jobPosts/"+_id}>
-              <div className="border p-3">
-                <h5>{title}</h5>
-                <h5>£{salary}</h5>
-                <p>{description}</p>
-              </div>
-            </Link>
-            
-        </section>
+        <JobPostFrontPage props={currentJobPost}/>
       )
     })
   }
