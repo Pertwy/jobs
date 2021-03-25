@@ -26,6 +26,7 @@ const userSchema = new mongoose.Schema({
     minlength: 5,
     maxlength: 255
   },
+  summary:{type: String},
   photo:{
     type: String
   },
@@ -39,7 +40,50 @@ const userSchema = new mongoose.Schema({
   savedJobs:[{
       type: mongoose.Schema.Types.ObjectId,
       ref: "JobPost" //This is the Schema name
-  }]
+  }],
+  location:{type: String},
+
+  phoneNumber:{type: Number},
+
+  elegibleUK:{type: Boolean},
+
+  highestLevelOfDegree:{type: String},
+
+  industry:[{type: String}],
+
+  workExperience:[{
+    jobTitle:{type: String},
+    company:{type:String},
+    location:{type:String},
+    startDate:{},
+    endEnd:{},
+    description:{type:String}
+    }],
+
+  eduction:[{
+    country:{type:String},
+    unit:{type: String},
+    rank:{type:String},
+    startDate:{},
+    endEnd:{},
+    description:{type:String},
+    comendations:{type:String}
+    }],
+
+  skills:[{
+    skill:{type: String},
+    yearsExperience:{type:Number}
+  }],
+
+  links:[{type: String}],
+
+  additionalInformation:{type: String},
+
+  languages:[{type: String}],
+
+  militaryService:{type: String}
+
+
 
 });
 
