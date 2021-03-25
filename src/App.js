@@ -10,6 +10,7 @@ import Profile from "./pages/Profile"
 import RecruiterProfile from "./pages/RecruiterProfile"
 import ViewJobPost from "./idPages/ViewJobPost"
 import CreateAccount from "./pages/CreateAccount"
+import Footer from "./components/Footer"
 // import TestForm from "./pages/TestForm"
 
 axios.defaults.withCredentials = true
@@ -31,6 +32,9 @@ function App() {
         <Route path="/jobPosts/:id" component={ViewJobPost} />
         {/* <Route path="/testForm" component={TestForm}></Route> */}
       </div>
+
+      <Footer/>
+
     </Router>
   );
 }

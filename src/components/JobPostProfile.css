@@ -51,7 +51,7 @@ html {
 }
 .overflow::before {
   position: absolute;
-  content: "...";
+  /* content: "..."; */
 /*   inset-block-end: 0;
   inset-inline-end: 0; */
   bottom: 0;

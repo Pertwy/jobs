@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './HomePage.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import UserDropDown from "../components/UserDropDown"
 import "./AddList.css"
 
 
@@ -32,26 +31,10 @@ export default function RecruiterProfile(){
 
 
 
-  function BookList(books) {
-    return (books.books.map(currentBook => {
-
-      const {title, author, image,  _id} = currentBook
-      return (
-
-        <section className="book" key={_id} >
-          <Link className="link" to={"/book/"+_id}>
-            <img className="card-img-top" src={image} alt={title}></img>
-          </Link>
-
-        </section>
-      )
-    })
-  )}
-
+  
  
   return (
     <div className="container">
-      <UserDropDown setEmail={setCurrentUser}/>
 
       <div className="py-5 row container-fluid">
         
@@ -59,7 +42,6 @@ export default function RecruiterProfile(){
           <h1 className="pr-5">Photo</h1>
 
           <div>
-            <h4>Name: {userData.name}</h4>
             <h4>Email: {userData.email}</h4>
             <h4>Bio: {userData.bio}</h4>
           </div>
@@ -68,13 +50,6 @@ export default function RecruiterProfile(){
       </div>
 
 
-
-      <div className="book-row-section">
-        <h3 className="book-row-title" >BOOKS I'VE READ</h3>
-        <div className="row book-row">
-          <BookList books={userData.books} type="books"/>
-        </div>
-      </div>
 
 
     </div>

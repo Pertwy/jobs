@@ -91,7 +91,7 @@ export default function HomePage(){
         </div>
       </div>
 
-      <div className="container mt-5 ">
+      <div className="container mt-5 mb-5 ">
           <h2 className="book-row-title pb-5">OPEN POSITONS</h2>
           <div className="row d-flex justify-content-between">
             <JobList/>

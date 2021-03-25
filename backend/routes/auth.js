@@ -28,4 +28,11 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.get("/logout", (req, res => {
+    res.cookie("token", "", {
+        httpOnly: true,
+        expired: new Date(0)
+    }).send();
+}))
+
 module.exports = router;
