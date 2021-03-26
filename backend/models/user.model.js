@@ -56,16 +56,16 @@ const userSchema = new mongoose.Schema({
     company:{type:String},
     location:{type:String},
     startDate:{},
-    endEnd:{},
+    endDate:{},
     description:{type:String}
     }],
 
-  eduction:[{
+  militaryService:[{
     country:{type:String},
     unit:{type: String},
     rank:{type:String},
     startDate:{},
-    endEnd:{},
+    endDate:{},
     description:{type:String},
     comendations:{type:String}
     }],
@@ -81,9 +81,15 @@ const userSchema = new mongoose.Schema({
 
   languages:[{type: String}],
 
-  militaryService:{type: String}
-
-
+  education:[{
+    country:{type:String},
+    levelOfEducation:{type: String},
+    fieldOfStudy:{type:String},
+    collegeOrUniversity:{},
+    location:{},
+    startDate:{},
+    endDate:{},
+    }],
 
 });
 

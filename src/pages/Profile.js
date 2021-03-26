@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './HomePage.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import UserDropDown from "../components/UserDropDown"
 import "./AddList.css"
 import JobPostProfile from "../components/JobPostProfile"
 
@@ -12,8 +11,23 @@ export default function Profile(){
     givenName:"",
     surname:"",
     email:"",
-    appliedTo:[{title:"", salary:"", _id:""}],
-    savedJobs:[{title:"", salary:"", _id:""}]
+    appliedTo:[],
+    savedJobs:[],
+    summary:"",
+    photo:"",
+    CV:"",
+    location:"",
+    phoneNumber:"",
+    elegibleUK:"",
+    highestLevelOfDegree:"",
+    industry:[],
+    workExperience:[],
+    militaryService:[],
+    eduction:[],
+    skills:[],
+    links:[],
+    additionalInformation:"",
+    languages:[],
   })
 
 

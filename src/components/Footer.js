@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export default function Footer() {
 
     return (
-        <div class="container-fluid pb-0 mb-0 justify-content-center text-light ">
+        <div class="container-fluid footer-container-fluid pb-0 mb-0 justify-content-center text-light ">
      <footer>
          <div class="row my-5 justify-content-center py-5">
              <div class="col-11">
