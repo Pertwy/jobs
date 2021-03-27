@@ -42,6 +42,7 @@ const userSchema = new mongoose.Schema({
       ref: "JobPost" //This is the Schema name
   }],
   location:{type: String},
+  headline:{type: String},
 
   phoneNumber:{type: Number},
 
@@ -85,8 +86,8 @@ const userSchema = new mongoose.Schema({
     country:{type:String},
     levelOfEducation:{type: String},
     fieldOfStudy:{type:String},
-    collegeOrUniversity:{},
-    location:{},
+    collegeOrUniversity:{type:String},
+    location:{type:String},
     startDate:{},
     endDate:{},
     }],
