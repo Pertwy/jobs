@@ -13,14 +13,15 @@ export default function Profile(){
   const [userData, setUserData] = useState({
     givenName:"john",
     surname:"perkins",
-    email:"",
+    email:"j@gmail",
+    headline:"",
     appliedTo:[],
     savedJobs:[],
     summary:"",
     photo:"",
     CV:"",
-    location:"",
-    phoneNumber:"",
+    location:"london",
+    phoneNumber:"0121",
     elegibleUK:"Y",
     highestLevelOfDegree:"Y",
     industry:[],
@@ -33,8 +34,15 @@ export default function Profile(){
     languages:[],
   })
   const [expandPersonalDetails, setExpandPersonalDetails] = useState(true)
+  const [expandBasicInfo, setExpandBasicInfo] = useState(true)
+
   const [givenName, setGivenName] = useState("")
   const [surname, setSurname] = useState("")
+  const [headline, setHeadline] = useState("")
+  const [location, setLocation] = useState("")
+  const [email, setEmail] = useState("")
+  const [phoneNumber, setPhoneNumber] = useState("")
+
   const [highestLevelOfDegree, setHighestLevelOfDegree] = useState("")
   const [elegibleUK, setElegibleUK] = useState("")
 
@@ -124,6 +132,82 @@ export default function Profile(){
       </>    }
 
 
+//Basic Info ///////////////////////////////////////////////
+function handleExpandBasicInfo(){
+  setExpandBasicInfo(!expandBasicInfo)
+}
+
+function handleSaveBasicInfo(){
+  if(givenName){
+    setUserData({...userData, givenName:givenName})
+  }
+  if(surname){
+    setUserData({...userData, surname:surname})
+  }
+  if(location){
+    setUserData({...userData, location:location})
+  }
+  if(email){
+    setUserData({...userData, email:email})
+  }
+  if(phoneNumber){
+    setUserData({...userData, phoneNumber:phoneNumber})
+  }
+
+  setExpandBasicInfo(!expandBasicInfo)
+}
+
+function handleCancelBasicInfo(){
+  setGivenName("")
+  setSurname("")
+  setHeadline("")
+  setEmail("")
+  setPhoneNumber("")
+  setExpandBasicInfo(!expandBasicInfo)
+}
+
+let BasicInfo 
+if(expandBasicInfo){
+  BasicInfo =
+    <>
+      {userData.givenName && <p>Given Name</p>}
+      {userData.surname && <p>Surname</p>}
+      {userData.headline && <p>Headline</p>}
+      {userData.location && <p>Location</p>}
+      {userData.email > 0  && <p>Email</p>}
+      {userData.phoneNumber > 0  && <p>Phone Number</p>}
+    </>
+  } else{
+    BasicInfo = <>
+          <TextField fullWidth  onChange={({ target }) =>     
+                setGivenName(target.value)} id="standard-basic" label="Given Name" placeholder={userData.givenName}/>
+
+          <TextField fullWidth  onChange={({ target }) =>     
+                setSurname(target.value)} id="standard-basic" label="Surname" placeholder={userData.surname}/>
+
+          <TextField fullWidth  onChange={({ target }) =>     
+                setHeadline(target.value)} id="standard-basic" label="Headline" placeholder={userData.headline}/>
+
+          <TextField fullWidth  onChange={({ target }) =>     
+                setLocation(target.value)} id="standard-basic" label="Location" placeholder={userData.location}/>  
+
+          <TextField fullWidth  onChange={({ target }) =>     
+                setEmail(target.value)} id="standard-basic" label="Email" placeholder={userData.email}/>
+
+          <TextField fullWidth  onChange={({ target }) =>     
+                setPhoneNumber(target.value)} id="standard-basic" label="Phone Number" placeholder={userData.phoneNumber}/>
+
+          <Button onClick={()=>handleSaveBasicInfo()} variant="outlined">
+            Save Changes
+          </Button>
+          <Button onClick={()=>handleCancelBasicInfo()} variant="outlined">
+            Cancel
+          </Button>
+
+    </>    }
+
+
+
 
 
 
@@ -144,12 +228,13 @@ export default function Profile(){
         <div className={"col-sm-12"} >
           <div className={"border  p-3"}>
 
-            <section className={"main-info" }>
-              <h4 className={"border-top-0 border-right-0 border border-left-0" }>Name</h4>
-              <p>headline</p>
-              <p>Location</p>
-              <p>email</p>
-              <p>phone number</p>
+
+            <section className={"basic-info" }>
+              <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
+                <h4 >Basic Info</h4>
+                <button onClick={() => handleExpandBasicInfo()}>Edit</button>
+              </div>
+              {BasicInfo}
             </section>
 
 
