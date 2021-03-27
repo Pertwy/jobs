@@ -7,7 +7,7 @@ import "./AddList.css"
 import JobPostProfile from "../components/JobPostProfile"
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
+import {produce} from "immer"
 
 export default function Profile(){
   const [userData, setUserData] = useState({
@@ -28,10 +28,10 @@ export default function Profile(){
     workExperience:[],
     militaryService:[],
     eduction:[],
-    skills:[],
-    links:[],
+    skills:[{title:"skill1"},{title:"skill2"}],
+    links:["link1", "Link2"],
     additionalInformation:"",
-    languages:[],
+    languages:["Spanish", "English"],
   })
   const [expandPersonalDetails, setExpandPersonalDetails] = useState(true)
   const [expandBasicInfo, setExpandBasicInfo] = useState(true)
@@ -42,6 +42,15 @@ export default function Profile(){
   const [location, setLocation] = useState("")
   const [email, setEmail] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
+
+  const [expandSkills, setExpandSkills] = useState(false)
+  const [newSkill, setNewSkill] = useState("")
+
+  const [expandLinks, setExpandLinks] = useState(false)
+  const [newLink, setNewLink] = useState("")
+
+  const [expandLanguages, setExpandLanguages] = useState(false)
+  const [newLanguage, setNewLanguage] = useState("")
 
   const [highestLevelOfDegree, setHighestLevelOfDegree] = useState("")
   const [elegibleUK, setElegibleUK] = useState("")
@@ -110,8 +119,8 @@ export default function Profile(){
   if(expandPersonalDetails){
     PersonalDetails =
       <>
-        {userData.elegibleUK && <p>Eligible to Work in the UK</p>}
-        {userData.highestLevelOfDegree && <p>Highest level of education</p>}
+        {userData.elegibleUK && <p>Eligible to Work in the UK: {userData.elegibleUK}</p>}
+        {userData.highestLevelOfDegree && <p>Highest level of education: {userData.highestLevelOfDegree}</p>}
         {userData.industry.length > 0  && <p>Industry</p>}
       </>
     } else{
@@ -170,12 +179,12 @@ let BasicInfo
 if(expandBasicInfo){
   BasicInfo =
     <>
-      {userData.givenName && <p>Given Name</p>}
-      {userData.surname && <p>Surname</p>}
-      {userData.headline && <p>Headline</p>}
-      {userData.location && <p>Location</p>}
-      {userData.email > 0  && <p>Email</p>}
-      {userData.phoneNumber > 0  && <p>Phone Number</p>}
+      {userData.givenName && <p>Given Name: {userData.givenName}</p>}
+      {userData.surname && <p>Surname: {userData.surname}</p>}
+      {userData.headline && <p>Headline: {userData.headline}</p>}
+      {userData.location && <p>Location: {userData.location}</p>}
+      {userData.email && <p>Email: {userData.email}</p>}
+      {userData.phoneNumber && <p>Phone Number: {userData.phoneNumber}</p>}
     </>
   } else{
     BasicInfo = <>
@@ -207,7 +216,152 @@ if(expandBasicInfo){
     </>    }
 
 
+//Skills /////////////////////////////////
+let Skills
+if(userData.skills.length > 0 && !expandSkills){
+  Skills =
+    <>
+      <SkillMap></SkillMap>
+    </>
+  } else if(userData.skills.length > 0 && expandSkills){
+    Skills =
+    <>
+      <SkillMap></SkillMap>
+      <div className={"row pl-3 pr-3 space-between"}>
+        <TextField  onChange={({ target }) =>     
+          setNewSkill(target.value)} id="standard-basic" label="New Skill" />
+        <div className={"row pr-3"}>
+          <button onClick={()=>handleAddNewSkill()}>Save</button>
+          <button onClick={()=>handleCancelSkill()}>Cancel</button>
+        </div>
+      </div>
+    </>
+  } else{
+    Skills = <>
+    </>}
 
+  function SkillMap(){
+    return userData.skills.map(skill => {
+      return (
+        <div className={"row space-between pl-3 pr-3"}>
+          <p>{skill.title}</p>
+          <button onClick={()=>console.log("delete this skill")}>delete</button>
+        </div>
+      )
+    })
+  }
+
+  function handleAddSkill(){
+    setExpandSkills(!expandSkills)
+  }
+
+  function handleAddNewSkill(){
+    console.log("Add Skill")
+    console.log(userData.skills)
+
+    return produce(userData.skills, draftState => {
+      draftState.push({"title":newSkill})
+      draftState[1].done = true
+  })}
+
+  function handleCancelSkill(){
+    setNewSkill("")
+    setExpandSkills(!expandSkills)
+  }
+  
+
+//Links /////////////////////////////////
+let Links
+if(userData.links.length > 0 && !expandLinks){
+  Links =
+    <>
+      <LinkMap></LinkMap>
+    </>
+  } else if(userData.links.length > 0 && expandLinks){
+    Links =
+    <>
+      <LinkMap></LinkMap>
+      <div className={"row pl-3 pr-3 space-between"}>
+        <TextField  onChange={({ target }) =>     
+          setNewLink(target.value)} id="standard-basic" label="New Link" />
+        <div className={"row pr-3"}>
+          <button onClick={()=>console.log("Save Link")}>Save</button>
+          <button onClick={()=>handleCancelLink()}>Cancel</button>
+        </div>
+      </div>
+    </>
+  } else{
+    Links = <>
+    </>}
+
+  function LinkMap(){
+    return userData.links.map(link => {
+      return (
+        <div className={"row space-between pl-3 pr-3"}>
+          <p>{link}</p>
+          <button onClick={()=>console.log("delete this link")}>delete</button>
+        </div>
+      )
+    })
+  }
+
+  function handleAddLink(){
+    setExpandLinks(!expandLinks)
+  }
+  function handleAddNewLink(){
+
+  }
+  function handleCancelLink(){
+    setNewLink("")
+    setExpandLinks(!expandLinks)
+  }
+
+
+//Languaes /////////////////////////////////
+let Languages
+if(userData.languages.length > 0 && !expandLanguages){
+  Languages =
+    <>
+      <LanguageMap></LanguageMap>
+    </>
+  } else if(userData.languages.length > 0 && expandLanguages){
+    Languages =
+    <>
+      <LanguageMap></LanguageMap>
+      <div className={"row pl-3 pr-3 space-between"}>
+        <TextField  onChange={({ target }) =>     
+          setNewLanguage(target.value)} id="standard-basic" label="New Language" />
+        <div className={"row pr-3"}>
+          <button onClick={()=>console.log("Save Language")}>Save</button>
+          <button onClick={()=>handleCancelLanguage()}>Cancel</button>
+        </div>
+      </div>
+    </>
+  } else{
+    Languages = <>
+    </>}
+
+  function LanguageMap(){
+    return userData.languages.map(languages => {
+      return (
+        <div className={"row space-between pl-3 pr-3"}>
+          <p>{languages}</p>
+          <button onClick={()=>console.log("delete this language")}>delete</button>
+        </div>
+      )
+    })
+  }
+
+  function handleAddLanguage(){
+    setExpandLanguages(!expandLanguages)
+  }
+  function handleAddNewLanguage(){
+
+  }
+  function handleCancelLanguage(){
+    setNewLanguage("")
+    setExpandLanguages(!expandLanguages)
+  }
 
 
 
@@ -256,11 +410,19 @@ if(expandBasicInfo){
             </section>
 
             <section className={"personal-details" }>
-              <h4 className={"border-top-0 border-right-0 border border-left-0" }>Skills</h4>
+              <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
+                <h4> Skills</h4>
+                <button onClick={() => handleAddSkill()}> + </button>
+              </div>
+              {Skills}
             </section>
 
             <section className={"personal-details" }>
-              <h4 className={"border-top-0 border-right-0 border border-left-0" }>Links</h4>
+              <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
+                <h4> Links</h4>
+                <button onClick={() => handleAddLink()}> + </button>
+              </div>
+              {Links}
             </section>
 
             <section className={"personal-details" }>
@@ -268,8 +430,15 @@ if(expandBasicInfo){
             </section>
 
             <section className={"personal-details" }>
+              <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
+                <h4> Languages</h4>
+                <button onClick={() => handleAddLanguage()}> + </button>
+              </div>
+              {Languages}
+            </section>
+
+            <section className={"personal-details" }>
               <h4 className={"border-top-0 border-right-0 border border-left-0" }>Add Section</h4>
-              <p>Languages</p>
               <p>Military service</p>
             </section>
 
