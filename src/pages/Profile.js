@@ -179,6 +179,13 @@ function handleSaveWorkExperience(){
     description:WEDescription
   })
   setUserData({...userData, workExperience:newWorkExperience})
+  setExpandWorkExperience(!expandWorkExperience)
+}
+
+function handleDeleteWorkExperience(prop){
+  const workExperience = userData.workExperience.filter(workExperience => workExperience.jobTitle !== prop);
+  setUserData({...userData, workExperience:workExperience})
+  setExpandWorkExperience(!expandWorkExperience)
 }
 
 
@@ -289,10 +296,7 @@ if(userData.workExperience.length > 0 && !expandWorkExperience){
       })
     }
 
-    function handleDeleteWorkExperience(prop){
-      const workExperience = userData.workExperience.filter(workExperience => workExperience.jobTitle !== prop);
-      setUserData({...userData, workExperience:workExperience})
-  }
+    
 
 
 //Education ///////////////////////////////////////////////
@@ -313,13 +317,19 @@ function handleSaveEducation(){
   })
 
   setUserData({...userData, education: newEducation})
+  setExpandEducation(!expandEducation)
+}
+
+function handleDeleteEducation(prop){
+  const education = userData.education.filter(education => education.levelOfEducation !== prop);
+  setUserData({...userData, education:education})
+  setExpandEducation(!expandEducation)
 }
 
 
 function handleCancelEducation(){
   setEducationCountry();
   setEducationLevelOfEducation();
-  
   setEducationFieldOfStudy();
   setEducationStartDate();
   setEducationEndDate();
@@ -422,13 +432,7 @@ if(userData.education.length > 0 && !expandEducation){
       })
     }
 
-    function handleDeleteEducation(prop){
-      const education = userData.education.filter(education => education.levelOfEducation !== prop);
-      setUserData({...userData, education:education})
-  }
-
-
-
+    
 
 
 
@@ -743,10 +747,6 @@ if(userData.languages.length > 0 && !expandLanguages){
             </section>
 
             <section className={"personal-details" }>
-              <h4 className={"border-top-0 border-right-0 border border-left-0" }>Aditional information</h4>
-            </section>
-
-            <section className={"personal-details" }>
               <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
                 <h4> Languages</h4>
                 <button onClick={() => handleAddLanguage()}> + </button>
@@ -755,8 +755,10 @@ if(userData.languages.length > 0 && !expandLanguages){
             </section>
 
             <section className={"personal-details" }>
-              <h4 className={"border-top-0 border-right-0 border border-left-0" }>Add Section</h4>
-              <p>Military service</p>
+            <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
+                <h4> Military Service </h4>
+                <button onClick={() => handleAddLanguage()}> + </button>
+              </div>
             </section>
 
 
