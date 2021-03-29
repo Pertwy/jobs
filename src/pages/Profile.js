@@ -273,19 +273,26 @@ if(userData.workExperience.length > 0 && !expandWorkExperience){
       return userData.workExperience.map(WorkExperience => {
         return (
           <div className={"pl-3 pr-3"}>
-            <h4>{WorkExperience.jobTitle}</h4>
+            <div className={"row space-between"}>
+              <h4>{WorkExperience.jobTitle}</h4>
+              <button onClick={()=>handleDeleteWorkExperience(WorkExperience.jobTitle)}>delete</button>
+            </div>
             <p>Company: {WorkExperience.company}</p>
             <p>Location: {WorkExperience.location}</p>
             <p>Start Date: {WorkExperience.startDate}</p>
             <p>End Date: {WorkExperience.endDate}</p>
             <p>Description: {WorkExperience.description}</p>
       
-            <button onClick={()=>console.log("delete this Work Experience")}>delete</button>
+            
           </div>
         )
       })
     }
 
+    function handleDeleteWorkExperience(prop){
+      const workExperience = userData.workExperience.filter(workExperience => workExperience.jobTitle !== prop);
+      setUserData({...userData, workExperience:workExperience})
+  }
 
 
 //Education ///////////////////////////////////////////////
@@ -399,7 +406,10 @@ if(userData.education.length > 0 && !expandEducation){
       return userData.education.map(Education => {
         return (
           <div className={"pl-3 pr-3"}>
-            <h4>{Education.country}</h4>
+            <div className={"row space-between"}>
+              <h4>{Education.country}</h4>
+              <button onClick={()=>handleDeleteEducation(Education.levelOfEducation)}>delete</button>
+            </div>
             <p>Level Of Education: {Education.levelOfEducation}</p>
             <p>Field Of Study: {Education.fieldOfStudy}</p>
             <p>Start Date: {Education.startDate}</p>
@@ -412,6 +422,10 @@ if(userData.education.length > 0 && !expandEducation){
       })
     }
 
+    function handleDeleteEducation(prop){
+      const education = userData.education.filter(education => education.levelOfEducation !== prop);
+      setUserData({...userData, education:education})
+  }
 
 
 
@@ -524,11 +538,16 @@ if(userData.skills.length > 0 && !expandSkills){
       return (
         <div className={"row space-between pl-3 pr-3"}>
           <p>{skill.title}</p>
-          <button onClick={()=>console.log("delete this skill")}>delete</button>
+          <button onClick={()=>handleDeleteSkill(skill.title)}>delete</button>
         </div>
       )
     })
   }
+
+  function handleDeleteSkill(prop){
+    const skill = userData.skills.filter(skill => skill.title !== prop);
+    setUserData({...userData, skills:skill})
+}
 
   function handleAddSkill(){
     setExpandSkills(!expandSkills)
@@ -575,10 +594,15 @@ if(userData.links.length > 0 && !expandLinks){
       return (
         <div className={"row space-between pl-3 pr-3"}>
           <p>{link}</p>
-          <button onClick={()=>console.log("delete this link")}>delete</button>
+          <button onClick={()=>handleDeleteLink(link)}>delete</button>
         </div>
       )
     })
+  }
+
+  function handleDeleteLink(prop){
+    const lang = userData.links.filter(link => link !== prop);
+    setUserData({...userData, links:lang})
   }
 
   function handleAddLink(){
@@ -620,14 +644,19 @@ if(userData.languages.length > 0 && !expandLanguages){
     </>}
 
   function LanguageMap(){
-    return userData.languages.map(languages => {
+    return userData.languages.map(language => {
       return (
         <div className={"row space-between pl-3 pr-3"}>
-          <p>{languages}</p>
-          <button onClick={()=>console.log("delete this language")}>delete</button>
+          <p>{language}</p>
+          <button onClick={()=>handleDeleteLanguage(language)}>delete</button>
         </div>
       )
     })
+  }
+
+  function handleDeleteLanguage(prop){
+      const lang = userData.languages.filter(lang => lang !== prop);
+      setUserData({...userData, languages:lang})
   }
 
   function handleAddLanguage(){
