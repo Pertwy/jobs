@@ -8,6 +8,7 @@ import JobPostProfile from "../components/JobPostProfile"
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import {produce} from "immer"
+import { LensTwoTone } from '@material-ui/icons';
 
 export default function Profile(){
   const [userData, setUserData] = useState({
@@ -42,6 +43,14 @@ export default function Profile(){
   const [location, setLocation] = useState("")
   const [email, setEmail] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
+
+  const [expandWorkExperience, setExpandWorkExperience] = useState(false)
+  const [WEJobTitle, setWEJobTilte] = useState("")
+  const [WECompany, setWECompany] = useState("")
+  const [WELocation, setWELocation] = useState("")
+  const [WEStartDate, setWEStartDate] = useState("")
+  const [WEEndDate, setWEEndDate] = useState("")
+  const [WEDescription, setWEDescription] = useState("")
 
   const [expandSkills, setExpandSkills] = useState(false)
   const [newSkill, setNewSkill] = useState("")
@@ -139,6 +148,131 @@ export default function Profile(){
             </Button>
 
       </>    }
+
+
+//Work Experience ///////////////////////////////////////////////
+function handleExpandWorkExperience(){
+  setExpandWorkExperience(!expandWorkExperience)
+}
+
+function handleSaveWorkExperience(){
+  let newWorkExperience = userData.workExperience
+  newWorkExperience.push({
+    jobTitle:WEJobTitle,
+    company:WECompany,
+    location:WELocation,
+    startDate:WEStartDate,
+    endDate:WEEndDate,
+    description:WEDescription
+  })
+  setUserData({...userData, workExperience:newWorkExperience})
+}
+
+
+function handleCancelWorkExperience(){
+  setWEJobTilte("")
+  setWECompany("")
+  setWELocation("")
+  setWEStartDate("")
+  setWEEndDate("")
+  setWEDescription("")
+  setExpandWorkExperience(!expandWorkExperience)
+}
+
+
+
+let WorkExperience
+if(userData.workExperience.length > 0 && !expandWorkExperience){
+  WorkExperience =
+    <>
+      <WorkExperienceMap></WorkExperienceMap>
+    </>
+  } else if(userData.workExperience.length > 0 && expandWorkExperience){
+    WorkExperience =
+    <>
+      <WorkExperienceMap></WorkExperienceMap>
+      <>
+        <TextField fullWidth  onChange={({ target }) =>     
+              setWEJobTilte(target.value)} id="standard-basic" label="Job Title" />
+
+        <TextField fullWidth  onChange={({ target }) =>     
+              setWECompany(target.value)} id="standard-basic" label="Company"/>
+
+        <TextField fullWidth  onChange={({ target }) =>     
+              setWELocation(target.value)} id="standard-basic" label="Location" />
+
+        <TextField fullWidth  onChange={({ target }) =>     
+              setWEStartDate(target.value)} id="standard-basic" label="Start Date"/>
+
+        <TextField fullWidth  onChange={({ target }) =>     
+              setWEEndDate(target.value)} id="standard-basic" label="End Date"/>  
+
+        <TextField fullWidth  onChange={({ target }) =>     
+              setWEDescription(target.value)} id="standard-basic" label="Description"/>         
+
+        
+
+        <Button onClick={()=>handleSaveWorkExperience()} variant="outlined">
+          Save Changes
+        </Button>
+        <Button onClick={()=>handleCancelWorkExperience()} variant="outlined">
+          Cancel
+        </Button>
+      </>
+    </>
+  } else if(userData.workExperience.length == 0 && expandWorkExperience){
+    WorkExperience =
+      <>
+        <TextField fullWidth  onChange={({ target }) =>     
+              setWEJobTilte(target.value)} id="standard-basic" label="Job Title" />
+
+        <TextField fullWidth  onChange={({ target }) =>     
+              setWECompany(target.value)} id="standard-basic" label="Company"/>
+
+        <TextField fullWidth  onChange={({ target }) =>     
+              setWELocation(target.value)} id="standard-basic" label="Location" />
+
+        <TextField fullWidth  onChange={({ target }) =>     
+              setWEStartDate(target.value)} id="standard-basic" label="Start Date"/>
+
+        <TextField fullWidth  onChange={({ target }) =>     
+              setWEEndDate(target.value)} id="standard-basic" label="End Date"/>  
+
+        <TextField fullWidth  onChange={({ target }) =>     
+              setWEDescription(target.value)} id="standard-basic" label="Description"/>         
+
+        
+
+        <Button onClick={()=>handleSaveWorkExperience()} variant="outlined">
+          Save Changes
+        </Button>
+        <Button onClick={()=>handleCancelWorkExperience()} variant="outlined">
+          Cancel
+        </Button>
+   </>
+ 
+  } else{
+    WorkExperience = <></>
+  }
+
+
+    function WorkExperienceMap(){
+      return userData.workExperience.map(WorkExperience => {
+        return (
+          <div className={"row space-between pl-3 pr-3"}>
+            <p>{WorkExperience.jobTitle}</p>
+            <p>{WorkExperience.company}</p>
+            <p>{WorkExperience.location}</p>
+            <p>{WorkExperience.startDate}</p>
+            <p>{WorkExperience.endDate}</p>
+            <p>{WorkExperience.description}</p>
+      
+            <button onClick={()=>console.log("delete this Work Experience")}>delete</button>
+          </div>
+        )
+      })
+    }
+
 
 
 //Basic Info ///////////////////////////////////////////////
@@ -256,13 +390,10 @@ if(userData.skills.length > 0 && !expandSkills){
   }
 
   function handleAddNewSkill(){
-    console.log("Add Skill")
-    console.log(userData.skills)
-
-    return produce(userData.skills, draftState => {
-      draftState.push({"title":newSkill})
-      draftState[1].done = true
-  })}
+    let newSkillNow = userData.skills
+    newSkillNow.push({"title":newSkill})
+    setUserData({...userData, skills:newSkillNow})
+  }
 
   function handleCancelSkill(){
     setNewSkill("")
@@ -285,7 +416,7 @@ if(userData.links.length > 0 && !expandLinks){
         <TextField  onChange={({ target }) =>     
           setNewLink(target.value)} id="standard-basic" label="New Link" />
         <div className={"row pr-3"}>
-          <button onClick={()=>console.log("Save Link")}>Save</button>
+          <button onClick={()=>handleAddNewLink()}>Save</button>
           <button onClick={()=>handleCancelLink()}>Cancel</button>
         </div>
       </div>
@@ -309,7 +440,9 @@ if(userData.links.length > 0 && !expandLinks){
     setExpandLinks(!expandLinks)
   }
   function handleAddNewLink(){
-
+    let newLinkNow = userData.links
+    newLinkNow.push(newLink)
+    setUserData({...userData, links:newLinkNow})
   }
   function handleCancelLink(){
     setNewLink("")
@@ -332,7 +465,7 @@ if(userData.languages.length > 0 && !expandLanguages){
         <TextField  onChange={({ target }) =>     
           setNewLanguage(target.value)} id="standard-basic" label="New Language" />
         <div className={"row pr-3"}>
-          <button onClick={()=>console.log("Save Language")}>Save</button>
+          <button onClick={()=>handleAddNewLanguage()}>Save</button>
           <button onClick={()=>handleCancelLanguage()}>Cancel</button>
         </div>
       </div>
@@ -356,7 +489,9 @@ if(userData.languages.length > 0 && !expandLanguages){
     setExpandLanguages(!expandLanguages)
   }
   function handleAddNewLanguage(){
-
+    let newLanguageNow = userData.languages
+    newLanguageNow.push(newLanguage)
+    setUserData({...userData, languages:newLanguageNow})
   }
   function handleCancelLanguage(){
     setNewLanguage("")
@@ -402,7 +537,11 @@ if(userData.languages.length > 0 && !expandLanguages){
 
 
             <section className={"personal-details" }>
-              <h4 className={"border-top-0 border-right-0 border border-left-0" }>Work Experience</h4>
+              <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
+                <h4 >Work Experience</h4>
+                <button onClick={() => handleExpandWorkExperience()}>Edit</button>
+              </div>
+              {WorkExperience}
             </section>
 
             <section className={"personal-details" }>
