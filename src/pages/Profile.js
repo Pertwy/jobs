@@ -9,6 +9,9 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 import WorkExperience from "./profileSections/WorkExperience"
+import Education from "./profileSections/Education"
+import MilitaryService from "./profileSections/MilitaryService"
+import BasicInfo from "./profileSections/BasicInfo"
 
 export default function Profile(){
   const [userData, setUserData] = useState({
@@ -35,33 +38,7 @@ export default function Profile(){
     languages:["Spanish", "English"],
   })
   const [expandPersonalDetails, setExpandPersonalDetails] = useState(true)
-  const [expandBasicInfo, setExpandBasicInfo] = useState(true)
 
-  const [givenName, setGivenName] = useState("")
-  const [surname, setSurname] = useState("")
-  const [headline, setHeadline] = useState("")
-  const [location, setLocation] = useState("")
-  const [email, setEmail] = useState("")
-  const [phoneNumber, setPhoneNumber] = useState("")
-
-
-
-  const [ expandEducation, setExpandEducation] = useState(false)
-  const [ educationCountry, setEducationCountry] = useState("");
-  const [ educationLevelOfEducation, setEducationLevelOfEducation] = useState("");
-  const [ educationFieldOfStudy, setEducationFieldOfStudy] = useState("");
-  const [ educationStartDate, setEducationStartDate] = useState("");
-  const [ educationEndDate, setEducationEndDate] =useState("");
-  const [ educationCollegeOrUniversity, setEducationCollegeOrUniversity] =useState("");
-
-  const [expandMilitaryService, setExpandMilitaryService] = useState(false)
-  const [militaryServiceCountry, setMilitaryServiceCountry] = useState("")
-  const [militaryServiceUnit, setMilitaryServiceUnit] = useState("")
-  const [militaryRank, setMilitaryRank] = useState("")
-  const [militaryServiceStartDate, setMilitaryServiceStartDate] = useState("")
-  const [militaryServiceEndDate, setMilitaryServiceEndDate] = useState("")
-  const [militaryServiceDescription, setMilitaryServiceDescription] = useState("")
-  const [militaryServiceComendations, setMilitaryServiceComendations] = useState("")
 
 
   const [expandSkills, setExpandSkills] = useState(false)
@@ -162,369 +139,6 @@ export default function Profile(){
       </>    }
 
 
-
-
-
-
-//Education ///////////////////////////////////////////////
-function handleExpandEducation(){
-  setExpandEducation(!expandEducation)
-}
-
-function handleSaveEducation(){
-  let newEducation = userData.education
-
-  newEducation.push({
-    country:educationCountry,
-    levelOfEducation:educationLevelOfEducation,
-    fieldOfStudy:educationFieldOfStudy,
-    startDate:educationStartDate,
-    endDate: educationEndDate,
-    collegeOrUniversity:educationCollegeOrUniversity
-  })
-
-  setUserData({...userData, education: newEducation})
-  setExpandEducation(false)
-}
-
-function handleDeleteEducation(prop){
-  const education = userData.education.filter(education => education.levelOfEducation !== prop);
-  setUserData({...userData, education:education})
-  setExpandEducation(false)
-}
-
-
-function handleCancelEducation(){
-  setEducationCountry();
-  setEducationLevelOfEducation();
-  setEducationFieldOfStudy();
-  setEducationStartDate();
-  setEducationEndDate();
-  setEducationCollegeOrUniversity();
-  setExpandEducation(!expandEducation)
-}
-
-
-
-let Education
-if(userData.education.length > 0 && !expandEducation){
-  Education =
-    <>
-      <EducationMap></EducationMap>
-    </>
-  } else if(userData.education.length > 0 && expandEducation){
-    Education =
-    <>
-      <EducationMap></EducationMap>
-      <>
-        <TextField fullWidth  onChange={({ target }) =>     
-              setEducationCountry(target.value)} id="standard-basic" label="Country" />
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setEducationLevelOfEducation(target.value)} id="standard-basic" label="Level Of Education"/>
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setEducationFieldOfStudy(target.value)} id="standard-basic" label="Field Of Study" />
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setEducationStartDate(target.value)} id="standard-basic" label="Start Date"/>
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setEducationEndDate(target.value)} id="standard-basic" label="End Date"/>  
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setEducationCollegeOrUniversity(target.value)} id="standard-basic" label="College/University"/>         
-
-        
-
-        <Button onClick={()=>handleSaveEducation()} variant="outlined">
-          Save Changes
-        </Button>
-        <Button onClick={()=>handleCancelEducation()} variant="outlined">
-          Cancel
-        </Button>
-      </>
-    </>
-  } else if(userData.education.length == 0 && expandEducation){
-    Education =
-      <>
-        <TextField fullWidth  onChange={({ target }) =>     
-              setEducationCountry(target.value)} id="standard-basic" label="Country" />
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setEducationLevelOfEducation(target.value)} id="standard-basic" label="Level Of Education"/>
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setEducationFieldOfStudy(target.value)} id="standard-basic" label="Field Of Study" />
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setEducationStartDate(target.value)} id="standard-basic" label="Start Date"/>
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setEducationEndDate(target.value)} id="standard-basic" label="End Date"/>  
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setEducationCollegeOrUniversity(target.value)} id="standard-basic" label="College/University"/>     
-
-        <Button onClick={()=>handleSaveEducation()} variant="outlined">
-          Save Changes
-        </Button>
-        <Button onClick={()=>handleCancelEducation()} variant="outlined">
-          Cancel
-        </Button>
-   </>
- 
-  } else{
-    Education = <></>
-  }
-
-
-    function EducationMap(){
-      return userData.education.map(Education => {
-        return (
-          <div className={"pl-3 pr-3"}>
-            <div className={"row space-between"}>
-              <h4>{Education.country}</h4>
-              <button onClick={()=>handleDeleteEducation(Education.levelOfEducation)}>delete</button>
-            </div>
-            <p>Level Of Education: {Education.levelOfEducation}</p>
-            <p>Field Of Study: {Education.fieldOfStudy}</p>
-            <p>Start Date: {Education.startDate}</p>
-            <p>End Date: {Education.endDate}</p>
-            <p>College/University: {Education.collegeOrUniversity}</p>
-      
-            <button onClick={()=>console.log("delete this Education")}>delete</button>
-          </div>
-        )
-      })
-    }
-
-    
-
-
-
-//Military Service ///////////////////////////////////////////////
-function handleExpandMilitaryService(){
-  setExpandMilitaryService(!expandMilitaryService)
-}
-
-function handleSaveMilitaryService(){
-  let newMilitaryService = userData.militaryService
-  newMilitaryService.push({
-    country: militaryServiceCountry,
-    unit: militaryServiceUnit,
-    rank: militaryRank,
-    startDate: militaryServiceStartDate,
-    endDate: militaryServiceEndDate,
-    description: militaryServiceDescription,
-    comendations: militaryServiceComendations
-  })
-
-  setUserData({...userData, militaryService:newMilitaryService})
-  setExpandMilitaryService(false)
-}
-
-function handleDeleteMilitaryService(prop){
-  const militaryService = userData.militaryService.filter(militaryService => militaryService.jobTitle !== prop);
-  setUserData({...userData, militaryService:militaryService})
-  setExpandMilitaryService(false)
-}
-
-
-function handleCancelMilitaryService(){
-  setMilitaryServiceCountry("")
-  setMilitaryServiceUnit("")
-  setMilitaryRank("")
-  setMilitaryServiceStartDate("")
-  setMilitaryServiceEndDate("")
-  setMilitaryServiceDescription("")
-  setMilitaryServiceComendations("")
-  setExpandMilitaryService(!expandMilitaryService)
-}
-
-
-
-let MilitaryService
-if(userData.militaryService.length > 0 && !expandMilitaryService){
-  MilitaryService =
-    <>
-      <MilitaryServiceMap></MilitaryServiceMap>
-    </>
-  } else if(userData.militaryService.length > 0 && expandMilitaryService){
-    MilitaryService =
-    <>
-      <MilitaryServiceMap></MilitaryServiceMap>
-      <>
-        <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceCountry(target.value)} id="standard-basic" label="Country" />
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceUnit(target.value)} id="standard-basic" label="Unit"/>
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryRank(target.value)} id="standard-basic" label="Rank" />
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceStartDate(target.value)} id="standard-basic" label="Start Date"/>
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceEndDate(target.value)} id="standard-basic" label="End Date"/>  
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceDescription(target.value)} id="standard-basic" label="Description"/>         
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceComendations(target.value)} id="standard-basic" label="Comendations"/>   
-
-        
-
-        <Button onClick={()=>handleSaveMilitaryService()} variant="outlined">
-          Save Changes
-        </Button>
-        <Button onClick={()=>handleCancelMilitaryService()} variant="outlined">
-          Cancel
-        </Button>
-      </>
-    </>
-  } else if(userData.militaryService.length == 0 && expandMilitaryService){
-    MilitaryService =
-      <>
-               <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceCountry(target.value)} id="standard-basic" label="Country" />
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceUnit(target.value)} id="standard-basic" label="Unit"/>
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryRank(target.value)} id="standard-basic" label="Rank" />
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceStartDate(target.value)} id="standard-basic" label="Start Date"/>
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceEndDate(target.value)} id="standard-basic" label="End Date"/>  
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceDescription(target.value)} id="standard-basic" label="Description"/>         
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceComendations(target.value)} id="standard-basic" label="Comendations"/>           
-
-        
-
-        <Button onClick={()=>handleSaveMilitaryService()} variant="outlined">
-          Save Changes
-        </Button>
-        <Button onClick={()=>handleCancelMilitaryService()} variant="outlined">
-          Cancel
-        </Button>
-   </>
- 
-  } else{
-    MilitaryService = <></>
-  }
-
-
-    function MilitaryServiceMap(){
-      return userData.militaryService.map(MilitaryService => {
-        return (
-          <div className={"pl-3 pr-3"}>
-            <div className={"row space-between"}>
-              <h4>{MilitaryService.jobTitle}</h4>
-              <button onClick={()=>handleDeleteMilitaryService(MilitaryService.jobTitle)}>delete</button>
-            </div>
-            <p>Country: {MilitaryService.country}</p>
-            <p>Unit: {MilitaryService.unit}</p>
-            <p>Start Date: {MilitaryService.startDate}</p>
-            <p>End Date: {MilitaryService.endDate}</p>
-            <p>Rank: {MilitaryService.rank}</p>
-            <p>Description: {MilitaryService.description}</p>
-            <p>Comendations: {MilitaryService.comendations}</p>
-      
-            
-          </div>
-        )
-      })
-    }
-
-
-
-
-
-
-//Basic Info ///////////////////////////////////////////////
-function handleExpandBasicInfo(){
-  setExpandBasicInfo(!expandBasicInfo)
-}
-
-function handleSaveBasicInfo(){
-  if(givenName){
-    setUserData({...userData, givenName:givenName})
-  }
-  if(surname){
-    setUserData({...userData, surname:surname})
-  }
-  if(location){
-    setUserData({...userData, location:location})
-  }
-  if(email){
-    setUserData({...userData, email:email})
-  }
-  if(phoneNumber){
-    setUserData({...userData, phoneNumber:phoneNumber})
-  }
-
-  setExpandBasicInfo(!expandBasicInfo)
-}
-
-function handleCancelBasicInfo(){
-  setGivenName("")
-  setSurname("")
-  setHeadline("")
-  setEmail("")
-  setPhoneNumber("")
-  setExpandBasicInfo(!expandBasicInfo)
-}
-
-let BasicInfo 
-if(expandBasicInfo){
-  BasicInfo =
-    <>
-      {userData.givenName && <p>Given Name: {capitalizeFirstLetter(userData.givenName)}</p>}
-      {userData.surname && <p>Surname: {capitalizeFirstLetter(userData.surname)}</p>}
-      {userData.headline && <p>Headline: {userData.headline}</p>}
-      {userData.location && <p>Location: {userData.location}</p>}
-      {userData.email && <p>Email: {userData.email}</p>}
-      {userData.phoneNumber && <p>Phone Number: {userData.phoneNumber}</p>}
-    </>
-  } else{
-    BasicInfo = <>
-          <TextField fullWidth  onChange={({ target }) =>     
-                setGivenName(target.value)} id="standard-basic" label="Given Name" placeholder={userData.givenName}/>
-
-          <TextField fullWidth  onChange={({ target }) =>     
-                setSurname(target.value)} id="standard-basic" label="Surname" placeholder={userData.surname}/>
-
-          <TextField fullWidth  onChange={({ target }) =>     
-                setHeadline(target.value)} id="standard-basic" label="Headline" placeholder={userData.headline}/>
-
-          <TextField fullWidth  onChange={({ target }) =>     
-                setLocation(target.value)} id="standard-basic" label="Location" placeholder={userData.location}/>  
-
-          <TextField fullWidth  onChange={({ target }) =>     
-                setEmail(target.value)} id="standard-basic" label="Email" placeholder={userData.email}/>
-
-          <TextField fullWidth  onChange={({ target }) =>     
-                setPhoneNumber(target.value)} id="standard-basic" label="Phone Number" placeholder={userData.phoneNumber}/>
-
-          <Button onClick={()=>handleSaveBasicInfo()} variant="outlined">
-            Save Changes
-          </Button>
-          <Button onClick={()=>handleCancelBasicInfo()} variant="outlined">
-            Cancel
-          </Button>
-
-    </>    }
 
 
 //Skills /////////////////////////////////
@@ -710,13 +324,7 @@ if(userData.languages.length > 0 && !expandLanguages){
           <div className={"border  p-3"}>
 
 
-            <section className={"basic-info" }>
-              <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
-                <h4 >Basic Info</h4>
-                <button onClick={() => handleExpandBasicInfo()}>Edit</button>
-              </div>
-              {BasicInfo}
-            </section>
+            <BasicInfo props={userData} setUserData={setUserData}></BasicInfo>
 
 
             <section className={"personal-details" }>
@@ -729,13 +337,7 @@ if(userData.languages.length > 0 && !expandLanguages){
 
             <WorkExperience props={userData} setUserData={setUserData}></WorkExperience>
 
-            <section className={"personal-details" }>
-              <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
-                <h4 >Eduction</h4>
-                <button onClick={() => handleExpandEducation()}>Edit</button>
-              </div>
-              {Education}
-            </section>
+            <Education props={userData} setUserData={setUserData}></Education>
 
             <section className={"personal-details" }>
               <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
@@ -761,13 +363,7 @@ if(userData.languages.length > 0 && !expandLanguages){
               {Languages}
             </section>
 
-            <section className={"personal-details" }>
-            <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
-                <h4> Military Service </h4>
-                <button onClick={() => handleExpandMilitaryService()}> + </button>
-              </div>
-              {MilitaryService}
-            </section>
+            <MilitaryService props={userData} setUserData={setUserData}></MilitaryService>
 
             
 
