@@ -13,6 +13,8 @@ import Education from "./profileSections/Education"
 import MilitaryService from "./profileSections/MilitaryService"
 import BasicInfo from "./profileSections/BasicInfo"
 import PersonalDetails from "./profileSections/PersonalDetails"
+import Links from "./profileSections/Links"
+import Languages from "./profileSections/Languages"
 
 export default function Profile(){
   const [userData, setUserData] = useState({
@@ -41,14 +43,6 @@ export default function Profile(){
   
   const [expandSkills, setExpandSkills] = useState(false)
   const [newSkill, setNewSkill] = useState("")
-
-  const [expandLinks, setExpandLinks] = useState(false)
-  const [newLink, setNewLink] = useState("")
-
-  const [expandLanguages, setExpandLanguages] = useState(false)
-  const [newLanguage, setNewLanguage] = useState("")
-
-
 
   // useEffect(() => {
   //   try {
@@ -85,10 +79,6 @@ export default function Profile(){
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
-
- 
-
-
 
 
 //Skills /////////////////////////////////
@@ -147,113 +137,6 @@ if(userData.skills.length > 0 && !expandSkills){
   }
   
 
-//Links /////////////////////////////////
-let Links
-if(userData.links.length > 0 && !expandLinks){
-  Links =
-    <>
-      <LinkMap></LinkMap>
-    </>
-  } else if(userData.links.length > 0 && expandLinks){
-    Links =
-    <>
-      <LinkMap></LinkMap>
-      <div className={"row pl-3 pr-3 space-between"}>
-        <TextField  onChange={({ target }) =>     
-          setNewLink(target.value)} id="standard-basic" label="New Link" />
-        <div className={"row pr-3"}>
-          <button onClick={()=>handleAddNewLink()}>Save</button>
-          <button onClick={()=>handleCancelLink()}>Cancel</button>
-        </div>
-      </div>
-    </>
-  } else{
-    Links = <>
-    </>}
-
-  function LinkMap(){
-    return userData.links.map(link => {
-      return (
-        <div className={"row space-between pl-3 pr-3"}>
-          <p>{link}</p>
-          <button onClick={()=>handleDeleteLink(link)}>delete</button>
-        </div>
-      )
-    })
-  }
-
-  function handleDeleteLink(prop){
-    const lang = userData.links.filter(link => link !== prop);
-    setUserData({...userData, links:lang})
-  }
-
-  function handleAddLink(){
-    setExpandLinks(!expandLinks)
-  }
-  function handleAddNewLink(){
-    let newLinkNow = userData.links
-    newLinkNow.push(newLink)
-    setUserData({...userData, links:newLinkNow})
-  }
-  function handleCancelLink(){
-    setNewLink("")
-    setExpandLinks(!expandLinks)
-  }
-
-
-//Languaes /////////////////////////////////
-let Languages
-if(userData.languages.length > 0 && !expandLanguages){
-  Languages =
-    <>
-      <LanguageMap></LanguageMap>
-    </>
-  } else if(userData.languages.length > 0 && expandLanguages){
-    Languages =
-    <>
-      <LanguageMap></LanguageMap>
-      <div className={"row pl-3 pr-3 space-between"}>
-        <TextField  onChange={({ target }) =>     
-          setNewLanguage(target.value)} id="standard-basic" label="New Language" />
-        <div className={"row pr-3"}>
-          <button onClick={()=>handleAddNewLanguage()}>Save</button>
-          <button onClick={()=>handleCancelLanguage()}>Cancel</button>
-        </div>
-      </div>
-    </>
-  } else{
-    Languages = <>
-    </>}
-
-  function LanguageMap(){
-    return userData.languages.map(language => {
-      return (
-        <div className={"row space-between pl-3 pr-3"}>
-          <p>{language}</p>
-          <button onClick={()=>handleDeleteLanguage(language)}>delete</button>
-        </div>
-      )
-    })
-  }
-
-  function handleDeleteLanguage(prop){
-      const lang = userData.languages.filter(lang => lang !== prop);
-      setUserData({...userData, languages:lang})
-  }
-
-  function handleAddLanguage(){
-    setExpandLanguages(!expandLanguages)
-  }
-  function handleAddNewLanguage(){
-    let newLanguageNow = userData.languages
-    newLanguageNow.push(newLanguage)
-    setUserData({...userData, languages:newLanguageNow})
-  }
-  function handleCancelLanguage(){
-    setNewLanguage("")
-    setExpandLanguages(!expandLanguages)
-  }
-
 
 
   return (
@@ -290,27 +173,14 @@ if(userData.languages.length > 0 && !expandLanguages){
               {Skills}
             </section>
 
-            <section className={"personal-details" }>
-              <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
-                <h4> Links</h4>
-                <button onClick={() => handleAddLink()}> + </button>
-              </div>
-              {Links}
-            </section>
+      
+            <Languages props={userData} setUserData={setUserData}></Languages>
 
-            <section className={"personal-details" }>
-              <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
-                <h4> Languages</h4>
-                <button onClick={() => handleAddLanguage()}> + </button>
-              </div>
-              {Languages}
-            </section>
+            <Links props={userData} setUserData={setUserData}></Links>
 
             <MilitaryService props={userData} setUserData={setUserData}></MilitaryService>
 
-            
-
-
+          
           </div>
         </div>
 
