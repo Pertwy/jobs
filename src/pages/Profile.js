@@ -12,6 +12,7 @@ import WorkExperience from "./profileSections/WorkExperience"
 import Education from "./profileSections/Education"
 import MilitaryService from "./profileSections/MilitaryService"
 import BasicInfo from "./profileSections/BasicInfo"
+import PersonalDetails from "./profileSections/PersonalDetails"
 
 export default function Profile(){
   const [userData, setUserData] = useState({
@@ -37,10 +38,7 @@ export default function Profile(){
     additionalInformation:"",
     languages:["Spanish", "English"],
   })
-  const [expandPersonalDetails, setExpandPersonalDetails] = useState(true)
-
-
-
+  
   const [expandSkills, setExpandSkills] = useState(false)
   const [newSkill, setNewSkill] = useState("")
 
@@ -50,8 +48,6 @@ export default function Profile(){
   const [expandLanguages, setExpandLanguages] = useState(false)
   const [newLanguage, setNewLanguage] = useState("")
 
-  const [highestLevelOfDegree, setHighestLevelOfDegree] = useState("")
-  const [elegibleUK, setElegibleUK] = useState("")
 
 
   // useEffect(() => {
@@ -91,52 +87,6 @@ export default function Profile(){
   }
 
  
-
-//Personal Details ///////////////////////////////////////////////
-  function handleExpandPersonalDetails(){
-    setExpandPersonalDetails(!expandPersonalDetails)
-  }
-
-  function handleSavePersonalDetails(){
-    if(elegibleUK){
-      setUserData({...userData, elegibleUK:elegibleUK})
-    }
-    if(highestLevelOfDegree){
-      setUserData({...userData, highestLevelOfDegree:highestLevelOfDegree})
-    }
-    setExpandPersonalDetails(!expandPersonalDetails)
-  }
-
-  function handleCancelPersonalDetails(){
-    setElegibleUK("")
-    setHighestLevelOfDegree("")
-    setExpandPersonalDetails(!expandPersonalDetails)
-  }
-
-  let PersonalDetails 
-  if(expandPersonalDetails){
-    PersonalDetails =
-      <>
-        {userData.elegibleUK && <p>Eligible to Work in the UK: {userData.elegibleUK}</p>}
-        {userData.highestLevelOfDegree && <p>Highest level of education: {userData.highestLevelOfDegree}</p>}
-        {userData.industry.length > 0  && <p>Industry</p>}
-      </>
-    } else{
-      PersonalDetails = <>
-            <TextField fullWidth  onChange={({ target }) =>     
-                  setElegibleUK(target.value)} id="standard-basic" label="Eligible to work in the UK" placeholder={userData.elegibleUK}/>
-
-            <TextField fullWidth  onChange={({ target }) =>     
-                  setHighestLevelOfDegree(target.value)} id="standard-basic" label="Highest Level of Degree" placeholder={userData.highestLevelOfDegree}/>
-
-            <Button onClick={()=>handleSavePersonalDetails()} variant="outlined">
-              Save Changes
-            </Button>
-            <Button onClick={()=>handleCancelPersonalDetails()} variant="outlined">
-              Cancel
-            </Button>
-
-      </>    }
 
 
 
@@ -326,14 +276,7 @@ if(userData.languages.length > 0 && !expandLanguages){
 
             <BasicInfo props={userData} setUserData={setUserData}></BasicInfo>
 
-
-            <section className={"personal-details" }>
-              <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
-                <h4 >Personal Details</h4>
-                <button onClick={() => handleExpandPersonalDetails()}>Edit</button>
-              </div>
-              {PersonalDetails}
-            </section>
+            <PersonalDetails props={userData} setUserData={setUserData}></PersonalDetails>
 
             <WorkExperience props={userData} setUserData={setUserData}></WorkExperience>
 
