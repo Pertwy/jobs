@@ -15,6 +15,7 @@ import BasicInfo from "./profileSections/BasicInfo"
 import PersonalDetails from "./profileSections/PersonalDetails"
 import Links from "./profileSections/Links"
 import Languages from "./profileSections/Languages"
+import Skills from "./profileSections/Skills"
 
 export default function Profile(){
   const [userData, setUserData] = useState({
@@ -41,9 +42,7 @@ export default function Profile(){
     languages:["Spanish", "English"],
   })
   
-  const [expandSkills, setExpandSkills] = useState(false)
-  const [newSkill, setNewSkill] = useState("")
-
+ 
   // useEffect(() => {
   //   try {
   //     axios.get('http://localhost:5000/users/')
@@ -81,62 +80,6 @@ export default function Profile(){
   }
 
 
-//Skills /////////////////////////////////
-let Skills
-if(userData.skills.length > 0 && !expandSkills){
-  Skills =
-    <>
-      <SkillMap></SkillMap>
-    </>
-  } else if(userData.skills.length > 0 && expandSkills){
-    Skills =
-    <>
-      <SkillMap></SkillMap>
-      <div className={"row pl-3 pr-3 space-between"}>
-        <TextField  onChange={({ target }) =>     
-          setNewSkill(target.value)} id="standard-basic" label="New Skill" />
-        <div className={"row pr-3"}>
-          <button onClick={()=>handleAddNewSkill()}>Save</button>
-          <button onClick={()=>handleCancelSkill()}>Cancel</button>
-        </div>
-      </div>
-    </>
-  } else{
-    Skills = <>
-    </>}
-
-  function SkillMap(){
-    return userData.skills.map(skill => {
-      return (
-        <div className={"row space-between pl-3 pr-3"}>
-          <p>{skill.title}</p>
-          <button onClick={()=>handleDeleteSkill(skill.title)}>delete</button>
-        </div>
-      )
-    })
-  }
-
-  function handleDeleteSkill(prop){
-    const skill = userData.skills.filter(skill => skill.title !== prop);
-    setUserData({...userData, skills:skill})
-}
-
-  function handleAddSkill(){
-    setExpandSkills(!expandSkills)
-  }
-
-  function handleAddNewSkill(){
-    let newSkillNow = userData.skills
-    newSkillNow.push({"title":newSkill})
-    setUserData({...userData, skills:newSkillNow})
-  }
-
-  function handleCancelSkill(){
-    setNewSkill("")
-    setExpandSkills(!expandSkills)
-  }
-  
-
 
 
   return (
@@ -154,32 +97,39 @@ if(userData.skills.length > 0 && !expandSkills){
       <div className="row container-fluid">
         
         <div className={"col-sm-12"} >
-          <div className={"border  p-3"}>
+          <div className={"border  p-4"}>
 
 
             <BasicInfo props={userData} setUserData={setUserData}></BasicInfo>
 
-            <PersonalDetails props={userData} setUserData={setUserData}></PersonalDetails>
-
-            <WorkExperience props={userData} setUserData={setUserData}></WorkExperience>
-
-            <Education props={userData} setUserData={setUserData}></Education>
-
-            <section className={"personal-details" }>
-              <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
-                <h4> Skills</h4>
-                <button onClick={() => handleAddSkill()}> + </button>
-              </div>
-              {Skills}
+            <section className={"pt-4"}>
+              <PersonalDetails props={userData} setUserData={setUserData}></PersonalDetails>
             </section>
 
-      
-            <Languages props={userData} setUserData={setUserData}></Languages>
+            <section className={"pt-4"}>
+              <WorkExperience props={userData} setUserData={setUserData}></WorkExperience>
+            </section>
 
-            <Links props={userData} setUserData={setUserData}></Links>
 
-            <MilitaryService props={userData} setUserData={setUserData}></MilitaryService>
+            <section className={"pt-4"}>
+              <Education props={userData} setUserData={setUserData}></Education>
+            </section>
 
+            <section className={"pt-4"}>
+              <Skills props={userData} setUserData={setUserData}></Skills>
+            </section>
+
+            <section className={"pt-4"}>
+              <Languages props={userData} setUserData={setUserData}></Languages>
+            </section>
+
+            <section className={"pt-4"}>
+              <Links props={userData} setUserData={setUserData}></Links>
+            </section>
+
+            <section className={"pt-4"}>
+              <MilitaryService props={userData} setUserData={setUserData}></MilitaryService>
+            </section>
           
           </div>
         </div>

@@ -135,7 +135,10 @@ function handleExpandWorkExperience(){
               <div className={"pl-3 pr-3"}>
                 <div className={"row space-between"}>
                   <h4>{WorkExperience.jobTitle}</h4>
-                  <button onClick={()=>handleDeleteWorkExperience(WorkExperience.jobTitle)}>delete</button>
+                  <div className="row">
+                    <button onClick={()=>handleDeleteWorkExperience(WorkExperience.jobTitle)}>delete</button>
+                    <button onClick={()=>handleDeleteWorkExperience(WorkExperience.jobTitle)}>delete</button>
+                    </div>
                 </div>
                 <p>Company: {WorkExperience.company}</p>
                 <p>Location: {WorkExperience.location}</p>
@@ -156,7 +159,7 @@ function handleExpandWorkExperience(){
         <section className={"personal-details" }>
               <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
                 <h4 >Work Experience</h4>
-                <button onClick={() => handleExpandWorkExperience()}>Edit</button>
+                <button onClick={() => handleExpandWorkExperience()}>Add</button>
               </div>
               {WorkExperience}
             </section>

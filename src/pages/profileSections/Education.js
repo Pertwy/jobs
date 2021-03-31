@@ -136,7 +136,10 @@ function handleExpandEducation(){
             <div className={"pl-3 pr-3"}>
               <div className={"row space-between"}>
                 <h4>{Education.country}</h4>
-                <button onClick={()=>handleDeleteEducation(Education.levelOfEducation)}>delete</button>
+                <div className="row">
+                    <button  onClick={()=>handleDeleteEducation(Education.levelOfEducation)}>Delete</button>
+                    <button onClick={()=>handleDeleteEducation(Education.levelOfEducation)}>Edit</button>
+                </div>
               </div>
               <p>Level Of Education: {Education.levelOfEducation}</p>
               <p>Field Of Study: {Education.fieldOfStudy}</p>
@@ -144,7 +147,6 @@ function handleExpandEducation(){
               <p>End Date: {Education.endDate}</p>
               <p>College/University: {Education.collegeOrUniversity}</p>
         
-              <button onClick={()=>console.log("delete this Education")}>delete</button>
             </div>
           )
         })
@@ -157,7 +159,7 @@ function handleExpandEducation(){
         <section className={"personal-details" }>
               <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
                 <h4 >Eduction</h4>
-                <button onClick={() => handleExpandEducation()}>Edit</button>
+                <button onClick={() => handleExpandEducation()}>Add</button>
               </div>
               {Education}
         </section>

@@ -168,7 +168,7 @@ if(props.props.militaryService.length > 0 && !expandMilitaryService){
         <section className={"personal-details" }>
               <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
                 <h4 >Military Service</h4>
-                <button onClick={() => handleExpandMilitaryService()}>Edit</button>
+                <button onClick={() => handleExpandMilitaryService()}>Add</button>
               </div>
               {MilitaryService}
         </section>
