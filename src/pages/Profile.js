@@ -134,7 +134,7 @@ export default function Profile(){
           </div>
         </div>
 
-        <div className={"col-sm-4"} >
+        <div className={"col-sm-4 col-md-12"} >
           <h3 className="book-row-title" >SAVED</h3>
           <div className="row book-row">
             <SavedJobs/>
