@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 
 import "date-fns";
 import DateFnsUtils from '@date-io/date-fns';
-import { DateTimePicker, DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 
 
 export default function WorkExperience(props){
@@ -20,11 +20,12 @@ export default function WorkExperience(props){
     const [WEEndDate, setWEEndDate] = useState("")
     const [WEDescription, setWEDescription] = useState("")
 
-    // const [selectedDate, setSelectedDate] = useState(new Date())
-    const [selectedDate, handleDateChange] = useState(new Date());
+    // const [startDate, setSelectedDate] = useState(new Date())
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
     
   
-    // const handleDateChange = (date: Date | null) => {
+    // const setStartDate = (date: Date | null) => {
     //   setSelectedDate(date);
     // };
 
@@ -95,7 +96,28 @@ function handleExpandWorkExperience(){
                   setWEEndDate(target.value)} id="standard-basic" label="End Date"/>  
     
             <TextField fullWidth  onChange={({ target }) =>     
-                  setWEDescription(target.value)} id="standard-basic" label="Description"/>         
+                  setWEDescription(target.value)} id="standard-basic" label="Description"/>   
+
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <DatePicker
+                variant="inline"
+                openTo="year"
+                views={["year", "month"]}
+                label="Year and Month"
+                helperText="Start Month"
+                value={startDate}
+                onChange={setStartDate}
+              /> 
+              <DatePicker
+                variant="inline"
+                openTo="year"
+                views={["year", "month"]}
+                label="Year and Month"
+                helperText="End Month"
+                value={endDate}
+                onChange={setEndDate}
+              /> 
+            </MuiPickersUtilsProvider>      
     
             
     
@@ -136,9 +158,18 @@ function handleExpandWorkExperience(){
                 openTo="year"
                 views={["year", "month"]}
                 label="Year and Month"
-                helperText="Start from year selection"
-                value={selectedDate}
-                onChange={handleDateChange}
+                helperText="Start Month"
+                value={startDate}
+                onChange={setStartDate}
+              /> 
+              <DatePicker
+                variant="inline"
+                openTo="year"
+                views={["year", "month"]}
+                label="Year and Month"
+                helperText="End Month"
+                value={endDate}
+                onChange={setEndDate}
               /> 
             </MuiPickersUtilsProvider>
             
@@ -152,8 +183,8 @@ function handleExpandWorkExperience(){
               helperText="With min and max"
               minDate={new Date("2018-03-01")}
               maxDate={new Date("2018-06-01")}
-              value={selectedDate}
-              // onChange={handleDateChange}
+              value={startDate}
+              // onChange={setStartDate}
               onChange={({ target }) => setSelectedDate(target.value)}
             /> */}
     

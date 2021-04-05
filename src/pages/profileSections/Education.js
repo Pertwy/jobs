@@ -5,6 +5,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
+import "date-fns";
+import DateFnsUtils from '@date-io/date-fns';
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+
 export default function Education(props){
 
     const [ expandEducation, setExpandEducation] = useState(false)
@@ -15,6 +19,8 @@ export default function Education(props){
     const [ educationEndDate, setEducationEndDate] =useState("");
     const [ educationCollegeOrUniversity, setEducationCollegeOrUniversity] =useState("");
   
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
     
     
 //Education ///////////////////////////////////////////////
@@ -84,7 +90,29 @@ function handleExpandEducation(){
                 setEducationEndDate(target.value)} id="standard-basic" label="End Date"/>  
   
           <TextField fullWidth  onChange={({ target }) =>     
-                setEducationCollegeOrUniversity(target.value)} id="standard-basic" label="College/University"/>         
+                setEducationCollegeOrUniversity(target.value)} id="standard-basic" label="College/University"/>     
+
+
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <DatePicker
+                variant="inline"
+                openTo="year"
+                views={["year", "month"]}
+                label="Year and Month"
+                helperText="Start Month"
+                value={startDate}
+                onChange={setStartDate}
+              /> 
+              <DatePicker
+                variant="inline"
+                openTo="year"
+                views={["year", "month"]}
+                label="Year and Month"
+                helperText="End Month"
+                value={endDate}
+                onChange={setEndDate}
+              /> 
+            </MuiPickersUtilsProvider>    
   
           
   
@@ -115,7 +143,28 @@ function handleExpandEducation(){
                 setEducationEndDate(target.value)} id="standard-basic" label="End Date"/>  
   
           <TextField fullWidth  onChange={({ target }) =>     
-                setEducationCollegeOrUniversity(target.value)} id="standard-basic" label="College/University"/>     
+                setEducationCollegeOrUniversity(target.value)} id="standard-basic" label="College/University"/>   
+
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <DatePicker
+                variant="inline"
+                openTo="year"
+                views={["year", "month"]}
+                label="Year and Month"
+                helperText="Start Month"
+                value={startDate}
+                onChange={setStartDate}
+              /> 
+              <DatePicker
+                variant="inline"
+                openTo="year"
+                views={["year", "month"]}
+                label="Year and Month"
+                helperText="End Month"
+                value={endDate}
+                onChange={setEndDate}
+              /> 
+            </MuiPickersUtilsProvider>  
   
           <Button onClick={()=>handleSaveEducation()} variant="outlined">
             Save Changes
