@@ -36,10 +36,10 @@ export default function Profile(){
     workExperience:[],
     militaryService:[],
     education:[],
-    skills:[{title:"skill1"},{title:"skill2"}],
+    skills:[{title:"skill1", proficiency:"v good"},{title:"skill2", proficiency:"not so good"}],
     links:["link1", "Link2"],
     additionalInformation:"",
-    languages:["Spanish", "English"],
+    languages:[{title:"English", proficiency:"v good"},{title:"Spanish", proficiency:"not so good"}],
   })
   
  

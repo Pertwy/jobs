@@ -81,7 +81,7 @@ if(props.props.skills.length > 0 && !expandSkills){
             id="standard-select-eligible"
             select
             value={proficiency}
-            onChange={setProficiency}
+            onChange={({ target }) => setProficiency(target.value)}
             helperText="Proficiency"
           >
             {proficiencies.map((option) => (
@@ -106,7 +106,7 @@ if(props.props.skills.length > 0 && !expandSkills){
     return props.props.skills.map(skill => {
       return (
         <div className={"row space-between pl-3 pr-3"}>
-          <p>{skill.title}</p>
+          <p>{skill.title} - {skill.proficiency}</p>
           <button onClick={()=>handleDeleteSkill(skill.title)}>delete</button>
         </div>
       )
@@ -124,7 +124,7 @@ if(props.props.skills.length > 0 && !expandSkills){
 
   function handleAddNewSkill(){
     let newSkillNow = props.props.skills
-    newSkillNow.push({"title":newSkill})
+    newSkillNow.push({"title":newSkill, "proficiency":proficiency})
     props.setUserData({...props.props, skills:newSkillNow})
   
     setExpandSkills(false)

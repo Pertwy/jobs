@@ -53,7 +53,7 @@ if(props.props.languages.length > 0 && !expandLanguages){
             id="standard-select-proficiency"
             select
             value={proficiency}
-            onChange={setProficiency}
+            onChange={({ target }) => setProficiency(target.value)}
             helperText="Proficiency"
           >
             {proficiencies.map((option) => (
@@ -78,12 +78,13 @@ if(props.props.languages.length > 0 && !expandLanguages){
     return props.props.languages.map(language => {
       return (
         <div className={"row space-between pl-3 pr-3"}>
-          <p>{language}</p>
+          <p>{language.title} - {language.proficiency}</p>
           <button onClick={()=>handleDeleteLanguage(language)}>delete</button>
         </div>
       )
     })
   }
+
 
   function handleDeleteLanguage(prop){
       const lang = props.props.languages.filter(lang => lang !== prop);
@@ -95,8 +96,9 @@ if(props.props.languages.length > 0 && !expandLanguages){
   }
   function handleAddNewLanguage(){
     let newLanguageNow = props.props.languages
-    newLanguageNow.push(newLanguage)
+    newLanguageNow.push({"title":newLanguage, "proficiency":proficiency})
     props.setUserData({...props.props, languages:newLanguageNow})
+    setExpandLanguages(false)
   }
   function handleCancelLanguage(){
     setNewLanguage("")
@@ -112,6 +114,7 @@ if(props.props.languages.length > 0 && !expandLanguages){
           <button onClick={() => handleAddLanguage()}> + </button>
         </div>
         {Languages}
+        
       </section>
     </div>
   )
