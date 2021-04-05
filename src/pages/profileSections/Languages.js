@@ -1,15 +1,40 @@
 import React, { useState} from 'react';
 import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
+
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import MenuItem from '@material-ui/core/MenuItem';
 
 export default function Languages(props){
 
   const [expandLanguages, setExpandLanguages] = useState(false)
   const [newLanguage, setNewLanguage] = useState("")
+  const [proficiency, setProficiency] = useState("Enter Proficiency")
 
 //Languaes /////////////////////////////////
+
+const proficiencies = [
+  {
+    value: 'Expert',
+    label: 'Expert',
+  },
+  {
+    value: 'Fluent',
+    label: 'Fluent',
+  },
+  {
+    value: 'Intermediate',
+    label: 'Intermediate',
+  },
+  {
+    value: 'Beginner',
+    label: 'Beginner',
+  }
+];
+
+
+
 let Languages
 if(props.props.languages.length > 0 && !expandLanguages){
   Languages =
@@ -23,6 +48,22 @@ if(props.props.languages.length > 0 && !expandLanguages){
       <div className={"row pl-3 pr-3 space-between"}>
         <TextField  onChange={({ target }) =>     
           setNewLanguage(target.value)} id="standard-basic" label="New Language" />
+
+          <TextField
+            id="standard-select-proficiency"
+            select
+            value={proficiency}
+            onChange={setProficiency}
+            helperText="Proficiency"
+          >
+            {proficiencies.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+
+      
         <div className={"row pr-3"}>
           <button onClick={()=>handleAddNewLanguage()}>Save</button>
           <button onClick={()=>handleCancelLanguage()}>Cancel</button>
