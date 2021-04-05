@@ -1,9 +1,14 @@
-import React, { useState} from 'react';
+import React, { useState, Fragment} from 'react';
 import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+
+import "date-fns";
+import DateFnsUtils from '@date-io/date-fns';
+import { DateTimePicker, DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+
 
 export default function WorkExperience(props){
 
@@ -14,6 +19,14 @@ export default function WorkExperience(props){
     const [WEStartDate, setWEStartDate] = useState("")
     const [WEEndDate, setWEEndDate] = useState("")
     const [WEDescription, setWEDescription] = useState("")
+
+    // const [selectedDate, setSelectedDate] = useState(new Date())
+    const [selectedDate, handleDateChange] = useState(new Date());
+    
+  
+    // const handleDateChange = (date: Date | null) => {
+    //   setSelectedDate(date);
+    // };
 
 
 //Work Experience ///////////////////////////////////////////////
@@ -52,6 +65,7 @@ function handleExpandWorkExperience(){
     setWEDescription("")
     setExpandWorkExperience(!expandWorkExperience)
   }
+
 
 
     let WorkExperience
@@ -95,7 +109,8 @@ function handleExpandWorkExperience(){
         </>
       } else if(props.props.workExperience.length == 0 && expandWorkExperience){
         WorkExperience =
-          <>
+         
+           <div>
             <TextField fullWidth  onChange={({ target }) =>     
                   setWEJobTilte(target.value)} id="standard-basic" label="Job Title" />
     
@@ -112,7 +127,35 @@ function handleExpandWorkExperience(){
                   setWEEndDate(target.value)} id="standard-basic" label="End Date"/>  
     
             <TextField fullWidth  onChange={({ target }) =>     
-                  setWEDescription(target.value)} id="standard-basic" label="Description"/>         
+                  setWEDescription(target.value)} id="standard-basic" label="Description"/>
+
+           
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <DatePicker
+                variant="inline"
+                openTo="year"
+                views={["year", "month"]}
+                label="Year and Month"
+                helperText="Start from year selection"
+                value={selectedDate}
+                onChange={handleDateChange}
+              /> 
+            </MuiPickersUtilsProvider>
+            
+
+
+
+
+            {/* <DatePicker
+              views={["year", "month"]}
+              label="Year and Month"
+              helperText="With min and max"
+              minDate={new Date("2018-03-01")}
+              maxDate={new Date("2018-06-01")}
+              value={selectedDate}
+              // onChange={handleDateChange}
+              onChange={({ target }) => setSelectedDate(target.value)}
+            /> */}
     
             
     
@@ -122,7 +165,8 @@ function handleExpandWorkExperience(){
             <Button onClick={()=>handleCancelWorkExperience()} variant="outlined">
               Cancel
             </Button>
-       </>
+            </div>
+   
      
       } else{
         WorkExperience = <></>

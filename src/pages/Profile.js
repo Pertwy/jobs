@@ -43,16 +43,16 @@ export default function Profile(){
   })
   
  
-  // useEffect(() => {
-  //   try {
-  //     axios.get('http://localhost:5000/users/')
-  //       //.then(response => (console.log(response.data)))
-  //       .then(response => setUserData(response.data))
+  useEffect(() => {
+    try {
+      axios.get('http://localhost:5000/users/')
+        //.then(response => (console.log(response.data)))
+        .then(response => setUserData(response.data))
 
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // },[])
+    } catch (error) {
+      console.log(error)
+    }
+  },[])
 
 
   //Display applied to jobs
@@ -134,7 +134,7 @@ export default function Profile(){
           </div>
         </div>
 
-        {/* <div className={"col-sm-4"} >
+        <div className={"col-sm-4"} >
           <h3 className="book-row-title" >SAVED</h3>
           <div className="row book-row">
             <SavedJobs/>
@@ -144,7 +144,7 @@ export default function Profile(){
           <div className="row book-row">
             <AppliedTo/>
           </div>
-        </div> */}
+        </div>
 
       </div>
 
