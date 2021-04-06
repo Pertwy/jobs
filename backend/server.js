@@ -4,7 +4,7 @@ const cors = require('cors')
 const config = require("config")
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
-require('dotenv').config()
+require('dotenv').config() 
 //require('../backend/startup/prod')(app)
 
 const app = express()
@@ -16,13 +16,16 @@ if (!config.get('jwtPrivateKey')){
     process.exit(1)
 }
 
+if (process.env.NODE_ENV === "production"){
+    app.use(express.static("./build"))
+}
+
 app.use(cors({ origin: true, credentials: true}));
 app.use(express.json())
 app.use(cookieParser())
 
 
-const uri = process.env.ATLAS_URI
-mongoose.connect(uri, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true})
+mongoose.connect(process.env.MONGO_URI || process.env.ATLAS_URI , {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true})
 
 const connection = mongoose.connection
 connection.once('open', () => {

@@ -69,22 +69,22 @@ if(expandBasicInfo){
   } else{
     BasicInfo = <>
           <TextField fullWidth  onChange={({ target }) =>     
-                setGivenName(target.value)} id="standard-basic" label="Given Name" placeholder={props.props.givenName}/>
+                setGivenName(target.value)}  label="Given Name" placeholder={props.props.givenName}/>
 
           <TextField fullWidth  onChange={({ target }) =>     
-                setSurname(target.value)} id="standard-basic" label="Surname" placeholder={props.props.surname}/>
+                setSurname(target.value)}  label="Surname" placeholder={props.props.surname}/>
 
           <TextField fullWidth  onChange={({ target }) =>     
-                setHeadline(target.value)} id="standard-basic" label="Headline" placeholder={props.props.headline}/>
+                setHeadline(target.value)}  label="Headline" placeholder={props.props.headline}/>
 
           <TextField fullWidth  onChange={({ target }) =>     
-                setLocation(target.value)} id="standard-basic" label="Location" placeholder={props.props.location}/>  
+                setLocation(target.value)} label="Location" placeholder={props.props.location}/>  
 
           <TextField fullWidth  onChange={({ target }) =>     
-                setEmail(target.value)} id="standard-basic" label="Email" placeholder={props.props.email}/>
+                setEmail(target.value)} label="Email" placeholder={props.props.email}/>
 
           <TextField fullWidth  onChange={({ target }) =>     
-                setPhoneNumber(target.value)} id="standard-basic" label="Phone Number" placeholder={props.props.phoneNumber}/>
+                setPhoneNumber(target.value)} label="Phone Number" placeholder={props.props.phoneNumber}/>
 
           <Button onClick={()=>handleSaveBasicInfo()} variant="outlined">
             Save Changes

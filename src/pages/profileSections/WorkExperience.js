@@ -67,6 +67,8 @@ function handleExpandWorkExperience(){
     setExpandWorkExperience(!expandWorkExperience)
   }
 
+  
+
 
 
     let WorkExperience
@@ -97,6 +99,14 @@ function handleExpandWorkExperience(){
     
             <TextField fullWidth  onChange={({ target }) =>     
                   setWEDescription(target.value)} id="standard-basic" label="Description"/>   
+
+            <TextField
+                      label="Multiline"
+                      multiline
+                      rows={4}
+                      defaultValue="Default Value"
+                      variant="outlined"
+                    />
 
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <DatePicker
@@ -151,6 +161,13 @@ function handleExpandWorkExperience(){
             <TextField fullWidth  onChange={({ target }) =>     
                   setWEDescription(target.value)} id="standard-basic" label="Description"/>
 
+            <TextField
+                      label="Multiline"
+                      multiline
+                      rows={4}
+                      defaultValue="Default Value"
+                    
+                    />
            
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <DatePicker
