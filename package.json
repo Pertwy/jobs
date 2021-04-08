@@ -32,8 +32,8 @@
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "set NODE_ENV=development&& cd backend && node server.js",
-    "start-prod": "set NODE_ENV=development&& cd backend && node server.js",
+    "start": "set NODE_ENV=production&& cd backend && node server.js",
+    "start-prod": "set NODE_ENV=production&& cd backend && node server.js",
     "test": "jest --watchAll --verbose"
   },
   "engines":{
