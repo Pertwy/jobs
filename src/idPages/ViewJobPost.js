@@ -42,7 +42,7 @@ export default function ViewJobPost(props){
 
   return (
     <div >
-      <div className="container">
+      <div  className="container shadow-lg p-4 mb-4 bg-white">
 
       <h1>{jobPost.title}</h1>
       <h3>Salary: {jobPost.salary}</h3>

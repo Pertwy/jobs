@@ -65,8 +65,8 @@ export default function SignIn(){
 
   return (
     <div>
-      <div className="d-flex container justify-content-center">  
-        <form className={classes.root, "col-sm-6"} noValidate autoComplete="off" onSubmit={handleSignUp}>
+      <div className="d-flex container justify-content-center shadow-lg p-4 mb-4 bg-white">  
+        <form  className="col-sm-8" noValidate autoComplete="off" onSubmit={handleSignUp}>
             <h3 className={classes.input}>Sign In</h3>  
 
             <TextField  fullWidth className={classes.input} onChange={({ target }) =>     

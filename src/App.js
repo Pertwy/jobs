@@ -23,7 +23,7 @@ function App() {
       </div>
 
       <div>
-      <br/>
+      
         <Route path="/" exact component={HomePage} />
         <Route path="/signin" exact component={SignIn} />
         <Route path="/createaccount" exact component={CreateAccount} />
