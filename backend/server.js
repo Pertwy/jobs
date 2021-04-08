@@ -16,10 +16,6 @@ if (!config.get('jwtPrivateKey')){
     process.exit(1)
 }
 
-if (process.env.NODE_ENV === "production"){
-    app.use(express.static("./build"))
-}
-
 app.use(cors({ origin: true, credentials: true}));
 app.use(express.json())
 app.use(cookieParser())

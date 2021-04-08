@@ -33,8 +33,6 @@
   },
   "scripts": {
     "start": "cd backend && node server.js",
-    "install-client": "npm install",
-    "heroku-postbuild":"npm run install-client && npm run build",
     "test": "jest --watchAll --verbose"
   },
   "engines":{
