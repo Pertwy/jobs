@@ -11,7 +11,7 @@ export default function JobPostFrontPage(props) {
 
     
 
-    <section className="col-sm-4" key={_id} >
+    <section className="col-sm-12 col-md-6 col-lg-4 mb-3" key={_id} >
         
         <Link className="link" to={"/jobPosts/"+_id}>
           <div className="job-box  p-4">
