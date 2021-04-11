@@ -45,7 +45,7 @@
   },
   "scripts": {
     "start": "set NODE_ENV=production&& cd backend && node server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build",
+    "start-prod": "set NODE_ENV=production&& cd backend && node server.js",
     "test": "jest --watchAll --verbose"
   },
   "engines": {
