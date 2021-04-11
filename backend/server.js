@@ -29,14 +29,14 @@ connection.once('open', () => {
     console.log("MongoDB database connection established successfully")
 })
 
-if (process.env.NODE_ENV === "production"){
+// if (process.env.NODE_ENV === "production"){
 
-    app.use(express.static("build"))
+//     app.use(express.static("build"))
 
-    app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, "../build", "index.html"))
-    })
-}
+//     app.get("*", (req, res) => {
+//         res.sendFile(path.resolve(__dirname, "../build", "index.html"))
+//     })
+// }
 
 
 const jobpostsRouter = require('./routes/jobPosts')
