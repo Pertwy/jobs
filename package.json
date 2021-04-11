@@ -44,8 +44,8 @@
     "nodemon": "^2.0.7"
   },
   "scripts": {
-    "start": "set NODE_ENV=production&& cd backend && node server.js",
-    "start-prod": "set NODE_ENV=production&& cd backend && node server.js",
+    "start": "set NODE_ENV=production&& cd backend && node server.js && react-scripts build",
+    "start-prod": "set NODE_ENV=production&& cd backend && node server.js && react-scripts build",
     "heroku-postbuild": "npm install && react-scripts build",
     "test": "jest --watchAll --verbose"
   },
