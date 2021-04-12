@@ -45,11 +45,12 @@
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "set NODE_ENV=production&& cd backend && node server.js && react-scripts build",
+    "start": "react-scripts start",
+    "start-dev": "cd backend && node server.js && npm start",
     "start-prod": "set NODE_ENV=production&& cd backend && node server.js && react-scripts build",
     "build": "react-scripts build",
-    "heroku-postbuild": "npm install && npm run build",
-    "test": "jest --watchAll --verbose"
+    "test": "jest --watchAll --verbose",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build"
   },
   "engines": {
     "node": "14.15.4"
