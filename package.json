@@ -48,7 +48,7 @@
     "start": "set NODE_ENV=production&& cd backend && node server.js && react-scripts build",
     "start-prod": "set NODE_ENV=production&& cd backend && node server.js && react-scripts build",
     "build": "react-scripts build",
-    "heroku-postbuild": "npm install",
+    "heroku-postbuild": "npm install && npm run build",
     "test": "jest --watchAll --verbose"
   },
   "engines": {
