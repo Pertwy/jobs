@@ -20,18 +20,18 @@ export default function HomePage(){
 
 
 
-  // useEffect(() => {
+  useEffect(() => {
     
-  //   try {
-  //     axios.get("http://jobbored-jps.herokuapp.com/jobPosts/")
-  //     //.then(response => console.log(response.data))
-  //     .then(response => (setJobPostList(response.data)))
+    try {
+      axios.get("http://localhost:5000/jobPosts/")
+      //.then(response => console.log(response.data))
+      .then(response => (setJobPostList(response.data)))
 
-  //   } catch (error) {
-  //     console.log("Could not get job posts")
-  //   }
+    } catch (error) {
+      console.log("Could not get job posts")
+    }
     
-  // },[currentUser])
+  },[currentUser])
 
 
 
