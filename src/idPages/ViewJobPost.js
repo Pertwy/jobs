@@ -12,7 +12,7 @@ export default function ViewJobPost(props){
   const [value, setValue] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:5000/jobPosts/"+props.location.pathname.replace("/jobPosts/", ""))
+    axios.get("/jobPosts/"+props.location.pathname.replace("/jobPosts/", ""))
       .then(response => (setJobPost(response.data)))
       //.then(response => (console.log(response.data)))
       
@@ -24,7 +24,7 @@ export default function ViewJobPost(props){
     let jobID = {
       "job":props.location.pathname.replace("/jobPosts/", "")
     }
-    axios.post("http://localhost:5000/users/apply", jobID)
+    axios.post("/users/apply", jobID)
       .then(response => console.log(response))
   }
 
@@ -34,7 +34,7 @@ export default function ViewJobPost(props){
     let jobID = {
       "job":props.location.pathname.replace("/jobPosts/", "")
     }
-    axios.post("http://localhost:5000/users/save", jobID)
+    axios.post("/users/save", jobID)
       .then(response => console.log(response))
   }
 

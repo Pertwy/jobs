@@ -45,7 +45,7 @@ export default function Profile(){
  
   useEffect(() => {
     try {
-      axios.get('http://localhost:5000/users/')
+      axios.get('/users/')
         //.then(response => (console.log(response.data)))
         .then(response => setUserData(response.data))
 

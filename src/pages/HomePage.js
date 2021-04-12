@@ -23,7 +23,7 @@ export default function HomePage(){
   useEffect(() => {
     
     try {
-      axios.get("http://localhost:5000/jobPosts/")
+      axios.get("/jobPosts/")
       //.then(response => console.log(response.data))
       .then(response => (setJobPostList(response.data)))
 
