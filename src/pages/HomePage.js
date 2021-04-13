@@ -23,7 +23,7 @@ export default function HomePage(){
   useEffect(() => {
     
     try {
-      axios.get("/jobPosts/")
+      axios.get("/api/jobPosts/")
       //.then(response => console.log(response.data))
       .then(response => (setJobPostList(response.data)))
 

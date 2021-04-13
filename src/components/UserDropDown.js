@@ -8,7 +8,7 @@ export default function UserDropDown(props) {
   const [user, setUser] = useState("")
 
   useEffect(() => {
-    axios.get('/testusers/all')
+    axios.get('/api/testusers/all')
       .then(response => 
           {setUsers(response.data)})
       //.then(console.log(users))

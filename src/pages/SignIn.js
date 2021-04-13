@@ -23,7 +23,7 @@ export default function SignIn(){
     console.log(newUser)
 
     try{
-      axios.post('/users/add', newUser)
+      axios.post('/api/users/add', newUser)
         .then(res => console.log(res.data));
       }catch(e){
         console.error(e)
@@ -35,7 +35,7 @@ export default function SignIn(){
     let user = {"email":email, "password":password}
 
     try{
-      axios.post('/auth/', user, {withCredentials: true, credentials: 'include'})
+      axios.post('/api/auth/', user, {withCredentials: true, credentials: 'include'})
         .then(res => console.log(res.data));
       }catch(e){
         console.error(e)

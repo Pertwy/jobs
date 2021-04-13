@@ -18,12 +18,12 @@ export default function RecruiterProfile(){
     console.log(currentUser)
     if(currentUser){
       let email = {"email":currentUser}
-      axios.post('/testusers/',email)
+      axios.post('/api/testusers/',email)
         .then(response => (setUserData(response.data)))
         .then(console.log(userData))
     }
     else{
-      axios.get('/books/')
+      axios.get('/api/books/')
         .then(response => (setBooks(response.data)))
     }
   },[currentUser, update])
