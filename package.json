@@ -50,7 +50,7 @@
     "start-prod": "set NODE_ENV=production && cd backend && node server.js",
     "build": "react-scripts build",
     "test": "jest --watchAll --verbose",
-    "heroku-postbuild": "set NODE_ENV=production && NPM_CONFIG_PRODUCTION=false && npm install && npm run build"
+    "heroku-postbuild": "set NODE_ENV=production && npm install && npm run build"
   },
   "engines": {
     "node": "14.15.4"
