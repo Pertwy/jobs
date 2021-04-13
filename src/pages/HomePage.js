@@ -23,7 +23,7 @@ export default function HomePage(){
     : "http://localhost:5000";  
 
 
-
+console.log(process.env.NODE_ENV);
   useEffect(() => {
     
     try {
