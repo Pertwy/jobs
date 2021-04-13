@@ -10,9 +10,12 @@ export default function ViewJobPost(props){
   const [currentUser, setCurrentUser] = useState("john@gmail.com")
   const [review, setReview] = useState("")
   const [value, setValue] = useState("");
-
+  const BASE_URL =
+  process.env.NODE_ENV == "production"
+    ? "https://jobbored-jps.herokuapp.com/"
+    : "http://localhost:5000";
   useEffect(() => {
-    axios.get("/api/jobPosts/"+props.location.pathname.replace("/jobPosts/", ""))
+    axios.get(`${BASE_URL}/api/jobPosts/`+props.location.pathname.replace("/jobPosts/", ""))
       .then(response => (setJobPost(response.data)))
       //.then(response => (console.log(response.data)))
       
@@ -24,7 +27,7 @@ export default function ViewJobPost(props){
     let jobID = {
       "job":props.location.pathname.replace("/jobPosts/", "")
     }
-    axios.post("/api/users/apply", jobID)
+    axios.post(`${BASE_URL}/api/users/apply`, jobID)
       .then(response => console.log(response))
   }
 
@@ -34,7 +37,7 @@ export default function ViewJobPost(props){
     let jobID = {
       "job":props.location.pathname.replace("/jobPosts/", "")
     }
-    axios.post("/api/users/save", jobID)
+    axios.post(`${BASE_URL}/api/users/save`, jobID)
       .then(response => console.log(response))
   }
 

@@ -11,6 +11,10 @@ export default function RecruiterProfile(){
   const [currentUser, setCurrentUser] = useState("john@gmail.com")
   const [userData, setUserData] = useState({books:[],favorites:[],readList:[],lists:[], following:[]})
   const [update, setUpdate] = useState(0)
+  const BASE_URL =
+  process.env.NODE_ENV == "production"
+    ? "https://jobbored-jps.herokuapp.com/"
+    : "http://localhost:5000";  
 
 
 
@@ -18,12 +22,12 @@ export default function RecruiterProfile(){
     console.log(currentUser)
     if(currentUser){
       let email = {"email":currentUser}
-      axios.post('/api/testusers/',email)
+      axios.post(`${BASE_URL}/api/testusers/`,email)
         .then(response => (setUserData(response.data)))
         .then(console.log(userData))
     }
     else{
-      axios.get('/api/books/')
+      axios.get(`${BASE_URL}/api/books/`)
         .then(response => (setBooks(response.data)))
     }
   },[currentUser, update])

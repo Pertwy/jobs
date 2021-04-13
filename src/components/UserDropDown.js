@@ -7,8 +7,13 @@ export default function UserDropDown(props) {
   const [users, setUsers] = useState([])
   const [user, setUser] = useState("")
 
+  const BASE_URL =
+  process.env.NODE_ENV == "production"
+    ? "https://jobbored-jps.herokuapp.com/"
+    : "http://localhost:5000";
+
   useEffect(() => {
-    axios.get('/api/testusers/all')
+    axios.get(`${BASE_URL}/api/testusers/all`)
       .then(response => 
           {setUsers(response.data)})
       //.then(console.log(users))

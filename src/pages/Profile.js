@@ -18,6 +18,11 @@ import Languages from "./profileSections/Languages"
 import Skills from "./profileSections/Skills"
 
 export default function Profile(){
+  const BASE_URL =
+  process.env.NODE_ENV == "production"
+    ? "https://jobbored-jps.herokuapp.com/"
+    : "http://localhost:5000";  
+
   const [userData, setUserData] = useState({
     givenName:"john",
     surname:"perkins",
@@ -45,7 +50,7 @@ export default function Profile(){
  
   useEffect(() => {
     try {
-      axios.get('/api/users/')
+      axios.get(`${BASE_URL}/api/users/`)
         //.then(response => (console.log(response.data)))
         .then(response => setUserData(response.data))
 

@@ -6,9 +6,12 @@ import React, {useState, useEffect} from 'react';
 export default function UserDropDown(props) {
   const [lists, setLists] = useState([])
   const [list, setList] = useState("")
-
+  const BASE_URL =
+  process.env.NODE_ENV == "production"
+    ? "https://jobbored-jps.herokuapp.com/"
+    : "http://localhost:5000";
   useEffect(() => {
-    axios.get('/api/testusers/lists')
+    axios.get(`${BASE_URL}/api/testusers/lists`)
       .then(response => 
           {setLists(response.data)})
       //.then(console.log(users))

@@ -17,13 +17,17 @@ export default function HomePage(){
   const [postCode, setPostCode] = useState("")
   const [job, setJob] = useState("")
   const [salary, setSalary] = useState("")
+  const BASE_URL =
+  process.env.NODE_ENV == "production"
+    ? "https://jobbored-jps.herokuapp.com/"
+    : "http://localhost:5000";  
 
 
 
   useEffect(() => {
     
     try {
-      axios.get("/api/jobPosts/")
+      axios.get(`{BASE_URL}/api/jobPosts/`)
       //.then(response => console.log(response.data))
       .then(response => (setJobPostList(response.data)))
 

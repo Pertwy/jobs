@@ -15,7 +15,10 @@ export default function CreateAccount(){
   const [pronoun, setPronoun] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
-  
+  const BASE_URL =
+  process.env.NODE_ENV == "production"
+    ? "https://jobbored-jps.herokuapp.com/"
+    : "http://localhost:5000";  
 
   function newUserInDB(){
     let newUser = {
@@ -24,7 +27,7 @@ export default function CreateAccount(){
     console.log(newUser)
 
     try{
-      axios.post('/users/add', newUser)
+      axios.post(`${BASE_URL}/users/add`, newUser)
         .then(res => console.log(res.data));
       }catch(e){
         console.error(e)

@@ -14,7 +14,11 @@ export default function SignIn(){
   const [surname, setSurname] = useState("")
   const [pronoun, setPronoun] = useState("")
   const [password, setPassword] = useState("")
-  
+  const BASE_URL =
+  process.env.NODE_ENV == "production"
+    ? "https://jobbored-jps.herokuapp.com/"
+    : "http://localhost:5000";  
+
 
   function newUserInDB(){
     let newUser = {
@@ -35,7 +39,7 @@ export default function SignIn(){
     let user = {"email":email, "password":password}
 
     try{
-      axios.post('/api/auth/', user, {withCredentials: true, credentials: 'include'})
+      axios.post(`${BASE_URL}/api/auth/`, user, {withCredentials: true, credentials: 'include'})
         .then(res => console.log(res.data));
       }catch(e){
         console.error(e)
