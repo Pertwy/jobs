@@ -30,14 +30,6 @@ connection.once('open', () => {
     console.log("MongoDB database connection established successfully")
 })
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'))
-    console.log('working')
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname, 'client', 'build', 'index.html')) // relative path
-    })
-  }
-
 
 const jobpostsRouter = require('./routes/jobPosts')
 const usersRouter = require('./routes/users')
@@ -46,6 +38,14 @@ app.use('/api/jobPosts', jobpostsRouter)
 app.use('/users', usersRouter)
 app.use('/auth', authRouter)
 
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'))
+  console.log('working')
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html')) // relative path
+  })
+}
 
 app.listen(port, () => {
   console.log('working')
