@@ -15,7 +15,7 @@ export default function UserDropDown(props) {
     console.log(BASE_URL);
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/testusers/all`)
+    axios.get(`/api/testusers/all`)
       .then(response => 
           {setUsers(response.data)})
       //.then(console.log(users))

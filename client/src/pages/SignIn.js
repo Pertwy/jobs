@@ -27,7 +27,7 @@ console.log(BASE_URL);
     console.log(newUser)
 
     try{
-      axios.post(`${BASE_URL}/users/add`, newUser)
+      axios.post(`/api/users/add`, newUser)
         .then(res => console.log(res.data));
       }catch(e){
         console.error(e)
@@ -39,7 +39,7 @@ console.log(BASE_URL);
     let user = {"email":email, "password":password}
 
     try{
-      axios.post(`${BASE_URL}/auth/`, user, {withCredentials: true, credentials: 'include'})
+      axios.post(`/api/auth/`, user, {withCredentials: true, credentials: 'include'})
         .then(res => console.log(res.data));
       }catch(e){
         console.error(e)

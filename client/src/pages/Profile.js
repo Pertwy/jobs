@@ -50,7 +50,7 @@ export default function Profile(){
  
   useEffect(() => {
     try {
-      axios.get(`${BASE_URL}/users/`)
+      axios.get(`/api/users/`)
         //.then(response => (console.log(response.data)))
         .then(response => setUserData(response.data))
 
