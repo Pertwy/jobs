@@ -8,10 +8,10 @@ const path = require("path")
 require('dotenv').config() 
 //require('../backend/startup/prod')(app)
 console.log('working')
-app.use(express.static(path.join(__dirname, "/public")));
 
 const app = express()
 const port = process.env.PORT || 5000
+app.use(express.static(path.join(__dirname, "/public")));
 
 if (!config.get('jwtPrivateKey')){
     console.error("FATAL ERROR: jwtPrivateKey is not defined")
@@ -42,7 +42,7 @@ if (process.env.NODE_ENV === 'production') {
 const jobpostsRouter = require('./routes/jobPosts')
 const usersRouter = require('./routes/users')
 const authRouter = require('./routes/auth')
-app.use('/jobPosts', jobpostsRouter)
+app.use('/api/jobPosts', jobpostsRouter)
 app.use('/users', usersRouter)
 app.use('/auth', authRouter)
 

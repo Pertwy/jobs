@@ -23,7 +23,7 @@ console.log(process.env.NODE_ENV);
   useEffect(() => {
     
     try {
-      axios.get(`/jobPosts/`)
+      axios.get(`/api/jobPosts/`)
       .then(response => (setJobPostList(response.data)))
 
     } catch (error) {
