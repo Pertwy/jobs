@@ -42,12 +42,12 @@ if (process.env.NODE_ENV === 'production') {
 const jobpostsRouter = require('./routes/jobPosts')
 const usersRouter = require('./routes/users')
 const authRouter = require('./routes/auth')
-console.log('working')
 app.use('/jobPosts', jobpostsRouter)
 app.use('/users', usersRouter)
 app.use('/auth', authRouter)
 
 
 app.listen(port, () => {
+  console.log('working')
     console.log(`Server is running on port: ${port}`)
 })
