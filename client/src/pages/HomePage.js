@@ -24,9 +24,7 @@ console.log(process.env.NODE_ENV);
     
     try {
       axios.get(`/jobPosts/`)
-      .then(r => r.json())
-      console.log(r)
-      .then(json => (setJobPostList(json.data)))
+      .then(response => (setJobPostList(response.data)))
 
     } catch (error) {
       console.log("Could not get job posts")

@@ -7,8 +7,8 @@ const cookieParser = require('cookie-parser')
 const path = require("path")
 require('dotenv').config() 
 //require('../backend/startup/prod')(app)
-
-app.use(express.static(path.join(__dirname, "/")));
+console.log('working')
+app.use(express.static(path.join(__dirname, "/public")));
 
 const app = express()
 const port = process.env.PORT || 5000
@@ -32,6 +32,7 @@ connection.once('open', () => {
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'))
+    console.log('working')
     app.get('*', (req, res) => {
       res.sendFile(path.join(__dirname, 'client', 'build', 'index.html')) // relative path
     })
@@ -41,7 +42,7 @@ if (process.env.NODE_ENV === 'production') {
 const jobpostsRouter = require('./routes/jobPosts')
 const usersRouter = require('./routes/users')
 const authRouter = require('./routes/auth')
-
+console.log('working')
 app.use('/jobPosts', jobpostsRouter)
 app.use('/users', usersRouter)
 app.use('/auth', authRouter)
