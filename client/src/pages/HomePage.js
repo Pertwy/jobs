@@ -28,7 +28,7 @@ console.log(BASE_URL);
   useEffect(() => {
     
     try {
-      axios.get(`${BASE_URL}/jobPosts/`)
+      axios.get(`/jobPosts/`)
       //.then(response => console.log(response.data))
       .then(response => (setJobPostList(response.data)))
 

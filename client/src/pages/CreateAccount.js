@@ -26,7 +26,7 @@ export default function CreateAccount(){
     }
 
     try{
-      axios.post(`${BASE_URL}/users/add`, newUser)
+      axios.post(`/users/add`, newUser)
         .then(res => console.log(res.data));
       }catch(e){
         console.error(e)
