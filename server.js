@@ -33,14 +33,14 @@ if (process.env.NODE_ENV === "production"){
 
     app.use(express.static(path.join(__dirname, 'build')))
     app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, 'build'))
+        res.sendFile(path.join(__dirname, 'build', 'index.html'))
     })
 }
 
 
-const jobpostsRouter = require('./routes/jobPosts')
-const usersRouter = require('./routes/users')
-const authRouter = require('./routes/auth')
+const jobpostsRouter = require('./backend/routes/jobPosts')
+const usersRouter = require('./backend/routes/users')
+const authRouter = require('./backend/routes/auth')
 
 app.use('/jobPosts', jobpostsRouter)
 app.use('/users', usersRouter)
