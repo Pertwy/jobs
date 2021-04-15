@@ -9,7 +9,7 @@ export default function UserDropDown(props) {
 
   const BASE_URL =
   process.env.NODE_ENV == "production"
-    ? "https://jobbored-jps.herokuapp.com/"
+    ? "https://jobbored-jps.herokuapp.com"
     : "http://localhost:5000";
 
   useEffect(() => {

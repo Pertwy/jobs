@@ -17,7 +17,7 @@ export default function CreateAccount(){
   const [confirmPassword, setConfirmPassword] = useState("")
   const BASE_URL =
   process.env.NODE_ENV == "production"
-    ? "https://jobbored-jps.herokuapp.com/"
+    ? "https://jobbored-jps.herokuapp.com"
     : "http://localhost:5000";  
 
   function newUserInDB(){

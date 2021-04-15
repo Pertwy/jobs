@@ -13,7 +13,7 @@ export default function RecruiterProfile(){
   const [update, setUpdate] = useState(0)
   const BASE_URL =
   process.env.NODE_ENV == "production"
-    ? "https://jobbored-jps.herokuapp.com/"
+    ? "https://jobbored-jps.herokuapp.com"
     : "http://localhost:5000";  
 
 

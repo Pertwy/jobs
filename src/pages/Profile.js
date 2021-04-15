@@ -20,7 +20,7 @@ import Skills from "./profileSections/Skills"
 export default function Profile(){
   const BASE_URL =
   process.env.NODE_ENV == "production"
-    ? "https://jobbored-jps.herokuapp.com/"
+    ? "https://jobbored-jps.herokuapp.com"
     : "http://localhost:5000";  
 
   const [userData, setUserData] = useState({

@@ -8,7 +8,7 @@ export default function UserDropDown(props) {
   const [list, setList] = useState("")
   const BASE_URL =
   process.env.NODE_ENV == "production"
-    ? "https://jobbored-jps.herokuapp.com/"
+    ? "https://jobbored-jps.herokuapp.com"
     : "http://localhost:5000";
   useEffect(() => {
     axios.get(`${BASE_URL}/api/testusers/lists`)

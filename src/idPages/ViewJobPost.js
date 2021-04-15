@@ -12,7 +12,7 @@ export default function ViewJobPost(props){
   const [value, setValue] = useState("");
   const BASE_URL =
   process.env.NODE_ENV == "production"
-    ? "https://jobbored-jps.herokuapp.com/"
+    ? "https://jobbored-jps.herokuapp.com"
     : "http://localhost:5000";
   useEffect(() => {
     axios.get(`${BASE_URL}/api/jobPosts/`+props.location.pathname.replace("/jobPosts/", ""))

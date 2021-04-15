@@ -16,7 +16,7 @@ export default function SignIn(){
   const [password, setPassword] = useState("")
   const BASE_URL =
   process.env.NODE_ENV == "production"
-    ? "https://jobbored-jps.herokuapp.com/"
+    ? "https://jobbored-jps.herokuapp.com"
     : "http://localhost:5000";  
 
 
