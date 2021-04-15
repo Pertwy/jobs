@@ -17,7 +17,7 @@ if (!config.get('jwtPrivateKey')){
     console.error("FATAL ERROR: jwtPrivateKey is not defined")
     process.exit(1)
 }
-
+app.use(express.static(path.join(__dirname, "/public")));
 app.use(cors({ origin: true, credentials: true}));
 app.use(express.json())
 app.use(cookieParser())
