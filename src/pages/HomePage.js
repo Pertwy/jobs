@@ -42,7 +42,7 @@ console.log(BASE_URL);
 
   //Display all jobs
   function JobList() {
-    return jobPostList.map(currentJobPost => {
+    return jobPostList && jobPostList.map(currentJobPost => {
       return (
         <JobPostFrontPage props={currentJobPost}/>
       )
