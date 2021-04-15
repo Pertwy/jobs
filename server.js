@@ -11,7 +11,6 @@ require('dotenv').config()
 const app = express()
 const port = process.env.PORT || 5000
 
-
 if (!config.get('jwtPrivateKey')){
     console.error("FATAL ERROR: jwtPrivateKey is not defined")
     process.exit(1)
@@ -29,18 +28,17 @@ connection.once('open', () => {
     console.log("MongoDB database connection established successfully")
 })
 
-if (process.env.NODE_ENV === "production"){
-
-    app.use(express.static(path.join(__dirname, 'build')))
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'))
     app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, 'build', 'index.html'))
+      res.sendFile(path.join(__dirname, 'client', 'build', 'index.html')) // relative path
     })
-}
+  }
 
 
-const jobpostsRouter = require('./backend/routes/jobPosts')
-const usersRouter = require('./backend/routes/users')
-const authRouter = require('./backend/routes/auth')
+const jobpostsRouter = require('./routes/jobPosts')
+const usersRouter = require('./routes/users')
+const authRouter = require('./routes/auth')
 
 app.use('/jobPosts', jobpostsRouter)
 app.use('/users', usersRouter)
