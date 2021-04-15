@@ -8,6 +8,8 @@ const path = require("path")
 require('dotenv').config() 
 //require('../backend/startup/prod')(app)
 
+app.use(express.static(path.join(__dirname, "/")));
+
 const app = express()
 const port = process.env.PORT || 5000
 
