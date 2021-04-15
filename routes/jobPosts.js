@@ -14,6 +14,7 @@ router.route("/").get((req, res) => {
     JobPost.find()
         .then(jobPosts => 
             res.json(jobPosts))
+            console.log(res)
         .catch(err => res.status(400).json("Error " + err))
 })
 
