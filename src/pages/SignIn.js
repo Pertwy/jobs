@@ -18,7 +18,7 @@ export default function SignIn(){
   process.env.NODE_ENV == "production"
     ? "https://jobbored-jps.herokuapp.com"
     : "http://localhost:5000";  
-
+console.log(BASE_URL);
 
   function newUserInDB(){
     let newUser = {
@@ -27,7 +27,7 @@ export default function SignIn(){
     console.log(newUser)
 
     try{
-      axios.post('/api/users/add', newUser)
+      axios.post(`${BASE_URL}/users/add`, newUser)
         .then(res => console.log(res.data));
       }catch(e){
         console.error(e)
@@ -39,7 +39,7 @@ export default function SignIn(){
     let user = {"email":email, "password":password}
 
     try{
-      axios.post(`${BASE_URL}/api/auth/`, user, {withCredentials: true, credentials: 'include'})
+      axios.post(`${BASE_URL}/auth/`, user, {withCredentials: true, credentials: 'include'})
         .then(res => console.log(res.data));
       }catch(e){
         console.error(e)

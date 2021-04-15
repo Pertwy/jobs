@@ -42,9 +42,9 @@ const jobpostsRouter = require('./routes/jobPosts')
 const usersRouter = require('./routes/users')
 const authRouter = require('./routes/auth')
 
-app.use('/api/jobPosts', jobpostsRouter)
-app.use('/api/users', usersRouter)
-app.use('/api/auth', authRouter)
+app.use('/jobPosts', jobpostsRouter)
+app.use('/users', usersRouter)
+app.use('/auth', authRouter)
 
 
 app.listen(port, () => {

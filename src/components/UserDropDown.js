@@ -12,8 +12,10 @@ export default function UserDropDown(props) {
     ? "https://jobbored-jps.herokuapp.com"
     : "http://localhost:5000";
 
+    console.log(BASE_URL);
+
   useEffect(() => {
-    axios.get(`${BASE_URL}/api/testusers/all`)
+    axios.get(`${BASE_URL}/testusers/all`)
       .then(response => 
           {setUsers(response.data)})
       //.then(console.log(users))

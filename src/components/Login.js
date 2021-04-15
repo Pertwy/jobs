@@ -7,6 +7,12 @@ export default function Login(){
     const [signUpPassword, setSignUpPassword] = useState("");
     const [name, setName] = useState("");
     
+  const BASE_URL =
+  process.env.NODE_ENV == "production"
+    ? "https://jobbored-jps.herokuapp.com"
+    : "http://localhost:5000";
+
+    console.log(BASE_URL);
 
     function newUserInDB(){
       let newUser = {
@@ -14,7 +20,7 @@ export default function Login(){
       }
 
       try{
-        axios.post('/api/users/add', newUser)
+        axios.post(`${BASE_URL}/users/add`, newUser)
           .then(res => console.log(res.data));
         }catch(e){
           console.error(e)
