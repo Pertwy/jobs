@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-export default function SignIn(){
+export default function CreateAccount(){
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
@@ -14,32 +14,19 @@ export default function SignIn(){
   const [surname, setSurname] = useState("")
   const [pronoun, setPronoun] = useState("")
   const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
   const BASE_URL =
   process.env.NODE_ENV == "production"
     ? "https://jobbored-jps.herokuapp.com"
     : "http://localhost:5000";  
-console.log(BASE_URL);
 
   function newUserInDB(){
     let newUser = {
       "email":email, "givenName":givenName, "surname":surname, "password":password
     }
-    console.log(newUser)
 
     try{
-      axios.post(`${BASE_URL}/users/add`, newUser)
-        .then(res => console.log(res.data));
-      }catch(e){
-        console.error(e)
-      }
-  }
-
-  function handleLogin(){
-
-    let user = {"email":email, "password":password}
-
-    try{
-      axios.post(`${BASE_URL}/auth/`, user, {withCredentials: true, credentials: 'include'})
+      axios.post(`/api/users/add`, newUser)
         .then(res => console.log(res.data));
       }catch(e){
         console.error(e)
@@ -69,20 +56,31 @@ console.log(BASE_URL);
 
   return (
     <div>
-      <div className="d-flex container justify-content-center shadow-lg p-4 mb-4 bg-white">  
-        <form  className="col-sm-8" noValidate autoComplete="off" onSubmit={handleSignUp}>
-            <h3 className={classes.input}>Sign In</h3>  
+      
+      <div className="d-flex container justify-content-center">  
+        <form className={classes.root, "col-sm-6"} noValidate autoComplete="off" onSubmit={handleSignUp}>
+            <h3 className={classes.input}>Create an account</h3>  
+            
+            <TextField fullWidth className={classes.input} onChange={({ target }) =>     
+                  setGivenName(target.value)} id="standard-basic" label="Given Name" />
 
-            <TextField  fullWidth className={classes.input} onChange={({ target }) =>     
+            <TextField fullWidth className={classes.input} onChange={({ target }) =>     
+                  setSurname(target.value)} id="standard-basic" label="Surname" />
+
+            <TextField fullWidth className={classes.input} onChange={({ target }) =>     
                   setEmail(target.value)} id="standard-basic" label="Email" />
 
             <TextField fullWidth className={classes.input} onChange={({ target }) =>     
                   setPassword(target.value)} id="standard-basic" label="Password" />
 
-            <Button onClick={() => handleLogin()} variant="outlined">
-              Log in
+            <TextField fullWidth className={classes.input} onChange={({ target }) =>     
+                  setConfirmPassword(target.value)} id="standard-basic" label="Confirm Password" />
+
+            <Button type="submit" variant="outlined">
+              Sign Up
             </Button>
         </form>
+
       </div>
     </div>
   )

@@ -11,8 +11,10 @@ Fawn.init(mongoose)
 
 
 router.route("/").get((req, res) => {
+    console.log('working from get jobPost')
     JobPost.find()
-        .then(jobPosts => res.json(jobPosts))
+        .then(jobPosts => 
+            res.json(jobPosts))
         .catch(err => res.status(400).json("Error " + err))
 })
 

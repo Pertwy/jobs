@@ -23,7 +23,6 @@ export default function JobPostFrontPage(props) {
             </div>
             <h6>Posted at - {createdAt}</h6>
           </div>
-          {console.log(props.props)}
         </Link>
         
     </section>
