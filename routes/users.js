@@ -30,13 +30,57 @@ router.post('/add', async (req, res) => {
 //Return user data with fields populated
 router.get('/', auth, async (req, res) => {
 
-
     let user = await User.findById(req.user._id)
         .populate("appliedTo")
         .populate("savedJobs");
 
     res.send(user);
 });
+
+
+router.post('/getuserdetails', async (req, res) => {
+    let user = await User.findOne({email: req.body.email})
+    res.send(user);
+});
+
+
+
+router.post('/addskill', async (req, res) => {
+
+    let user = await User.findOne({email: req.body.email})
+    
+    user.skills.push({"title": req.body.title, "proficiency":req.body.proficiency})
+
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
+router.post('/addlanguage', async (req, res) => {
+
+    let user = await User.findOne({email: req.body.email})
+    
+    user.languages.push({"title": req.body.title, "proficiency":req.body.proficiency})
+
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
+router.post('/addlink', async (req, res) => {
+
+    let user = await User.findOne({email: req.body.email})
+    
+    user.links.push(req.body.link)
+
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
 
 
 //Find all test users - For drop down
@@ -67,7 +111,8 @@ router.post('/save', auth, async (req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-//Save a job
+
+//Apply for a job
 router.post('/apply', auth, async (req, res) => {
 
     let user = await User.findById(req.user._id)

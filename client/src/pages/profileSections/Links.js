@@ -53,11 +53,29 @@ if(props.props.links.length > 0 && !expandLinks){
   function handleAddLink(){
     setExpandLinks(!expandLinks)
   }
+
+
   function handleAddNewLink(){
+
+    let info = {"email":"test@email.cm", "link":newLink}
+
+    try {
+      axios.post(`/api/users/addlink`, info)
+        .then(response => (console.log(response.data)))
+        // .then(response => setUserData(response.data))
+    } catch (error) {
+      console.log(error)
+    }
+
     let newLinkNow = props.props.links
     newLinkNow.push(newLink)
     props.setUserData({...props.props, links:newLinkNow})
+
+    setExpandLinks(false)
+    setNewLink("")
   }
+
+
   function handleCancelLink(){
     setNewLink("")
     setExpandLinks(!expandLinks)

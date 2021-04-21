@@ -14,6 +14,9 @@ export default function Skills(props){
 
 //Skills /////////////////////////////////
 
+
+
+
 const proficiencies = [
   {
     value: 'Less than one year',
@@ -123,11 +126,23 @@ if(props.props.skills.length > 0 && !expandSkills){
   }
 
   function handleAddNewSkill(){
+
+    let info = {"email":"test@email.cm", "title":newSkill, "proficiency":proficiency}
+
+    try {
+      axios.post(`/api/users/addskill`, info)
+        .then(response => (console.log(response.data)))
+        // .then(response => setUserData(response.data))
+    } catch (error) {
+      console.log(error)
+    }
+
     let newSkillNow = props.props.skills
     newSkillNow.push({"title":newSkill, "proficiency":proficiency})
     props.setUserData({...props.props, skills:newSkillNow})
   
     setExpandSkills(false)
+    setNewSkill("")
   }
 
   function handleCancelSkill(){

@@ -72,15 +72,18 @@ const userSchema = new mongoose.Schema({
     }],
 
   skills:[{
-    skill:{type: String},
-    yearsExperience:{type:Number}
+    title: {type:String}, 
+    proficiency:{type:String}
   }],
 
-  links:[{type: String}],
+  links:[{type:String}],
 
   additionalInformation:{type: String},
 
-  languages:[{type: String}],
+  languages:[{
+    title: {type:String}, 
+    proficiency:{type:String}
+  }],
 
   education:[{
     country:{type:String},

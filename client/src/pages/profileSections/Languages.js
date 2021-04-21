@@ -94,12 +94,29 @@ if(props.props.languages.length > 0 && !expandLanguages){
   function handleAddLanguage(){
     setExpandLanguages(!expandLanguages)
   }
+
+
   function handleAddNewLanguage(){
+
+    let info = {"email":"test@email.cm", "title":newLanguage, "proficiency":proficiency}
+
+    try {
+      axios.post(`/api/users/addlanguage`, info)
+        .then(response => (console.log(response.data)))
+        // .then(response => setUserData(response.data))
+    } catch (error) {
+      console.log(error)
+    }
+
     let newLanguageNow = props.props.languages
     newLanguageNow.push({"title":newLanguage, "proficiency":proficiency})
     props.setUserData({...props.props, languages:newLanguageNow})
+    
     setExpandLanguages(false)
+    setNewLanguage("")
   }
+
+
   function handleCancelLanguage(){
     setNewLanguage("")
     setExpandLanguages(!expandLanguages)
