@@ -16,13 +16,11 @@ export default function MilitaryService(props){
   const [militaryServiceCountry, setMilitaryServiceCountry] = useState("")
   const [militaryServiceUnit, setMilitaryServiceUnit] = useState("")
   const [militaryRank, setMilitaryRank] = useState("")
-  const [militaryServiceStartDate, setMilitaryServiceStartDate] = useState("")
-  const [militaryServiceEndDate, setMilitaryServiceEndDate] = useState("")
+  const [militaryServiceStartDate, setMilitaryServiceStartDate] = useState(new Date())
+  const [militaryServiceEndDate, setMilitaryServiceEndDate] = useState(new Date())
   const [militaryServiceDescription, setMilitaryServiceDescription] = useState("")
   const [militaryServiceComendations, setMilitaryServiceComendations] = useState("")
 
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
   
 //Military Service ///////////////////////////////////////////////
 function handleExpandMilitaryService(){
@@ -113,12 +111,6 @@ if(expandMilitaryService){
               setMilitaryRank(target.value)} label="Rank" />
 
         <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceStartDate(target.value)} label="Start Date"/>
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceEndDate(target.value)} label="End Date"/>  
-
-        <TextField fullWidth  onChange={({ target }) =>     
               setMilitaryServiceDescription(target.value)} label="Description"/>         
 
         <TextField fullWidth  onChange={({ target }) =>     
@@ -126,22 +118,16 @@ if(expandMilitaryService){
 
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <DatePicker
-                variant="inline"
-                openTo="year"
                 views={["year", "month"]}
                 label="Start Month"
-                //helperText="Start Month"
-                value={startDate}
-                onChange={setStartDate}
+                value={militaryServiceStartDate}
+                onChange={setMilitaryServiceStartDate}
               /> 
               <DatePicker
-                variant="inline"
-                openTo="year"
                 views={["year", "month"]}
-                label="End Month"
-                //helperText="End Month"
-                value={endDate}
-                onChange={setEndDate}
+                label="Start Month"
+                value={militaryServiceEndDate}
+                onChange={setMilitaryServiceEndDate}
               /> 
             </MuiPickersUtilsProvider> 
         
@@ -161,21 +147,25 @@ if(expandMilitaryService){
     function MilitaryServiceMap(){
       return props.props.militaryService.map(MilitaryService => {
         return (
-          <div className={"pl-3 pr-3"}>
+          <div className={"pl-3 pr-3 row space-between"}>
+
+            <div>
+              <p>Country: {MilitaryService.country}</p>
+              <p>Unit: {MilitaryService.unit}</p>
+              <p>Start Date:</p>
+              <p>End Date:</p>
+              {/* <p>Start Date: {MilitaryService.startDate}</p>
+              <p>End Date: {MilitaryService.endDate}</p> */}
+              <p>Rank: {MilitaryService.rank}</p>
+              <p>Description: {MilitaryService.description}</p>
+              <p>Comendations: {MilitaryService.comendations}</p>
+            </div>
+      
             <div className={"row "}>
-              
               <button onClick={()=>handleDeleteMilitaryService(MilitaryService.jobTitle)}>delete</button>
               <button onClick={()=>handleDeleteMilitaryService(MilitaryService.jobTitle)}>edit</button>
             </div>
-            <p>Country: {MilitaryService.country}</p>
-            <p>Unit: {MilitaryService.unit}</p>
-            <p>Start Date: {MilitaryService.startDate}</p>
-            <p>End Date: {MilitaryService.endDate}</p>
-            <p>Rank: {MilitaryService.rank}</p>
-            <p>Description: {MilitaryService.description}</p>
-            <p>Comendations: {MilitaryService.comendations}</p>
-      
-            
+
           </div>
         )
       })

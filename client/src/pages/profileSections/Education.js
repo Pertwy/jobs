@@ -22,8 +22,8 @@ export default function Education(props){
     const [ educationCountry, setEducationCountry] = useState("");
     const [ educationLevelOfEducation, setEducationLevelOfEducation] = useState("");
     const [ educationFieldOfStudy, setEducationFieldOfStudy] = useState("");
-    const [ educationStartDate, setEducationStartDate] = useState("");
-    const [ educationEndDate, setEducationEndDate] =useState("");
+    const [ educationStartDate, setEducationStartDate] = useState(new Date());
+    const [ educationEndDate, setEducationEndDate] =useState(new Date());
     const [ educationCollegeOrUniversity, setEducationCollegeOrUniversity] =useState("");
   
     const [startDate, setStartDate] = useState(new Date());
@@ -112,33 +112,21 @@ function handleExpandEducation(){
                 setEducationFieldOfStudy(target.value)} label="Field Of Study" />
   
           <TextField fullWidth  onChange={({ target }) =>     
-                setEducationStartDate(target.value)} label="Start Date"/>
-  
-          <TextField fullWidth  onChange={({ target }) =>     
-                setEducationEndDate(target.value)} label="End Date"/>  
-  
-          <TextField fullWidth  onChange={({ target }) =>     
                 setEducationCollegeOrUniversity(target.value)} label="College/University"/>     
 
 
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <DatePicker
-                variant="inline"
-                openTo="year"
                 views={["year", "month"]}
-                label="Year and Month"
-                helperText="Start Month"
-                value={startDate}
-                onChange={setStartDate}
+                label="Start Month"
+                value={educationStartDate}
+                onChange={setEducationStartDate}
               /> 
               <DatePicker
-                variant="inline"
-                openTo="year"
-                views={["year", "month"]}
-                label="Year and Month"
-                helperText="End Month"
-                value={endDate}
-                onChange={setEndDate}
+              views={["year", "month"]}
+              label="End Month"
+              value={educationEndDate}
+              onChange={setEducationEndDate}
               /> 
             </MuiPickersUtilsProvider>    
   

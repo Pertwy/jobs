@@ -19,13 +19,10 @@ export default function WorkExperience(props){
     const [WEJobTitle, setWEJobTilte] = useState("")
     const [WECompany, setWECompany] = useState("")
     const [WELocation, setWELocation] = useState("")
-    const [WEStartDate, setWEStartDate] = useState("")
-    const [WEEndDate, setWEEndDate] = useState("")
+    const [WEStartDate, setWEStartDate] = useState(new Date())
+    const [WEEndDate, setWEEndDate] = useState(new Date())
     const [WEDescription, setWEDescription] = useState("")
 
-    // const [startDate, setSelectedDate] = useState(new Date())
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
     
   
     // const setStartDate = (date: Date | null) => {
@@ -124,12 +121,6 @@ function handleExpandWorkExperience(){
                 setWELocation(target.value)} label="Location" />
   
           <TextField fullWidth  onChange={({ target }) =>     
-                setWEStartDate(target.value)} label="Start Date"/>
-  
-          <TextField fullWidth  onChange={({ target }) =>     
-                setWEEndDate(target.value)} label="End Date"/>  
-  
-          <TextField fullWidth  onChange={({ target }) =>     
                 setWEDescription(target.value)} label="Description"/>   
 
           {/* <TextField
@@ -142,22 +133,17 @@ function handleExpandWorkExperience(){
 
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <DatePicker
-              variant="inline"
-              openTo="year"
               views={["year", "month"]}
-              label="Year and Month"
-              helperText="Start Month"
-              value={startDate}
-              onChange={setStartDate}
+              label="Start Month"
+              // helperText="Start Month"
+              value={WEStartDate}
+              onChange={setWEStartDate}
             /> 
             <DatePicker
-              variant="inline"
-              openTo="year"
               views={["year", "month"]}
-              label="Year and Month"
-              helperText="End Month"
-              value={endDate}
-              onChange={setEndDate}
+              label="End Month"
+              value={WEEndDate}
+              onChange={setWEEndDate}
             /> 
           </MuiPickersUtilsProvider>      
   
