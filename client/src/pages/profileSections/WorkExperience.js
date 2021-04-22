@@ -9,6 +9,8 @@ import "date-fns";
 import DateFnsUtils from '@date-io/date-fns';
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 
+import DeleteButton from '../../components/DeleteButton';
+import EditButton from '../../components/EditButton';
 
 export default function WorkExperience(props){
 
@@ -74,6 +76,17 @@ function handleExpandWorkExperience(){
 
 
   function handleDeleteWorkExperience(prop){
+
+    let info = {"email":"test@email.cm", "workExperience":prop}
+
+    try {
+      axios.post(`/api/users/deleteworkexperience`, info)
+        .then(response => (console.log(response.data)))
+        // .then(response => setUserData(response.data))
+    } catch (error) {
+      console.log(error)
+    }
+
     const workExperience = props.props.workExperience.filter(workExperience => workExperience.jobTitle !== prop);
     props.setUserData({...props.props, workExperience:workExperience})
     setExpandWorkExperience(false)
@@ -165,8 +178,9 @@ function handleExpandWorkExperience(){
                 <div className={"row space-between"}>
                   <h4>{WorkExperience.jobTitle}</h4>
                   <div className="row">
-                    <button onClick={()=>handleDeleteWorkExperience(WorkExperience.jobTitle)}>delete</button>
-                    <button onClick={()=>handleDeleteWorkExperience(WorkExperience.jobTitle)}>delete</button>
+
+                    <EditButton item={WorkExperience.jobTitle} handleEdit={handleDeleteWorkExperience}/>
+                    <DeleteButton item={WorkExperience.jobTitle} handleDelete={handleDeleteWorkExperience}/>
                     </div>
                 </div>
                 <p>Company: {WorkExperience.company}</p>
@@ -174,8 +188,6 @@ function handleExpandWorkExperience(){
                 <p>Start Date: {WorkExperience.startDate}</p>
                 <p>End Date: {WorkExperience.endDate}</p>
                 <p>Description: {WorkExperience.description}</p>
-          
-                
               </div>
             )
           })

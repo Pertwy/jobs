@@ -3,6 +3,7 @@ import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import DeleteButton from '../../components/DeleteButton';
 
 export default function Links(props){
 
@@ -38,7 +39,7 @@ if(expandLinks){
       return (
         <div className={"row space-between pl-3 pr-3"}>
           <p>{link}</p>
-          <button onClick={()=>handleDeleteLink(link)}>delete</button>
+          <DeleteButton item={link} handleDelete={handleDeleteLink}/>
         </div>
       )
     })

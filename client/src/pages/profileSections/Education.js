@@ -9,6 +9,12 @@ import "date-fns";
 import DateFnsUtils from '@date-io/date-fns';
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 
+import DeleteButton from '../../components/DeleteButton';
+import EditButton from '../../components/EditButton';
+
+
+
+
 export default function Education(props){
 
     const [ expandEducation, setExpandEducation] = useState(false)
@@ -47,7 +53,6 @@ function handleExpandEducation(){
     try {
       axios.post(`/api/users/addeducation`, info)
         .then(response => (console.log(response.data)))
-        // .then(response => setUserData(response.data))
     } catch (error) {
       console.log(error)
     }
@@ -56,8 +61,20 @@ function handleExpandEducation(){
     setExpandEducation(false)
   }
   
+
+
   function handleDeleteEducation(prop){
-    const education = props.props.education.filter(education => education.levelOfEducation !== prop);
+
+    let info = {"email":"test@email.cm", "education":prop}
+
+    // try {
+    //   axios.post(`/api/users/deleteeducation`, info)
+    //     .then(response => (console.log(response.data)))
+    // } catch (error) {
+    //   console.log(error)
+    // }
+
+    const education = props.props.education.filter(education => education.levelOfEducation !== prop.levelOfEducation);
     props.setUserData({...props.props, education:education})
     setExpandEducation(false)
   }
@@ -137,6 +154,21 @@ function handleExpandEducation(){
   
 
 
+
+    const useStyles = makeStyles((theme) => ({
+      margin: {
+        margin: theme.spacing(1),
+      },
+      extendedIcon: {
+        marginRight: theme.spacing(1),
+      },
+    }));
+    
+    const classes = useStyles();
+
+
+
+
       function EducationMap(){
         return props.props.education.map(Education => {
           return (
@@ -144,8 +176,8 @@ function handleExpandEducation(){
               <div className={"row space-between"}>
                 <h4>{Education.country}</h4>
                 <div className="row">
-                    <button  onClick={()=>handleDeleteEducation(Education.levelOfEducation)}>Delete</button>
-                    <button onClick={()=>handleDeleteEducation(Education.levelOfEducation)}>Edit</button>
+                  <EditButton item={Education} handleEdit={handleDeleteEducation}/>
+                  <DeleteButton item={Education} handleDelete={handleDeleteEducation}/>
                 </div>
               </div>
               <p>Level Of Education: {Education.levelOfEducation}</p>

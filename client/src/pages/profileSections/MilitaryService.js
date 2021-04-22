@@ -53,12 +53,23 @@ function handleSaveMilitaryService(){
     console.log(error)
   }
 
-
   props.setUserData({...props.props, militaryService:newMilitaryService})
   setExpandMilitaryService(false)
 }
 
+
+
 function handleDeleteMilitaryService(prop){
+
+  let info = {"email":"test@email.cm", "militaryService":prop}
+
+  try {
+    axios.post(`/api/users/deletemilitaryservice`, info)
+      .then(response => (console.log(response.data)))
+  } catch (error) {
+    console.log(error)
+  }
+
   const militaryService = props.props.militaryService.filter(militaryService => militaryService.jobTitle !== prop);
   props.setUserData({...props.props, militaryService:militaryService})
   setExpandMilitaryService(false)

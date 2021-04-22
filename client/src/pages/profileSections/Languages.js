@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
+import DeleteButton from '../../components/DeleteButton';
 
 export default function Languages(props){
 
@@ -78,7 +79,7 @@ if(expandLanguages){
       return (
         <div className={"row space-between pl-3 pr-3"}>
           <p>{language.title} - {language.proficiency}</p>
-          <button onClick={()=>handleDeleteLanguage(language)}>delete</button>
+          <DeleteButton item={language} handleDelete={handleDeleteLanguage}/>
         </div>
       )
     })
