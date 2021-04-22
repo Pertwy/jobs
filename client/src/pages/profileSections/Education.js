@@ -64,15 +64,13 @@ function handleExpandEducation(){
   
   
   let Education
-  if(props.props.education.length > 0 && !expandEducation){
-    Education =
-      <>
-        <EducationMap></EducationMap>
-      </>
-    } else if(props.props.education.length > 0 && expandEducation){
-      Education =
-      <>
-        <EducationMap></EducationMap>
+  if(props.props.education.length > 0){
+    Education =<><EducationMap/></>
+    } else {Education=<></>}
+    
+  let EducationInput
+    if(expandEducation){
+      EducationInput =
         <>
           <TextField fullWidth  onChange={({ target }) =>     
                 setEducationCountry(target.value)} id="standard-basic" label="Country" />
@@ -123,61 +121,7 @@ function handleExpandEducation(){
             Cancel
           </Button>
         </>
-      </>
-    } else if(props.props.education.length == 0 && expandEducation){
-      Education =
-        <>
-          <TextField fullWidth  onChange={({ target }) =>     
-                setEducationCountry(target.value)} id="standard-basic" label="Country" />
-  
-          <TextField fullWidth  onChange={({ target }) =>     
-                setEducationLevelOfEducation(target.value)} id="standard-basic" label="Level Of Education"/>
-  
-          <TextField fullWidth  onChange={({ target }) =>     
-                setEducationFieldOfStudy(target.value)} id="standard-basic" label="Field Of Study" />
-  
-          <TextField fullWidth  onChange={({ target }) =>     
-                setEducationStartDate(target.value)} id="standard-basic" label="Start Date"/>
-  
-          <TextField fullWidth  onChange={({ target }) =>     
-                setEducationEndDate(target.value)} id="standard-basic" label="End Date"/>  
-  
-          <TextField fullWidth  onChange={({ target }) =>     
-                setEducationCollegeOrUniversity(target.value)} id="standard-basic" label="College/University"/>   
-
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <DatePicker
-                variant="inline"
-                openTo="year"
-                views={["year", "month"]}
-                label="Year and Month"
-                helperText="Start Month"
-                value={startDate}
-                onChange={setStartDate}
-              /> 
-              <DatePicker
-                variant="inline"
-                openTo="year"
-                views={["year", "month"]}
-                label="Year and Month"
-                helperText="End Month"
-                value={endDate}
-                onChange={setEndDate}
-              /> 
-            </MuiPickersUtilsProvider>  
-  
-          <Button onClick={()=>handleSaveEducation()} variant="outlined">
-            Save Changes
-          </Button>
-          <Button onClick={()=>handleCancelEducation()} variant="outlined">
-            Cancel
-          </Button>
-     </>
-   
-    } else{
-      Education = <></>
-    }
-  
+    } else {EducationInput =<></>}
   
       function EducationMap(){
         return props.props.education.map(Education => {
@@ -211,6 +155,7 @@ function handleExpandEducation(){
                 <button onClick={() => handleExpandEducation()}>Add</button>
               </div>
               {Education}
+              {EducationInput}
         </section>
     </div>
   )
