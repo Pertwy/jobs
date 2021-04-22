@@ -5,6 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
+import DeleteButton from '../../components/DeleteButton';
+import ExpandButton from '../../components/ExpandButton';
 
 export default function Languages(props){
 
@@ -36,15 +38,14 @@ const proficiencies = [
 
 
 let Languages
-if(props.props.languages.length > 0 && !expandLanguages){
-  Languages =
+if(props.props.languages.length > 0){
+  Languages =<><LanguageMap/></>
+  } else{Languages = <></>}
+  
+let LanguageInput
+if(expandLanguages){
+    LanguageInput =
     <>
-      <LanguageMap></LanguageMap>
-    </>
-  } else if(props.props.languages.length > 0 && expandLanguages){
-    Languages =
-    <>
-      <LanguageMap></LanguageMap>
       <div className={"row pl-3 pr-3 space-between"}>
         <TextField  onChange={({ target }) =>     
           setNewLanguage(target.value)} id="standard-basic" label="New Language" />
@@ -70,16 +71,16 @@ if(props.props.languages.length > 0 && !expandLanguages){
         </div>
       </div>
     </>
-  } else{
-    Languages = <>
-    </>}
+  } else{LanguageInput = <></>}
+
+
 
   function LanguageMap(){
     return props.props.languages.map(language => {
       return (
         <div className={"row space-between pl-3 pr-3"}>
           <p>{language.title} - {language.proficiency}</p>
-          <button onClick={()=>handleDeleteLanguage(language)}>delete</button>
+          <DeleteButton item={language} handleDelete={handleDeleteLanguage}/>
         </div>
       )
     })
@@ -87,19 +88,49 @@ if(props.props.languages.length > 0 && !expandLanguages){
 
 
   function handleDeleteLanguage(prop){
+
+    let info = {"email":"test@email.cm", "title":prop.title}
+
+    try {
+      axios.post(`/api/users/deletelanguage`, info)
+        .then(response => (console.log(response.data)))
+        // .then(response => setUserData(response.data))
+    } catch (error) {
+      console.log(error)
+    }
+
       const lang = props.props.languages.filter(lang => lang !== prop);
       props.setUserData({...props.props, languages:lang})
   }
 
+
+
   function handleAddLanguage(){
     setExpandLanguages(!expandLanguages)
   }
+
+
   function handleAddNewLanguage(){
+
+    let info = {"email":"test@email.cm", "title":newLanguage, "proficiency":proficiency}
+
+    try {
+      axios.post(`/api/users/addlanguage`, info)
+        .then(response => (console.log(response.data)))
+        // .then(response => setUserData(response.data))
+    } catch (error) {
+      console.log(error)
+    }
+
     let newLanguageNow = props.props.languages
     newLanguageNow.push({"title":newLanguage, "proficiency":proficiency})
     props.setUserData({...props.props, languages:newLanguageNow})
+    
     setExpandLanguages(false)
+    setNewLanguage("")
   }
+
+
   function handleCancelLanguage(){
     setNewLanguage("")
     setExpandLanguages(!expandLanguages)
@@ -111,9 +142,10 @@ if(props.props.languages.length > 0 && !expandLanguages){
       <section className={"personal-details" }>
         <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
           <h4> Languages</h4>
-          <button onClick={() => handleAddLanguage()}> + </button>
+          <ExpandButton expand={expandLanguages} handleExpand={handleAddLanguage}/>
         </div>
         {Languages}
+        {LanguageInput}
         
       </section>
     </div>

@@ -5,6 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
+import DeleteButton from '../../components/DeleteButton';
+import ExpandButton from '../../components/ExpandButton';
 
 export default function Skills(props){
 
@@ -13,6 +15,9 @@ export default function Skills(props){
   const [proficiency, setProficiency] = useState("Enter Proficiency")
 
 //Skills /////////////////////////////////
+
+
+
 
 const proficiencies = [
   {
@@ -63,16 +68,19 @@ const proficiencies = [
 
 
 let Skills
-if(props.props.skills.length > 0 && !expandSkills){
+if(props.props.skills.length > 0 ){
   Skills =
     <>
       <SkillMap></SkillMap>
     </>
-  } else if(props.props.skills.length > 0 && expandSkills){
-    Skills =
-    <>
-      <SkillMap></SkillMap>
-      <div className={"row pl-3 pr-3 space-between"}>
+  } else{Skills = <></>}
+  
+  
+let SkillInput
+if(expandSkills){
+  SkillInput=
+  <>
+    <div className={"row pl-3 pr-3 space-between"}>
 
         <TextField  onChange={({ target }) =>     
           setNewSkill(target.value)} id="standard-basic" label="New Skill" />
@@ -98,22 +106,33 @@ if(props.props.skills.length > 0 && !expandSkills){
         </div>
       </div>
     </>
-  } else{
-    Skills = <>
-    </>}
+}
+
 
   function SkillMap(){
     return props.props.skills.map(skill => {
       return (
         <div className={"row space-between pl-3 pr-3"}>
           <p>{skill.title} - {skill.proficiency}</p>
-          <button onClick={()=>handleDeleteSkill(skill.title)}>delete</button>
+          <DeleteButton item={skill.title} handleDelete={handleDeleteSkill}/>
         </div>
       )
     })
   }
 
+
   function handleDeleteSkill(prop){
+
+    let info = {"email":"test@email.cm", "title":prop}
+
+    try {
+      axios.post(`/api/users/deleteskill`, info)
+        .then(response => (console.log(response.data)))
+        // .then(response => setUserData(response.data))
+    } catch (error) {
+      console.log(error)
+    }
+
     const skill = props.props.skills.filter(skill => skill.title !== prop);
     props.setUserData({...props.props, skills:skill})
 }
@@ -123,11 +142,23 @@ if(props.props.skills.length > 0 && !expandSkills){
   }
 
   function handleAddNewSkill(){
+
+    let info = {"email":"test@email.cm", "title":newSkill, "proficiency":proficiency}
+
+    try {
+      axios.post(`/api/users/addskill`, info)
+        .then(response => (console.log(response.data)))
+        // .then(response => setUserData(response.data))
+    } catch (error) {
+      console.log(error)
+    }
+
     let newSkillNow = props.props.skills
     newSkillNow.push({"title":newSkill, "proficiency":proficiency})
     props.setUserData({...props.props, skills:newSkillNow})
   
     setExpandSkills(false)
+    setNewSkill("")
   }
 
   function handleCancelSkill(){
@@ -140,9 +171,10 @@ if(props.props.skills.length > 0 && !expandSkills){
       <section className={"personal-details" }>
         <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
           <h4> Skills</h4>
-          <button onClick={() => handleAddSkill()}> + </button>
+          <ExpandButton expand={expandSkills} handleExpand={handleAddSkill}/>
         </div>
         {Skills}
+        {SkillInput}
       </section>
     </div>
   )

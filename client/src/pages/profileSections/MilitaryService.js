@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import ExpandButton from '../../components/ExpandButton';
 
 import "date-fns";
 import DateFnsUtils from '@date-io/date-fns';
@@ -29,8 +30,8 @@ function handleExpandMilitaryService(){
 }
 
 function handleSaveMilitaryService(){
-  let newMilitaryService = props.props.militaryService
-  newMilitaryService.push({
+  
+  let additionalMilitaryService = {
     country: militaryServiceCountry,
     unit: militaryServiceUnit,
     rank: militaryRank,
@@ -38,13 +39,38 @@ function handleSaveMilitaryService(){
     endDate: militaryServiceEndDate,
     description: militaryServiceDescription,
     comendations: militaryServiceComendations
-  })
+  }
+  
+  let newMilitaryService = props.props.militaryService
+  newMilitaryService.push(additionalMilitaryService)
+
+  let info = {"email":"test@email.cm", "militaryService":additionalMilitaryService}
+
+  try {
+    axios.post(`/api/users/addmilitaryservice`, info)
+      .then(response => (console.log(response.data)))
+      // .then(response => setUserData(response.data))
+  } catch (error) {
+    console.log(error)
+  }
 
   props.setUserData({...props.props, militaryService:newMilitaryService})
   setExpandMilitaryService(false)
 }
 
+
+
 function handleDeleteMilitaryService(prop){
+
+  let info = {"email":"test@email.cm", "militaryService":prop}
+
+  try {
+    axios.post(`/api/users/deletemilitaryservice`, info)
+      .then(response => (console.log(response.data)))
+  } catch (error) {
+    console.log(error)
+  }
+
   const militaryService = props.props.militaryService.filter(militaryService => militaryService.jobTitle !== prop);
   props.setUserData({...props.props, militaryService:militaryService})
   setExpandMilitaryService(false)
@@ -62,39 +88,41 @@ function handleCancelMilitaryService(){
   setExpandMilitaryService(!expandMilitaryService)
 }
 
+let AddButton
+if(props.props.militaryService.length > 0){
+  AddButton=<></>
+}else{ AddButton = <ExpandButton expand={expandMilitaryService} handleExpand={handleExpandMilitaryService}/>}
 
 
 let MilitaryService
-if(props.props.militaryService.length > 0 && !expandMilitaryService){
-  MilitaryService =
-    <>
-      <MilitaryServiceMap></MilitaryServiceMap>
-    </>
-  } else if(props.props.militaryService.length > 0 && expandMilitaryService){
-    MilitaryService =
-    <>
-      <MilitaryServiceMap></MilitaryServiceMap>
+if(props.props.militaryService.length > 0){
+  MilitaryService = <><MilitaryServiceMap/></>
+  } else{MilitaryService = <></>}
+  
+let MilitaryServiceInput
+if(expandMilitaryService){
+    MilitaryServiceInput =
       <>
         <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceCountry(target.value)} id="standard-basic" label="Country" />
+              setMilitaryServiceCountry(target.value)} label="Country" />
 
         <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceUnit(target.value)} id="standard-basic" label="Unit"/>
+              setMilitaryServiceUnit(target.value)} label="Unit"/>
 
         <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryRank(target.value)} id="standard-basic" label="Rank" />
+              setMilitaryRank(target.value)} label="Rank" />
 
         <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceStartDate(target.value)} id="standard-basic" label="Start Date"/>
+              setMilitaryServiceStartDate(target.value)} label="Start Date"/>
 
         <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceEndDate(target.value)} id="standard-basic" label="End Date"/>  
+              setMilitaryServiceEndDate(target.value)} label="End Date"/>  
 
         <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceDescription(target.value)} id="standard-basic" label="Description"/>         
+              setMilitaryServiceDescription(target.value)} label="Description"/>         
 
         <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceComendations(target.value)} id="standard-basic" label="Comendations"/>   
+              setMilitaryServiceComendations(target.value)} label="Comendations"/>   
 
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <DatePicker
@@ -125,73 +153,19 @@ if(props.props.militaryService.length > 0 && !expandMilitaryService){
           Cancel
         </Button>
       </>
-    </>
-  } else if(props.props.militaryService.length == 0 && expandMilitaryService){
-    MilitaryService =
-      <>
-               <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceCountry(target.value)} id="standard-basic" label="Country" />
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceUnit(target.value)} id="standard-basic" label="Unit"/>
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryRank(target.value)} id="standard-basic" label="Rank" />
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceStartDate(target.value)} id="standard-basic" label="Start Date"/>
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceEndDate(target.value)} id="standard-basic" label="End Date"/>  
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceDescription(target.value)} id="standard-basic" label="Description"/>         
-
-        <TextField fullWidth  onChange={({ target }) =>     
-              setMilitaryServiceComendations(target.value)} id="standard-basic" label="Comendations"/>           
-
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <DatePicker
-                variant="inline"
-                openTo="year"
-                views={["year", "month"]}
-                label="Start Month"
-                //helperText="Start Month"
-                value={startDate}
-                onChange={setStartDate}
-              /> 
-              <DatePicker
-                variant="inline"
-                openTo="year"
-                views={["year", "month"]}
-                label="End Month"
-                //helperText="End Month"
-                value={endDate}
-                onChange={setEndDate}
-              /> 
-            </MuiPickersUtilsProvider> 
-        
-
-        <Button onClick={()=>handleSaveMilitaryService()} variant="outlined">
-          Save Changes
-        </Button>
-        <Button onClick={()=>handleCancelMilitaryService()} variant="outlined">
-          Cancel
-        </Button>
-   </>
+  } else {MilitaryServiceInput =<></>}
  
-  } else{
-    MilitaryService = <></>
-  }
+
 
 
     function MilitaryServiceMap(){
       return props.props.militaryService.map(MilitaryService => {
         return (
           <div className={"pl-3 pr-3"}>
-            <div className={"row space-between"}>
-              <h4>{MilitaryService.jobTitle}</h4>
+            <div className={"row "}>
+              
               <button onClick={()=>handleDeleteMilitaryService(MilitaryService.jobTitle)}>delete</button>
+              <button onClick={()=>handleDeleteMilitaryService(MilitaryService.jobTitle)}>edit</button>
             </div>
             <p>Country: {MilitaryService.country}</p>
             <p>Unit: {MilitaryService.unit}</p>
@@ -214,9 +188,11 @@ if(props.props.militaryService.length > 0 && !expandMilitaryService){
         <section className={"personal-details" }>
               <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
                 <h4 >Military Service</h4>
-                <button onClick={() => handleExpandMilitaryService()}>Add</button>
+                {AddButton}
+                
               </div>
               {MilitaryService}
+              {MilitaryServiceInput}
         </section>
     </div>
   )

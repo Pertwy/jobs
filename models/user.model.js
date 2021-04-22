@@ -41,15 +41,13 @@ const userSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "JobPost" //This is the Schema name
   }],
+  
   location:{type: String},
   headline:{type: String},
-
   phoneNumber:{type: Number},
 
   elegibleUK:{type: Boolean},
-
   highestLevelOfDegree:{type: String},
-
   industry:[{type: String}],
 
   workExperience:[{
@@ -72,15 +70,18 @@ const userSchema = new mongoose.Schema({
     }],
 
   skills:[{
-    skill:{type: String},
-    yearsExperience:{type:Number}
+    title: {type:String}, 
+    proficiency:{type:String}
   }],
 
-  links:[{type: String}],
+  links:[{type:String}],
 
   additionalInformation:{type: String},
 
-  languages:[{type: String}],
+  languages:[{
+    title: {type:String}, 
+    proficiency:{type:String}
+  }],
 
   education:[{
     country:{type:String},

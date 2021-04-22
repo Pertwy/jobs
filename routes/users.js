@@ -30,13 +30,212 @@ router.post('/add', async (req, res) => {
 //Return user data with fields populated
 router.get('/', auth, async (req, res) => {
 
-
     let user = await User.findById(req.user._id)
         .populate("appliedTo")
         .populate("savedJobs");
 
     res.send(user);
 });
+
+
+router.post('/getuserdetails', async (req, res) => {
+    let user = await User.findOne({email: req.body.email})
+    res.send(user);
+});
+
+
+
+router.post('/addskill', async (req, res) => {
+
+    let user = await User.findOne({email: req.body.email})
+    
+    user.skills.push({"title": req.body.title, "proficiency":req.body.proficiency})
+
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.post('/deleteskill', async (req, res) => {
+
+    let user = await User.findOne({email: req.body.email})
+
+    const skill = user.skills.filter(skill => skill.title !== req.body.title);
+    user.skills = skill
+
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
+
+
+
+router.post('/addlanguage', async (req, res) => {
+
+    let user = await User.findOne({email: req.body.email})
+    
+    user.languages.push({"title": req.body.title, "proficiency":req.body.proficiency})
+
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.post('/deletelanguage', async (req, res) => {
+
+    let user = await User.findOne({email: req.body.email})
+
+    const lang = user.languages.filter(lang => lang.title !== req.body.title);
+    user.languages = lang
+
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
+
+
+
+router.post('/addlink', async (req, res) => {
+
+    let user = await User.findOne({email: req.body.email})
+    
+    user.links.push(req.body.link)
+
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.post('/deletelink', async (req, res) => {
+    
+    let user = await User.findOne({email: req.body.email})
+
+    const link = user.links.filter(link => link !== req.body.title);
+    user.links = link
+
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+//Education //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+router.post('/addeducation', async (req, res) => {
+
+    console.log(req.body.education)
+
+    let user = await User.findOne({email: req.body.email})
+
+    user.education.push(req.body.education)
+
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.post('/deleteeducation', async (req, res) => {
+
+    console.log(req.body)
+
+    // let user = await User.findOne({email: req.body.email})
+
+    // const education = user.education.filter(education => education.jobTitle !== req.body.education);
+    // user.education = education
+
+    // await user.save()
+    //     .then(() => res.send(user))
+    //     .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
+//Work Experience /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+router.post('/addworkexperience', async (req, res) => {
+
+    console.log(req.body.workExperience)
+
+    let user = await User.findOne({email: req.body.email})
+
+    user.workExperience.push(req.body.workExperience)
+
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.post('/deleteworkexperience', async (req, res) => {
+
+    let user = await User.findOne({email: req.body.email})
+
+    const workExperience = user.workExperience.filter(workExperience => workExperience.jobTitle !== req.body.workExperience);
+    user.workExperience = workExperience
+
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
+
+
+
+//Military Service ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+router.post('/addmilitaryservice', async (req, res) => {
+
+    console.log(req.body.militaryService)
+
+    let user = await User.findOne({email: req.body.email})
+
+    user.militaryService.push(req.body.militaryService)
+
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.post('/deletemilitaryservice', async (req, res) => {
+
+    let user = await User.findOne({email: req.body.email})
+
+    const militaryService = user.militaryService.filter(militaryService => militaryService.jobTitle !== req.body.militaryService);
+    user.militaryService = militaryService
+
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
+
+
+
+//Basic Info //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+router.put('/updatebasicinfo', async (req, res) => {
+    
+    console.log(req.body)
+    
+    let user = await User.findOne({email: req.body.emailtest})
+    
+    console.log(user)
+
+    user.givenName = req.body.givenName
+    user.surname = req.body.surname
+    user.location = req.body.location
+    user.headline = req.body.headline
+    // user.email = req.body.email
+    user.phoneNumber = req.body.phoneNumber.toString()
+
+    await user.save()
+        .then(() => res.send(user))
+        // .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
+
+
+
 
 
 //Find all test users - For drop down
@@ -67,7 +266,8 @@ router.post('/save', auth, async (req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-//Save a job
+
+//Apply for a job
 router.post('/apply', auth, async (req, res) => {
 
     let user = await User.findById(req.user._id)

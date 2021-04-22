@@ -16,6 +16,7 @@ import PersonalDetails from "./profileSections/PersonalDetails"
 import Links from "./profileSections/Links"
 import Languages from "./profileSections/Languages"
 import Skills from "./profileSections/Skills"
+import { EmailRounded } from '@material-ui/icons';
 
 export default function Profile(){
   const BASE_URL =
@@ -23,10 +24,12 @@ export default function Profile(){
     ? "https://jobbored-jps.herokuapp.com"
     : "http://localhost:5000";  
 
+  const [currentUser, setCurrentUser] = useState("test@email.cm")
+
   const [userData, setUserData] = useState({
     givenName:"john",
     surname:"perkins",
-    email:"j@gmail",
+    email:"test@email.cm",
     headline:"",
     appliedTo:[],
     savedJobs:[],
@@ -49,8 +52,9 @@ export default function Profile(){
   
  
   useEffect(() => {
+    let email = {"email":currentUser}
     try {
-      axios.get(`/api/users/`)
+      axios.post(`/api/users/getuserdetails`, email)
         //.then(response => (console.log(response.data)))
         .then(response => setUserData(response.data))
 
