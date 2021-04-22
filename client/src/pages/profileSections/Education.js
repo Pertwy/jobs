@@ -29,16 +29,28 @@ function handleExpandEducation(){
   }
   
   function handleSaveEducation(){
-    let newEducation = props.props.education
-  
-    newEducation.push({
+    
+    let additionalEducation = {
       country:educationCountry,
       levelOfEducation:educationLevelOfEducation,
       fieldOfStudy:educationFieldOfStudy,
       startDate:educationStartDate,
       endDate: educationEndDate,
       collegeOrUniversity:educationCollegeOrUniversity
-    })
+    }
+    
+    let newEducation = props.props.education
+    newEducation.push(additionalEducation)
+
+    let info = {"email":"test@email.cm", "education":additionalEducation}
+
+    try {
+      axios.post(`/api/users/addeducation`, info)
+        .then(response => (console.log(response.data)))
+        // .then(response => setUserData(response.data))
+    } catch (error) {
+      console.log(error)
+    }
   
     props.setUserData({...props.props, education: newEducation})
     setExpandEducation(false)
@@ -73,22 +85,22 @@ function handleExpandEducation(){
       EducationInput =
         <>
           <TextField fullWidth  onChange={({ target }) =>     
-                setEducationCountry(target.value)} id="standard-basic" label="Country" />
+                setEducationCountry(target.value)} label="Country" />
   
           <TextField fullWidth  onChange={({ target }) =>     
-                setEducationLevelOfEducation(target.value)} id="standard-basic" label="Level Of Education"/>
+                setEducationLevelOfEducation(target.value)} label="Level Of Education"/>
   
           <TextField fullWidth  onChange={({ target }) =>     
-                setEducationFieldOfStudy(target.value)} id="standard-basic" label="Field Of Study" />
+                setEducationFieldOfStudy(target.value)} label="Field Of Study" />
   
           <TextField fullWidth  onChange={({ target }) =>     
-                setEducationStartDate(target.value)} id="standard-basic" label="Start Date"/>
+                setEducationStartDate(target.value)} label="Start Date"/>
   
           <TextField fullWidth  onChange={({ target }) =>     
-                setEducationEndDate(target.value)} id="standard-basic" label="End Date"/>  
+                setEducationEndDate(target.value)} label="End Date"/>  
   
           <TextField fullWidth  onChange={({ target }) =>     
-                setEducationCollegeOrUniversity(target.value)} id="standard-basic" label="College/University"/>     
+                setEducationCollegeOrUniversity(target.value)} label="College/University"/>     
 
 
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -123,6 +135,8 @@ function handleExpandEducation(){
         </>
     } else {EducationInput =<></>}
   
+
+
       function EducationMap(){
         return props.props.education.map(Education => {
           return (

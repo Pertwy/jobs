@@ -123,6 +123,35 @@ router.post('/deletelink', async (req, res) => {
 });
 
 
+router.post('/addeducation', async (req, res) => {
+
+    console.log(req.body.education)
+
+    let user = await User.findOne({email: req.body.email})
+
+    user.education.push(req.body.education)
+
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
+
+router.post('/addworkexperience', async (req, res) => {
+
+    console.log(req.body.workExperience)
+
+    let user = await User.findOne({email: req.body.email})
+
+    user.workExperience.push(req.body.workExperience)
+
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
 
 router.put('/updatebasicinfo', async (req, res) => {
     

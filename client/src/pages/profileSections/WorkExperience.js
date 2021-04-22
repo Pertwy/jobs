@@ -36,20 +36,46 @@ function handleExpandWorkExperience(){
     //console.log(props.props.workExperience)
   }
   
+
+
+
+
   function handleSaveWorkExperience(){
-    let newWorkExperience = props.props.workExperience
-    newWorkExperience.push({
+
+    let additionalWorkExperience ={
       jobTitle:WEJobTitle,
       company:WECompany,
       location:WELocation,
       startDate:WEStartDate,
       endDate:WEEndDate,
       description:WEDescription
-    })
+    }
+
+    let newWorkExperience = props.props.workExperience
+    newWorkExperience.push(additionalWorkExperience)
+
+    let info = {"email":"test@email.cm", "workExperience":additionalWorkExperience}
+
+    try {
+      axios.post(`/api/users/addworkexperience`, info)
+        .then(response => (console.log(response.data)))
+        // .then(response => setUserData(response.data))
+    } catch (error) {
+      console.log(error)
+    }
+  
+
+
+
     props.setUserData({...props.props, workExperience:newWorkExperience})
     setExpandWorkExperience(false)
   }
   
+
+
+
+
+
   function handleDeleteWorkExperience(prop){
     const workExperience = props.props.workExperience.filter(workExperience => workExperience.jobTitle !== prop);
     props.setUserData({...props.props, workExperience:workExperience})
@@ -78,22 +104,22 @@ function handleExpandWorkExperience(){
       WorkExperienceInput =
         <>
           <TextField fullWidth  onChange={({ target }) =>     
-                setWEJobTilte(target.value)} id="standard-basic" label="Job Title" />
+                setWEJobTilte(target.value)} label="Job Title" />
   
           <TextField fullWidth  onChange={({ target }) =>     
-                setWECompany(target.value)} id="standard-basic" label="Company"/>
+                setWECompany(target.value)} label="Company"/>
   
           <TextField fullWidth  onChange={({ target }) =>     
-                setWELocation(target.value)} id="standard-basic" label="Location" />
+                setWELocation(target.value)} label="Location" />
   
           <TextField fullWidth  onChange={({ target }) =>     
-                setWEStartDate(target.value)} id="standard-basic" label="Start Date"/>
+                setWEStartDate(target.value)} label="Start Date"/>
   
           <TextField fullWidth  onChange={({ target }) =>     
-                setWEEndDate(target.value)} id="standard-basic" label="End Date"/>  
+                setWEEndDate(target.value)} label="End Date"/>  
   
           <TextField fullWidth  onChange={({ target }) =>     
-                setWEDescription(target.value)} id="standard-basic" label="Description"/>   
+                setWEDescription(target.value)} label="Description"/>   
 
           {/* <TextField
                     label="Multiline"
