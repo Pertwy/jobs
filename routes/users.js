@@ -56,6 +56,21 @@ router.post('/addskill', async (req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.post('/deleteskill', async (req, res) => {
+
+    let user = await User.findOne({email: req.body.email})
+
+    const skill = user.skills.filter(skill => skill.title !== req.body.title);
+    user.skills = skill
+
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
+
+
 
 router.post('/addlanguage', async (req, res) => {
 
@@ -68,6 +83,21 @@ router.post('/addlanguage', async (req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.post('/deletelanguage', async (req, res) => {
+
+    let user = await User.findOne({email: req.body.email})
+
+    const lang = user.languages.filter(lang => lang.title !== req.body.title);
+    user.languages = lang
+
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
+
+
 
 router.post('/addlink', async (req, res) => {
 
@@ -79,6 +109,43 @@ router.post('/addlink', async (req, res) => {
         .then(() => res.send(user))
         .catch(err => res.status(400).json('Error: ' + err));
 });
+
+router.post('/deletelink', async (req, res) => {
+    
+    let user = await User.findOne({email: req.body.email})
+
+    const link = user.links.filter(link => link !== req.body.title);
+    user.links = link
+
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
+
+router.put('/updatebasicinfo', async (req, res) => {
+    
+    console.log(req.body)
+    
+    let user = await User.findOne({email: req.body.emailtest})
+    
+    console.log(user)
+
+    user.givenName = req.body.givenName
+    user.surname = req.body.surname
+    user.location = req.body.location
+    user.headline = req.body.headline
+    // user.email = req.body.email
+    user.phoneNumber = req.body.phoneNumber.toString()
+
+    await user.save()
+        .then(() => res.send(user))
+        // .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
+
 
 
 

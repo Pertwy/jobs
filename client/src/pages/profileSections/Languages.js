@@ -36,15 +36,14 @@ const proficiencies = [
 
 
 let Languages
-if(props.props.languages.length > 0 && !expandLanguages){
-  Languages =
+if(props.props.languages.length > 0){
+  Languages =<><LanguageMap/></>
+  } else{Languages = <></>}
+  
+let LanguageInput
+if(expandLanguages){
+    LanguageInput =
     <>
-      <LanguageMap></LanguageMap>
-    </>
-  } else if(props.props.languages.length > 0 && expandLanguages){
-    Languages =
-    <>
-      <LanguageMap></LanguageMap>
       <div className={"row pl-3 pr-3 space-between"}>
         <TextField  onChange={({ target }) =>     
           setNewLanguage(target.value)} id="standard-basic" label="New Language" />
@@ -70,9 +69,9 @@ if(props.props.languages.length > 0 && !expandLanguages){
         </div>
       </div>
     </>
-  } else{
-    Languages = <>
-    </>}
+  } else{LanguageInput = <></>}
+
+
 
   function LanguageMap(){
     return props.props.languages.map(language => {
@@ -87,9 +86,22 @@ if(props.props.languages.length > 0 && !expandLanguages){
 
 
   function handleDeleteLanguage(prop){
+
+    let info = {"email":"test@email.cm", "title":prop.title}
+
+    try {
+      axios.post(`/api/users/deletelanguage`, info)
+        .then(response => (console.log(response.data)))
+        // .then(response => setUserData(response.data))
+    } catch (error) {
+      console.log(error)
+    }
+
       const lang = props.props.languages.filter(lang => lang !== prop);
       props.setUserData({...props.props, languages:lang})
   }
+
+
 
   function handleAddLanguage(){
     setExpandLanguages(!expandLanguages)
@@ -131,6 +143,7 @@ if(props.props.languages.length > 0 && !expandLanguages){
           <button onClick={() => handleAddLanguage()}> + </button>
         </div>
         {Languages}
+        {LanguageInput}
         
       </section>
     </div>

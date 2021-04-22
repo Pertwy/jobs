@@ -12,15 +12,14 @@ export default function Links(props){
 
 //Links /////////////////////////////////
 let Links
-if(props.props.links.length > 0 && !expandLinks){
-  Links =
+if(props.props.links.length > 0){
+  Links =<><LinkMap></LinkMap></>
+  }else{Links = <><LinkMap></LinkMap></>}
+  
+let LinkInput
+if(expandLinks){
+  LinkInput =
     <>
-      <LinkMap></LinkMap>
-    </>
-  } else if(props.props.links.length > 0 && expandLinks){
-    Links =
-    <>
-      <LinkMap></LinkMap>
       <div className={"row pl-3 pr-3 space-between"}>
         <TextField  onChange={({ target }) =>     
           setNewLink(target.value)} id="standard-basic" label="New Link" />
@@ -30,9 +29,9 @@ if(props.props.links.length > 0 && !expandLinks){
         </div>
       </div>
     </>
-  } else{
-    Links = <>
-    </>}
+} else{ LinkInput = <></>}
+
+
 
   function LinkMap(){
     return props.props.links.map(link => {
@@ -46,9 +45,23 @@ if(props.props.links.length > 0 && !expandLinks){
   }
 
   function handleDeleteLink(prop){
+
+    let info = {"email":"test@email.cm", "title":prop}
+
+    try {
+      axios.post(`/api/users/deletelink`, info)
+        .then(response => (console.log(response.data)))
+        // .then(response => setUserData(response.data))
+    } catch (error) {
+      console.log(error)
+    }
+
     const lang = props.props.links.filter(link => link !== prop);
     props.setUserData({...props.props, links:lang})
   }
+
+
+
 
   function handleAddLink(){
     setExpandLinks(!expandLinks)
@@ -90,6 +103,7 @@ if(props.props.links.length > 0 && !expandLinks){
           <button onClick={() => handleAddLink()}> + </button>
         </div>
         {Links}
+        {LinkInput}
       </section>
     </div>
   )

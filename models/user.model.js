@@ -41,15 +41,13 @@ const userSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "JobPost" //This is the Schema name
   }],
+  
   location:{type: String},
   headline:{type: String},
-
   phoneNumber:{type: Number},
 
   elegibleUK:{type: Boolean},
-
   highestLevelOfDegree:{type: String},
-
   industry:[{type: String}],
 
   workExperience:[{

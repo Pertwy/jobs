@@ -29,7 +29,7 @@ export default function Profile(){
   const [userData, setUserData] = useState({
     givenName:"john",
     surname:"perkins",
-    email:"j@gmail",
+    email:"test@email.cm",
     headline:"",
     appliedTo:[],
     savedJobs:[],
@@ -56,7 +56,7 @@ export default function Profile(){
     try {
       axios.post(`/api/users/getuserdetails`, email)
         //.then(response => (console.log(response.data)))
-        // .then(response => setUserData(response.data))
+        .then(response => setUserData(response.data))
 
     } catch (error) {
       console.log(error)

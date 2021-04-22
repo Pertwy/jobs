@@ -27,6 +27,7 @@ function handleExpandBasicInfo(){
 }
 
 function handleSaveBasicInfo(){
+
   if(givenName){
     props.setUserData({...props.props, givenName:givenName})
   }
@@ -36,15 +37,42 @@ function handleSaveBasicInfo(){
   if(location){
     props.setUserData({...props.props, location:location})
   }
-  if(email){
-    props.setUserData({...props.props, email:email})
+  if(headline){
+    props.setUserData({...props.props, headline:headline})
   }
   if(phoneNumber){
     props.setUserData({...props.props, phoneNumber:phoneNumber})
   }
 
+  givenName ? props.setUserData({...props.props, givenName:givenName}) : setGivenName(props.props.givenName)
+  surname ? props.setUserData({...props.props, surname:surname}) : setSurname(props.props.surname)
+  location ? props.setUserData({...props.props, location:location}) : setLocation(props.props.location)
+  headline ? props.setUserData({...props.props, headline:headline}) : setHeadline(props.props.headline) && props.setUserData({...props.props, headline:headline})
+  // email ? props.setUserData({...props.props, email:email}) : setEmail(props.props.email)
+  phoneNumber ? props.setUserData({...props.props, phoneNumber:phoneNumber}) : setPhoneNumber(props.props.phoneNumber)
+  
+  let info = {"emailtest":"test@email.cm", 
+  "givenName":givenName, 
+  "surname":surname, 
+  "location":location, 
+  "headline":headline, 
+  "email":email, 
+  "phoneNumber":phoneNumber }
+
+    try {
+      axios.put(`/api/users/updatebasicinfo`, info)
+        .then(response => (console.log(response.data)))
+        // .then(response => setUserData(response.data))
+    } catch (error) {
+      console.log(error)
+    }
+
   setExpandBasicInfo(!expandBasicInfo)
 }
+
+
+
+
 
 function handleCancelBasicInfo(){
   setGivenName("")
@@ -80,8 +108,8 @@ if(expandBasicInfo){
           <TextField fullWidth  onChange={({ target }) =>     
                 setLocation(target.value)} label="Location" placeholder={props.props.location}/>  
 
-          <TextField fullWidth  onChange={({ target }) =>     
-                setEmail(target.value)} label="Email" placeholder={props.props.email}/>
+          {/* <TextField fullWidth  onChange={({ target }) =>     
+                setEmail(target.value)} label="Email" placeholder={props.props.email}/> */}
 
           <TextField fullWidth  onChange={({ target }) =>     
                 setPhoneNumber(target.value)} label="Phone Number" placeholder={props.props.phoneNumber}/>
