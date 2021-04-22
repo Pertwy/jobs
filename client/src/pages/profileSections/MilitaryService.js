@@ -29,8 +29,8 @@ function handleExpandMilitaryService(){
 }
 
 function handleSaveMilitaryService(){
-  let newMilitaryService = props.props.militaryService
-  newMilitaryService.push({
+  
+  let additionalMilitaryService = {
     country: militaryServiceCountry,
     unit: militaryServiceUnit,
     rank: militaryRank,
@@ -38,7 +38,21 @@ function handleSaveMilitaryService(){
     endDate: militaryServiceEndDate,
     description: militaryServiceDescription,
     comendations: militaryServiceComendations
-  })
+  }
+  
+  let newMilitaryService = props.props.militaryService
+  newMilitaryService.push(additionalMilitaryService)
+
+  let info = {"email":"test@email.cm", "militaryService":additionalMilitaryService}
+
+  try {
+    axios.post(`/api/users/addmilitaryservice`, info)
+      .then(response => (console.log(response.data)))
+      // .then(response => setUserData(response.data))
+  } catch (error) {
+    console.log(error)
+  }
+
 
   props.setUserData({...props.props, militaryService:newMilitaryService})
   setExpandMilitaryService(false)
@@ -136,8 +150,8 @@ if(expandMilitaryService){
       return props.props.militaryService.map(MilitaryService => {
         return (
           <div className={"pl-3 pr-3"}>
-            <div className={"row space-between"}>
-              <h4>{MilitaryService.jobTitle}</h4>
+            <div className={"row "}>
+              
               <button onClick={()=>handleDeleteMilitaryService(MilitaryService.jobTitle)}>delete</button>
               <button onClick={()=>handleDeleteMilitaryService(MilitaryService.jobTitle)}>edit</button>
             </div>

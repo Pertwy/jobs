@@ -63,9 +63,6 @@ function handleExpandWorkExperience(){
     } catch (error) {
       console.log(error)
     }
-  
-
-
 
     props.setUserData({...props.props, workExperience:newWorkExperience})
     setExpandWorkExperience(false)

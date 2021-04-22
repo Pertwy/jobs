@@ -152,6 +152,20 @@ router.post('/addworkexperience', async (req, res) => {
 });
 
 
+router.post('/addmilitaryservice', async (req, res) => {
+
+    console.log(req.body.militaryService)
+
+    let user = await User.findOne({email: req.body.email})
+
+    user.militaryService.push(req.body.militaryService)
+
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
 
 router.put('/updatebasicinfo', async (req, res) => {
     
