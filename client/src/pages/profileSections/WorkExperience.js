@@ -67,159 +67,73 @@ function handleExpandWorkExperience(){
     setExpandWorkExperience(!expandWorkExperience)
   }
 
-  
-
-
 
     let WorkExperience
-    if(props.props.workExperience.length > 0 && !expandWorkExperience){
-      WorkExperience =
+    if(props.props.workExperience.length > 0){
+      WorkExperience =<><WorkExperienceMap/></>
+      } else {WorkExperience = <></>}
+        
+    let WorkExperienceInput
+    if(expandWorkExperience){
+      WorkExperienceInput =
         <>
-          <WorkExperienceMap></WorkExperienceMap>
-        </>
-      } else if(props.props.workExperience.length > 0 && expandWorkExperience){
-        WorkExperience =
-        <>
-          <WorkExperienceMap></WorkExperienceMap>
-          <>
-            <TextField fullWidth  onChange={({ target }) =>     
-                  setWEJobTilte(target.value)} id="standard-basic" label="Job Title" />
-    
-            <TextField fullWidth  onChange={({ target }) =>     
-                  setWECompany(target.value)} id="standard-basic" label="Company"/>
-    
-            <TextField fullWidth  onChange={({ target }) =>     
-                  setWELocation(target.value)} id="standard-basic" label="Location" />
-    
-            <TextField fullWidth  onChange={({ target }) =>     
-                  setWEStartDate(target.value)} id="standard-basic" label="Start Date"/>
-    
-            <TextField fullWidth  onChange={({ target }) =>     
-                  setWEEndDate(target.value)} id="standard-basic" label="End Date"/>  
-    
-            <TextField fullWidth  onChange={({ target }) =>     
-                  setWEDescription(target.value)} id="standard-basic" label="Description"/>   
+          <TextField fullWidth  onChange={({ target }) =>     
+                setWEJobTilte(target.value)} id="standard-basic" label="Job Title" />
+  
+          <TextField fullWidth  onChange={({ target }) =>     
+                setWECompany(target.value)} id="standard-basic" label="Company"/>
+  
+          <TextField fullWidth  onChange={({ target }) =>     
+                setWELocation(target.value)} id="standard-basic" label="Location" />
+  
+          <TextField fullWidth  onChange={({ target }) =>     
+                setWEStartDate(target.value)} id="standard-basic" label="Start Date"/>
+  
+          <TextField fullWidth  onChange={({ target }) =>     
+                setWEEndDate(target.value)} id="standard-basic" label="End Date"/>  
+  
+          <TextField fullWidth  onChange={({ target }) =>     
+                setWEDescription(target.value)} id="standard-basic" label="Description"/>   
 
-            <TextField
-                      label="Multiline"
-                      multiline
-                      rows={4}
-                      defaultValue="Default Value"
-                      variant="outlined"
-                    />
+          {/* <TextField
+                    label="Multiline"
+                    multiline
+                    rows={4}
+                    defaultValue="Default Value"
+                    variant="outlined"
+                  /> */}
 
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <DatePicker
-                variant="inline"
-                openTo="year"
-                views={["year", "month"]}
-                label="Year and Month"
-                helperText="Start Month"
-                value={startDate}
-                onChange={setStartDate}
-              /> 
-              <DatePicker
-                variant="inline"
-                openTo="year"
-                views={["year", "month"]}
-                label="Year and Month"
-                helperText="End Month"
-                value={endDate}
-                onChange={setEndDate}
-              /> 
-            </MuiPickersUtilsProvider>      
-    
-            
-    
-            <Button onClick={()=>handleSaveWorkExperience()} variant="outlined">
-              Save Changes
-            </Button>
-            <Button onClick={()=>handleCancelWorkExperience()} variant="outlined">
-              Cancel
-            </Button>
-          </>
-        </>
-      } else if(props.props.workExperience.length == 0 && expandWorkExperience){
-        WorkExperience =
-         
-           <div>
-            <TextField fullWidth  onChange={({ target }) =>     
-                  setWEJobTilte(target.value)} id="standard-basic" label="Job Title" />
-    
-            <TextField fullWidth  onChange={({ target }) =>     
-                  setWECompany(target.value)} id="standard-basic" label="Company"/>
-    
-            <TextField fullWidth  onChange={({ target }) =>     
-                  setWELocation(target.value)} id="standard-basic" label="Location" />
-    
-            <TextField fullWidth  onChange={({ target }) =>     
-                  setWEStartDate(target.value)} id="standard-basic" label="Start Date"/>
-    
-            <TextField fullWidth  onChange={({ target }) =>     
-                  setWEEndDate(target.value)} id="standard-basic" label="End Date"/>  
-    
-            <TextField fullWidth  onChange={({ target }) =>     
-                  setWEDescription(target.value)} id="standard-basic" label="Description"/>
-
-            <TextField
-                      label="Multiline"
-                      multiline
-                      rows={4}
-                      defaultValue="Default Value"
-                    
-                    />
-           
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <DatePicker
-                variant="inline"
-                openTo="year"
-                views={["year", "month"]}
-                label="Year and Month"
-                helperText="Start Month"
-                value={startDate}
-                onChange={setStartDate}
-              /> 
-              <DatePicker
-                variant="inline"
-                openTo="year"
-                views={["year", "month"]}
-                label="Year and Month"
-                helperText="End Month"
-                value={endDate}
-                onChange={setEndDate}
-              /> 
-            </MuiPickersUtilsProvider>
-            
-
-
-
-
-            {/* <DatePicker
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <DatePicker
+              variant="inline"
+              openTo="year"
               views={["year", "month"]}
               label="Year and Month"
-              helperText="With min and max"
-              minDate={new Date("2018-03-01")}
-              maxDate={new Date("2018-06-01")}
+              helperText="Start Month"
               value={startDate}
-              // onChange={setStartDate}
-              onChange={({ target }) => setSelectedDate(target.value)}
-            /> */}
-    
-            
-    
-            <Button onClick={()=>handleSaveWorkExperience()} variant="outlined">
-              Save Changes
-            </Button>
-            <Button onClick={()=>handleCancelWorkExperience()} variant="outlined">
-              Cancel
-            </Button>
-            </div>
-   
-     
-      } else{
-        WorkExperience = <></>
-      }
-    
+              onChange={setStartDate}
+            /> 
+            <DatePicker
+              variant="inline"
+              openTo="year"
+              views={["year", "month"]}
+              label="Year and Month"
+              helperText="End Month"
+              value={endDate}
+              onChange={setEndDate}
+            /> 
+          </MuiPickersUtilsProvider>      
+  
+          
+  
+          <Button onClick={()=>handleSaveWorkExperience()} variant="outlined">
+            Save Changes
+          </Button>
+          <Button onClick={()=>handleCancelWorkExperience()} variant="outlined">
+            Cancel
+          </Button>
+        </>} else{WorkExperienceInput =<></>}
+         
     
         function WorkExperienceMap(){
           return props.props.workExperience.map(WorkExperience => {
@@ -254,6 +168,7 @@ function handleExpandWorkExperience(){
                 <button onClick={() => handleExpandWorkExperience()}>Add</button>
               </div>
               {WorkExperience}
+              {WorkExperienceInput}
             </section>
     </div>
   )
