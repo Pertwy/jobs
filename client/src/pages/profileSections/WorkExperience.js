@@ -193,8 +193,8 @@ function handleExpandWorkExperience(){
                 <h4 >Work Experience</h4>
                 <button onClick={() => handleExpandWorkExperience()}>Add</button>
               </div>
-              {WorkExperience}
               {WorkExperienceInput}
+              {WorkExperience}
             </section>
     </div>
   )

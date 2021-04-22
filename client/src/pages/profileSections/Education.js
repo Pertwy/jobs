@@ -168,8 +168,8 @@ function handleExpandEducation(){
                 <h4 >Eduction</h4>
                 <button onClick={() => handleExpandEducation()}>Add</button>
               </div>
-              {Education}
               {EducationInput}
+              {Education}
         </section>
     </div>
   )
