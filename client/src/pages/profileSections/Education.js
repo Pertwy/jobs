@@ -11,6 +11,7 @@ import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 
 import DeleteButton from '../../components/DeleteButton';
 import EditButton from '../../components/EditButton';
+import ExpandButton from '../../components/ExpandButton';
 
 
 
@@ -198,7 +199,7 @@ function handleExpandEducation(){
         <section className={"personal-details" }>
               <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
                 <h4 >Eduction</h4>
-                <button onClick={() => handleExpandEducation()}>Add</button>
+                <ExpandButton expand={expandEducation} handleExpand={handleExpandEducation}/>
               </div>
               {EducationInput}
               {Education}

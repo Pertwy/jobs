@@ -11,6 +11,7 @@ import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 
 import DeleteButton from '../../components/DeleteButton';
 import EditButton from '../../components/EditButton';
+import ExpandButton from '../../components/ExpandButton';
 
 export default function WorkExperience(props){
 
@@ -200,7 +201,7 @@ function handleExpandWorkExperience(){
         <section className={"personal-details" }>
               <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
                 <h4 >Work Experience</h4>
-                <button onClick={() => handleExpandWorkExperience()}>Add</button>
+                <ExpandButton expand={expandWorkExperience} handleExpand={handleExpandWorkExperience}/>
               </div>
               {WorkExperienceInput}
               {WorkExperience}

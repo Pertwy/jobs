@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import DeleteButton from '../../components/DeleteButton';
+import ExpandButton from '../../components/ExpandButton';
 
 export default function Links(props){
 
@@ -101,7 +102,8 @@ if(expandLinks){
       <section className={"personal-details" }>
         <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
           <h4> Links</h4>
-          <button onClick={() => handleAddLink()}> + </button>
+          <ExpandButton expand={expandLinks} handleExpand={handleAddLink}/>
+          
         </div>
         {Links}
         {LinkInput}

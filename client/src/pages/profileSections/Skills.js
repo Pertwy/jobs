@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import DeleteButton from '../../components/DeleteButton';
+import ExpandButton from '../../components/ExpandButton';
 
 export default function Skills(props){
 
@@ -170,7 +171,7 @@ if(expandSkills){
       <section className={"personal-details" }>
         <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
           <h4> Skills</h4>
-          <button onClick={() => handleAddSkill()}> + </button>
+          <ExpandButton expand={expandSkills} handleExpand={handleAddSkill}/>
         </div>
         {Skills}
         {SkillInput}

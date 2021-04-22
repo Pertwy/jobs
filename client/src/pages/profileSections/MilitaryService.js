@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import ExpandButton from '../../components/ExpandButton';
 
 import "date-fns";
 import DateFnsUtils from '@date-io/date-fns';
@@ -90,7 +91,7 @@ function handleCancelMilitaryService(){
 let AddButton
 if(props.props.militaryService.length > 0){
   AddButton=<></>
-}else{AddButton = <button onClick={() => handleExpandMilitaryService()}>Add</button>}
+}else{ AddButton = <ExpandButton expand={expandMilitaryService} handleExpand={handleExpandMilitaryService}/>}
 
 
 let MilitaryService

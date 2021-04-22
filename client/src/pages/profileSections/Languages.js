@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import DeleteButton from '../../components/DeleteButton';
+import ExpandButton from '../../components/ExpandButton';
 
 export default function Languages(props){
 
@@ -141,7 +142,7 @@ if(expandLanguages){
       <section className={"personal-details" }>
         <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
           <h4> Languages</h4>
-          <button onClick={() => handleAddLanguage()}> + </button>
+          <ExpandButton expand={expandLanguages} handleExpand={handleAddLanguage}/>
         </div>
         {Languages}
         {LanguageInput}

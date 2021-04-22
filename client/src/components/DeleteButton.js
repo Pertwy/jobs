@@ -6,9 +6,9 @@ import IconButton from '@material-ui/core/IconButton';
 export default function DeleteButton(props){
 
     const useStyles = makeStyles((theme) => ({
-        margin: {
-          margin: theme.spacing(1),
-        },
+        // margin: {
+        //   margin: theme.spacing(1),
+        // },
         extendedIcon: {
           marginRight: theme.spacing(1),
         },
