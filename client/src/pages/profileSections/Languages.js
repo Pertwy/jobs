@@ -5,8 +5,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
+
 import DeleteButton from '../../components/DeleteButton';
 import ExpandButton from '../../components/ExpandButton';
+import SaveButton from '../../components/SaveButton';
+import CancelButton from '../../components/CancelButton';
+
 
 export default function Languages(props){
 
@@ -66,8 +70,8 @@ if(expandLanguages){
 
       
         <div className={"row pr-3"}>
-          <button onClick={()=>handleAddNewLanguage()}>Save</button>
-          <button onClick={()=>handleCancelLanguage()}>Cancel</button>
+          <SaveButton handleSave={handleAddNewLanguage}/>
+          <CancelButton handleCancel={handleCancelLanguage}/>
         </div>
       </div>
     </>

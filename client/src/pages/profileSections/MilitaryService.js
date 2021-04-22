@@ -9,6 +9,8 @@ import ExpandButton from '../../components/ExpandButton';
 import "date-fns";
 import DateFnsUtils from '@date-io/date-fns';
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import DeleteButton from '../../components/DeleteButton';
+import EditButton from '../../components/EditButton';
 
 export default function MilitaryService(props){
 
@@ -162,8 +164,8 @@ if(expandMilitaryService){
             </div>
       
             <div className={"row "}>
-              <button onClick={()=>handleDeleteMilitaryService(MilitaryService.jobTitle)}>delete</button>
-              <button onClick={()=>handleDeleteMilitaryService(MilitaryService.jobTitle)}>edit</button>
+              <EditButton item={MilitaryService.jobTitle} handleDelete={handleDeleteMilitaryService}/>
+              <DeleteButton item={MilitaryService.jobTitle} handleDelete={handleDeleteMilitaryService}/>
             </div>
 
           </div>
