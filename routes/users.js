@@ -165,6 +165,21 @@ router.post('/addworkexperience', async (req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.post('/editworkexperience', async (req, res) => {
+
+    console.log(req.body)
+
+    let user = await User.findOne({email: req.body.email})
+
+    const updateWE = user.workExperience.filter(WE => WE.description !== req.body.current);
+    updateWE.push(req.body.update)
+    user.workExperience = updateWE
+
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
 router.post('/deleteworkexperience', async (req, res) => {
 
     let user = await User.findOne({email: req.body.email})

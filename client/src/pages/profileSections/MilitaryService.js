@@ -94,7 +94,7 @@ function handleSaveMilitaryService(){
 
 
 ////UPDATE//////////////////////////////////////////////////////////////////////////////
-function handleEditMilitaryService(country, unit, rank, description, comendations){
+function handleEditMilitaryService(country, unit, rank, description, comendations, startDate, endDate){
   setMilitaryServiceUnit(unit)
   setMilitaryServiceEdit(true)
   setExpandMilitaryService(false)
@@ -110,8 +110,8 @@ function handleEditMilitaryService(country, unit, rank, description, comendation
   setMilitaryServiceEditCountry(country)
   setMilitaryServiceEditUnit(unit)
   setMilitaryServiceEditRank(rank)
-  // setMilitaryServiceEditStartDate(startDate)
-  // setMilitaryServiceEditEndDate(endDate)
+  setMilitaryServiceEditStartDate(startDate)
+  setMilitaryServiceEditEndDate(endDate)
   setMilitaryServiceEditDescription(description)
   setMilitaryServiceEditComendations(comendations)
 }
@@ -180,46 +180,6 @@ function handleDeleteMilitaryService(prop){
   const militaryService = props.props.militaryService.filter(militaryService => militaryService.unit !== prop);
   props.setUserData({...props.props, militaryService:militaryService})
   setExpandMilitaryService(false)
-}
-
-
-////Map all MS ////////////////////////////////////////////////////////////////////////////
-let MilitaryServiceInfo
-if(props.props.militaryService.length > 0){
-  MilitaryServiceInfo = <><MilitaryServiceMap/></>
-  } else{MilitaryServiceInfo = <></>}
-  
-function MilitaryServiceMap(){
-  return props.props.militaryService.map(MilitaryService => {
-    return (
-      
-      <div className={"pl-3 pr-3 row space-between"}>
-
-        {!MilitaryService.switch &&(
-          <>
-          <div>
-            <p>Country: {MilitaryService.country}</p>
-            <p>Unit: {MilitaryService.unit}</p>
-            <p>Start Date:</p>
-            <p>End Date:</p>
-            {/* <p>Start Date: {MilitaryService.startDate}</p>
-            <p>End Date: {MilitaryService.endDate}</p> */}
-            <p>Rank: {MilitaryService.rank}</p>
-            <p>Description: {MilitaryService.description}</p>
-            <p>Comendations: {MilitaryService.comendations}</p>
-          </div>
-    
-          <div className={"row "}>
-            <Button onClick={()=>handleEditMilitaryService(MilitaryService.country, MilitaryService.unit, MilitaryService.rank, MilitaryService.description, MilitaryService.comendation)}>Edit</Button> 
-            {/* <EditButton item={MilitaryService.jobTitle} handleDelete={handleDeleteMilitaryService}/> */}
-            <DeleteButton item={MilitaryService.unit} handleDelete={handleDeleteMilitaryService}/>
-          </div>
-        </>)}
-    
-      </div>
-    )
-  })
-
 }
 
 
@@ -317,6 +277,45 @@ let EditInputs =
 
 
 
+////Map all MS ////////////////////////////////////////////////////////////////////////////
+let MilitaryServiceInfo
+if(props.props.militaryService.length > 0){
+  MilitaryServiceInfo = <><MilitaryServiceMap/></>
+  } else{MilitaryServiceInfo = <></>}
+  
+function MilitaryServiceMap(){
+  return props.props.militaryService.map(MilitaryService => {
+    return (
+      
+      <div className={"pl-3 pr-3 row space-between"}>
+
+        {!MilitaryService.switch &&(
+          <>
+          <div>
+            <p>Country: {MilitaryService.country}</p>
+            <p>Unit: {MilitaryService.unit}</p>
+            <p>Start Date:</p>
+            <p>End Date:</p>
+            <p>Start Date: {MilitaryService.startDate}</p>
+            <p>End Date: {MilitaryService.endDate}</p>
+            <p>Rank: {MilitaryService.rank}</p>
+            <p>Description: {MilitaryService.description}</p>
+            <p>Comendations: {MilitaryService.comendations}</p>
+          </div>
+    
+          <div className={"row "}>
+            <Button onClick={()=>handleEditMilitaryService(MilitaryService.country, MilitaryService.unit, MilitaryService.rank, MilitaryService.description, MilitaryService.comendation, MilitaryService.startDate, MilitaryService.endDate)}>Edit</Button> 
+            {/* <EditButton item={MilitaryService.jobTitle} handleDelete={handleDeleteMilitaryService}/> */}
+            <DeleteButton item={MilitaryService.unit} handleDelete={handleDeleteMilitaryService}/>
+          </div>
+        </>)}
+    
+      </div>
+    )
+  })
+
+}
+
 
   return (
     <div>
@@ -326,11 +325,14 @@ let EditInputs =
               <h4 >Military Service</h4>
               {CreateButton}
             </div>
+
+
             {militaryServiceEdit &&(
               <>
               {EditInputs}
               </>
             )}
+
 
             {MilitaryServiceInput}
             {MilitaryServiceInfo}

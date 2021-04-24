@@ -79,6 +79,8 @@ function handleExpandEducation(){
   }
   
   
+
+  
   function handleCancelEducation(){
     setEducationCountry();
     setEducationLevelOfEducation();

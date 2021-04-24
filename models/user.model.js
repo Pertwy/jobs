@@ -56,7 +56,11 @@ const userSchema = new mongoose.Schema({
     location:{type:String},
     startDate:{},
     endDate:{},
-    description:{type:String}
+    description:{type:String},
+    switch: {
+      type: Boolean,
+      default:false
+    },
     }],
 
   militaryService:[{
