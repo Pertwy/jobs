@@ -66,7 +66,11 @@ const userSchema = new mongoose.Schema({
     startDate:{},
     endDate:{},
     description:{type:String},
-    comendations:{type:String}
+    comendations:{type:String},
+    switch: {
+      type: Boolean,
+      default:false
+    },
     }],
 
   skills:[{

@@ -6,19 +6,16 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import DeleteButton from '../../components/DeleteButton';
-import ExpandButton from '../../components/ExpandButton';
-import SaveButton from '../../components/SaveButton';
-import CancelButton from '../../components/CancelButton';
+import DeleteButton from '../../components/buttons/DeleteButton';
+import ExpandButton from '../../components/buttons/ExpandButton';
+import SaveButton from '../../components/buttons/SaveButton';
+import CancelButton from '../../components/buttons/CancelButton';
 
 export default function Skills(props){
 
   const [expandSkills, setExpandSkills] = useState(false)
   const [newSkill, setNewSkill] = useState("")
   const [proficiency, setProficiency] = useState("Enter Proficiency")
-
-//Skills /////////////////////////////////
-
 
 
 

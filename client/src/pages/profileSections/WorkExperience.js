@@ -9,9 +9,9 @@ import "date-fns";
 import DateFnsUtils from '@date-io/date-fns';
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 
-import DeleteButton from '../../components/DeleteButton';
-import EditButton from '../../components/EditButton';
-import ExpandButton from '../../components/ExpandButton';
+import DeleteButton from '../../components/buttons/DeleteButton';
+import EditButton from '../../components/buttons/EditButton';
+import ExpandButton from '../../components/buttons/ExpandButton';
 
 export default function WorkExperience(props){
 

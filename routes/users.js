@@ -195,11 +195,26 @@ router.post('/addmilitaryservice', async (req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.post('/editmilitaryservice', async (req, res) => {
+
+    console.log(req.body)
+
+    let user = await User.findOne({email: req.body.email})
+
+    const updateMS = user.militaryService.filter(MS => MS.unit !== req.body.current);
+    updateMS.push(req.body.update)
+    user.militaryService = updateMS
+
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
 router.post('/deletemilitaryservice', async (req, res) => {
 
     let user = await User.findOne({email: req.body.email})
 
-    const militaryService = user.militaryService.filter(militaryService => militaryService.jobTitle !== req.body.militaryService);
+    const militaryService = user.militaryService.filter(militaryService => militaryService.unit !== req.body.militaryService);
     user.militaryService = militaryService
 
     await user.save()
