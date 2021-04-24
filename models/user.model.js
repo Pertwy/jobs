@@ -56,7 +56,11 @@ const userSchema = new mongoose.Schema({
     location:{type:String},
     startDate:{},
     endDate:{},
-    description:{type:String}
+    description:{type:String},
+    switch: {
+      type: Boolean,
+      default:false
+    },
     }],
 
   militaryService:[{
@@ -66,7 +70,11 @@ const userSchema = new mongoose.Schema({
     startDate:{},
     endDate:{},
     description:{type:String},
-    comendations:{type:String}
+    comendations:{type:String},
+    switch: {
+      type: Boolean,
+      default:false
+    },
     }],
 
   skills:[{
@@ -90,6 +98,10 @@ const userSchema = new mongoose.Schema({
     collegeOrUniversity:{type:String},
     startDate:{},
     endDate:{},
+    switch: {
+      type: Boolean,
+      default:false
+    },
     }],
 
 });

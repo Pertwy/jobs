@@ -5,17 +5,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
-import DeleteButton from '../../components/DeleteButton';
-import ExpandButton from '../../components/ExpandButton';
+
+import DeleteButton from '../../components/buttons/DeleteButton';
+import ExpandButton from '../../components/buttons/ExpandButton';
+import SaveButton from '../../components/buttons/SaveButton';
+import CancelButton from '../../components/buttons/CancelButton';
 
 export default function Skills(props){
 
   const [expandSkills, setExpandSkills] = useState(false)
   const [newSkill, setNewSkill] = useState("")
   const [proficiency, setProficiency] = useState("Enter Proficiency")
-
-//Skills /////////////////////////////////
-
 
 
 
@@ -101,8 +101,8 @@ if(expandSkills){
 
 
         <div className={"row pr-3"}>
-          <button onClick={()=>handleAddNewSkill()}>Save</button>
-          <button onClick={()=>handleCancelSkill()}>Cancel</button>
+          <SaveButton handleSave={handleAddNewSkill}/>
+          <CancelButton handleCancel={handleCancelSkill}/>
         </div>
       </div>
     </>
@@ -121,6 +121,7 @@ if(expandSkills){
   }
 
 
+
   function handleDeleteSkill(prop){
 
     let info = {"email":"test@email.cm", "title":prop}
@@ -137,9 +138,15 @@ if(expandSkills){
     props.setUserData({...props.props, skills:skill})
 }
 
+
+
+
   function handleAddSkill(){
     setExpandSkills(!expandSkills)
   }
+
+
+
 
   function handleAddNewSkill(){
 
@@ -161,11 +168,16 @@ if(expandSkills){
     setNewSkill("")
   }
 
+
+
+
   function handleCancelSkill(){
     setNewSkill("")
     setExpandSkills(!expandSkills)
   }
   
+
+
   return (
     <div>
       <section className={"personal-details" }>
