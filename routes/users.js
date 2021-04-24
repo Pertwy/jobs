@@ -136,18 +136,33 @@ router.post('/addeducation', async (req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.post('/editeducation', async (req, res) => {
+
+    console.log(req.body)
+
+    let user = await User.findOne({email: req.body.email})
+
+    const updateEducation = user.education.filter(Education => Education.levelOfEducation !== req.body.current);
+    updateEducation.push(req.body.update)
+    user.education = updateEducation
+
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
 router.post('/deleteeducation', async (req, res) => {
 
     console.log(req.body)
 
-    // let user = await User.findOne({email: req.body.email})
+    let user = await User.findOne({email: req.body.email})
 
-    // const education = user.education.filter(education => education.jobTitle !== req.body.education);
-    // user.education = education
+    const education = user.education.filter(education => education.levelOfEducation !== req.body.education);
+    user.education = education
 
-    // await user.save()
-    //     .then(() => res.send(user))
-    //     .catch(err => res.status(400).json('Error: ' + err));
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
 });
 
 

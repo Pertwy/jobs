@@ -52,8 +52,8 @@ function handleCancelMilitaryService(){
   setMilitaryServiceCountry("")
   setMilitaryServiceUnit("")
   setMilitaryServiceRank("")
-  setMilitaryServiceStartDate("")
-  setMilitaryServiceEndDate("")
+  setMilitaryServiceStartDate(new Date())
+  setMilitaryServiceEndDate(new Date())
   setMilitaryServiceDescription("")
   setMilitaryServiceComendations("")
   setExpandMilitaryService(!expandMilitaryService)
@@ -287,28 +287,31 @@ function MilitaryServiceMap(){
   return props.props.militaryService.map(MilitaryService => {
     return (
       
-      <div className={"pl-3 pr-3 row space-between"}>
+      <div className={"pl-3 pr-3"}>
 
         {!MilitaryService.switch &&(
           <>
-          <div>
-            <p>Country: {MilitaryService.country}</p>
-            <p>Unit: {MilitaryService.unit}</p>
-            <p>Start Date:</p>
-            <p>End Date:</p>
-            <p>Start Date: {MilitaryService.startDate}</p>
-            <p>End Date: {MilitaryService.endDate}</p>
-            <p>Rank: {MilitaryService.rank}</p>
-            <p>Description: {MilitaryService.description}</p>
-            <p>Comendations: {MilitaryService.comendations}</p>
-          </div>
-    
-          <div className={"row "}>
-            <Button onClick={()=>handleEditMilitaryService(MilitaryService.country, MilitaryService.unit, MilitaryService.rank, MilitaryService.description, MilitaryService.comendation, MilitaryService.startDate, MilitaryService.endDate)}>Edit</Button> 
-            {/* <EditButton item={MilitaryService.jobTitle} handleDelete={handleDeleteMilitaryService}/> */}
-            <DeleteButton item={MilitaryService.unit} handleDelete={handleDeleteMilitaryService}/>
-          </div>
-        </>)}
+            <div className={"row space-between"}>
+              <h4>Country: {MilitaryService.country}</h4>
+              <div className={"row "}>
+                <Button onClick={()=>handleEditMilitaryService(MilitaryService.country, MilitaryService.unit, MilitaryService.rank, MilitaryService.description, MilitaryService.comendation, MilitaryService.startDate, MilitaryService.endDate)}>Edit</Button> 
+                {/* <EditButton item={MilitaryService.jobTitle} handleDelete={handleDeleteMilitaryService}/> */}
+                <DeleteButton item={MilitaryService.unit} handleDelete={handleDeleteMilitaryService}/>
+              </div>
+            </div>
+
+
+            <div>
+              <p>Unit: {MilitaryService.unit}</p>
+              <p>Start Date:</p>
+              <p>End Date:</p>
+              {/* <p>Start Date: {MilitaryService.startDate}</p>
+              <p>End Date: {MilitaryService.endDate}</p> */}
+              <p>Rank: {MilitaryService.rank}</p>
+              <p>Description: {MilitaryService.description}</p>
+              <p>Comendations: {MilitaryService.comendations}</p>
+            </div>
+          </>)}
     
       </div>
     )

@@ -98,6 +98,10 @@ const userSchema = new mongoose.Schema({
     collegeOrUniversity:{type:String},
     startDate:{},
     endDate:{},
+    switch: {
+      type: Boolean,
+      default:false
+    },
     }],
 
 });
