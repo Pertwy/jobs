@@ -44,7 +44,7 @@ router.post('/getuserdetails', async (req, res) => {
 });
 
 
-
+//SKILL ///////////////////////////////////////////////////////////////////////////////////
 router.post('/addskill', async (req, res) => {
 
     let user = await User.findOne({email: req.body.email})
@@ -71,7 +71,7 @@ router.post('/deleteskill', async (req, res) => {
 
 
 
-
+////LANGUAGE //////////////////////////////////////////////////////////////////////////
 router.post('/addlanguage', async (req, res) => {
 
     let user = await User.findOne({email: req.body.email})
@@ -98,7 +98,7 @@ router.post('/deletelanguage', async (req, res) => {
 
 
 
-
+////LINK //////////////////////////////////////////////////////////////////////////////
 router.post('/addlink', async (req, res) => {
 
     let user = await User.findOne({email: req.body.email})
@@ -274,11 +274,22 @@ router.put('/updatebasicinfo', async (req, res) => {
 
     await user.save()
         .then(() => res.send(user))
-        // .catch(err => res.status(400).json('Error: ' + err));
+        .catch(err => res.status(400).json('Error: ' + err));
 });
 
 
+//personal details //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+router.put('/updatepersonaldetails', async (req, res) => {
+    
+    let user = await User.findOne({email: req.body.email})
 
+    user.eligibleUK = req.body.eligibleUK
+    user.highestLevelOfDegree = req.body.highestLevelOfDegree
+
+    await user.save()
+        .then(() => res.send(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
 
 
 

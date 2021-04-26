@@ -38,8 +38,8 @@ export default function Profile(){
     CV:"",
     location:"london",
     phoneNumber:"0121",
-    elegibleUK:"Y",
-    highestLevelOfDegree:"Y",
+    eligibleUK:"",
+    highestLevelOfDegree:"",
     industry:[],
     workExperience:[],
     militaryService:[],
@@ -95,13 +95,7 @@ export default function Profile(){
     <div className="container">
 
 
-      <div className="row container-fluid">
-          <div className="mb-4">
-            <h4>{capitalizeFirstLetter(userData.givenName)} {capitalizeFirstLetter(userData.surname)} - {userData.email}</h4>
-            <h5>Location</h5>
-          </div>
-      </div>
-      
+        
 
       <div className="row container-fluid">
         

@@ -5,30 +5,38 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
+import EditButton from '../../components/buttons/EditButton';
+
 
 export default function PersonalDetails(props){
 
-  const [expandPersonalDetails, setExpandPersonalDetails] = useState(true)
-  const [highestLevelOfDegree, setHighestLevelOfDegree] = useState("")
-  const [elegibleUK, setElegibleUK] = useState("")
+  const [expandPersonalDetails, setExpandPersonalDetails] = useState(false)
+  const [highestLevelOfDegree, setHighestLevelOfDegree] = useState(props.props.highestLevelOfDegree)
+  const [eligibleUK, setEligibleUK] = useState(props.props.eligibleUK)
 
 //Personal Details ///////////////////////////////////////////////
 function handleExpandPersonalDetails(){
   setExpandPersonalDetails(!expandPersonalDetails)
 }
 
+
 function handleSavePersonalDetails(){
-  if(elegibleUK){
-    props.setUserData({...props.props, elegibleUK:elegibleUK})
-  }
-  if(highestLevelOfDegree){
-    props.setUserData({...props.props, highestLevelOfDegree:highestLevelOfDegree})
-  }
+
+  let info = {"email":"test@email.cm", "eligibleUK":props.props.eligibleUK, "highestLevelOfDegree":props.props.highestLevelOfDegree}
+
+    try {
+      axios.put(`/api/users/updatepersonaldetails`, info)
+        .then(response => (console.log(response.data)))
+    } catch (error) {
+      console.log(error)
+    }
+
   setExpandPersonalDetails(!expandPersonalDetails)
 }
 
+
 function handleCancelPersonalDetails(){
-  setElegibleUK("")
+  setEligibleUK("")
   setHighestLevelOfDegree("")
   setExpandPersonalDetails(!expandPersonalDetails)
 }
@@ -36,14 +44,13 @@ function handleCancelPersonalDetails(){
 
 const eligibles = [
   {
-    value: true,
+    value: 'Yes',
     label: 'Yes',
   },
   {
-    value: false,
+    value: 'No',
     label: 'No',
   }]
-
 
 const educations = [
   {
@@ -82,31 +89,31 @@ const educations = [
 
 
   const handleChangeEducation = (event) => {
-    setHighestLevelOfDegree(event.target.value);
+    props.setUserData({...props.props, highestLevelOfDegree:event.target.value})
   };
 
   const handleChangeEligible = (event) => {
-    setElegibleUK(event.target.value);
+    props.setUserData({...props.props, eligibleUK:event.target.value})
   };
 
 
 let PersonalDetails 
-if(expandPersonalDetails){
+if(!expandPersonalDetails){
   PersonalDetails =
     <>
-      {props.props.elegibleUK && <p>Eligible to Work in the UK: {props.props.elegibleUK}</p>}
-      {props.props.highestLevelOfDegree && <p>Highest level of education: {props.props.highestLevelOfDegree}</p>}
+    
+      <p>Eligible to Work in the UK: {props.props.eligibleUK}</p>
+      <p>Highest level of education: {props.props.highestLevelOfDegree}</p>
       {props.props.industry.length > 0  && <p>Industry</p>}
     </>
   } else{
     PersonalDetails = <>
           {/* <TextField fullWidth  onChange={({ target }) =>     
-                setElegibleUK(target.value)} id="standard-basic" label="Eligible to work in the UK" placeholder={props.props.elegibleUK}/> */}
+                setEligibleUK(target.value)} id="standard-basic" label="Eligible to work in the UK" placeholder={props.props.eligibleUK}/> */}
 
           <TextField
-            id="standard-select-eligible"
             select
-            value={props.props.elegibleUK}
+            value={props.props.eligibleUK}
             onChange={handleChangeEligible}
             helperText="Eligible to work in the UK"
           >
@@ -118,9 +125,7 @@ if(expandPersonalDetails){
           </TextField>
 
 
-
           <TextField
-            id="standard-select-education"
             select
             value={props.props.highestLevelOfDegree}
             onChange={handleChangeEducation}
@@ -153,7 +158,7 @@ if(expandPersonalDetails){
         <section className={"personal-details" }>
               <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
                 <h4 >Personal Details</h4>
-                <button onClick={() => handleExpandPersonalDetails()}>Edit</button>
+                <EditButton handleEdit={handleExpandPersonalDetails}/>
               </div>
               {PersonalDetails}
             </section>
