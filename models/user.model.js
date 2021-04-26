@@ -46,7 +46,7 @@ const userSchema = new mongoose.Schema({
   headline:{type: String},
   phoneNumber:{type: Number},
 
-  elegibleUK:{type: Boolean},
+  eligibleUK:{type: String, default:""},
   highestLevelOfDegree:{type: String},
   industry:[{type: String}],
 

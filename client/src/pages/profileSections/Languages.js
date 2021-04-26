@@ -40,7 +40,6 @@ const proficiencies = [
 ];
 
 
-
 let Languages
 if(props.props.languages.length > 0){
   Languages =<><LanguageMap/></>

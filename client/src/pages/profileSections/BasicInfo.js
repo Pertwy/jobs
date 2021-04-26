@@ -4,10 +4,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import EditButton from '../../components/buttons/EditButton';
+
 
 export default function BasicInfo(props){
 
-  const [expandBasicInfo, setExpandBasicInfo] = useState(true)
+  const [expandBasicInfo, setExpandBasicInfo] = useState(false)
   const [givenName, setGivenName] = useState("")
   const [surname, setSurname] = useState("")
   const [headline, setHeadline] = useState("")
@@ -84,14 +86,16 @@ function handleCancelBasicInfo(){
 }
 
 let BasicInfo 
-if(expandBasicInfo){
+if(!expandBasicInfo){
   BasicInfo =
     <>
-      {props.props.givenName && <p>Given Name: {capitalizeFirstLetter(props.props.givenName)}</p>}
-      {props.props.surname && <p>Surname: {capitalizeFirstLetter(props.props.surname)}</p>}
+
+      <div className="mb-4">
+        <h4>{capitalizeFirstLetter(props.props.givenName)} {capitalizeFirstLetter(props.props.surname)} - {props.props.email}</h4>
+        <h5>{props.props.location}</h5>
+      </div>
+
       {props.props.headline && <p>Headline: {props.props.headline}</p>}
-      {props.props.location && <p>Location: {props.props.location}</p>}
-      {props.props.email && <p>Email: {props.props.email}</p>}
       {props.props.phoneNumber && <p>Phone Number: {props.props.phoneNumber}</p>}
     </>
   } else{
@@ -130,7 +134,7 @@ if(expandBasicInfo){
         <section className={"basic-info" }>
               <div className={"row space-between pl-3 pr-3 border-top-0 border-right-0 border border-left-0" }>
                 <h4 >Basic Info</h4>
-                <button onClick={() => handleExpandBasicInfo()}>Edit</button>
+                <EditButton handleEdit={handleExpandBasicInfo}/>
               </div>
               {BasicInfo}
             </section>
