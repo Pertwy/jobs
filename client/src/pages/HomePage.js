@@ -59,7 +59,6 @@ console.log(process.env.NODE_ENV);
 
   const classes = useStyles();
 
-
   return (
     <div>
       
@@ -82,8 +81,8 @@ console.log(process.env.NODE_ENV);
               <TextField className={"col-sm-3 form-text"} id="standard-search" onChange={({ target }) =>     
                     setSalary(target.value)} label="Salary" />
 
-              {/* <Button onClick={() => handleLogin()} variant="outlined">
-                Log in
+              {/* <Button onClick={() => handleSearch()} variant="outlined">
+                search
               </Button> */}
             </form>
           </div>

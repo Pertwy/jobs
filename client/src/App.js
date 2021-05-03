@@ -1,9 +1,8 @@
 import './App.css';
 import { BrowserRouter as Router, Route} from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios"
 
-import Navbar from "./components/Navbar"
+import Navbar2 from "./components/Navbar"
 import HomePage from "./pages/HomePage"
 import SignIn from "./pages/SignIn"
 import Profile from "./pages/Profile"
@@ -19,7 +18,7 @@ function App() {
   return (
     <Router>
       <div >
-        <Navbar />
+        <Navbar2 />
       </div>
 
       <div>
