@@ -16,7 +16,10 @@ const jobPostSchema = new Schema({
     coverLetterBool:{type: Boolean},
     applyOnCompanySiteBool:{type: Boolean},
     applyOnCompanySiteLink:{type: String},
-    type:{type: String}
+    type:{type: String},
+    credit1:{type: Boolean},
+    credit2:{type: Boolean},
+    credit3:{type: Boolean},
 
 },{
     timestamps: true

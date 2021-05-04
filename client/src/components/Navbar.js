@@ -35,6 +35,10 @@ export default function Navbar2() {
                 <Link to="/recruiterProfile" className="nav-text nav-link"><h6 className="nav-text">Recruiters</h6></Link>
               </li>
 
+              <li className="navbar-item">
+                <Link to="/jobSearch" className="nav-text nav-link"><h6 className="nav-text">Search</h6></Link>
+              </li>
+
             
             </ul>
            

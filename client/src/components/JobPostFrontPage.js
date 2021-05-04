@@ -5,12 +5,27 @@ import "./JobPostFrontPage.css"
 
 export default function JobPostFrontPage(props) {
   //const [lists, setLists] = useState([])
+  const {title, description, credit1, credit2, credit3, salary, createdAt, company, location, tags, industry, remote, easyApplyBool, coverLetterBool, applyOnCompanySiteBool, applyOnCompanySiteLink, type, _id} = props.props
 
-  const {title, description, salary, createdAt, company, location, tags, industry, remote, easyApplyBool, coverLetterBool, applyOnCompanySiteBool, applyOnCompanySiteLink, type, _id} = props.props
+
+  let creditOne
+  if(credit1){
+    creditOne=<div className="credit red"></div>
+  }else{creditOne=<></>}
+
+  let creditTwo
+  if(credit2){
+    creditTwo=<div className="credit blue"></div>
+  }else{creditTwo=<></>}
+
+  let creditThree
+  if(credit3){
+    creditThree=<div className="credit yellow"></div>
+  }else{creditThree=<></>}
+
+
+
   return (
-
-    
-
     <section className="col-sm-12 col-md-6 col-lg-4 mb-3" key={_id} >
         
         <Link className="link" to={"/jobPosts/"+_id}>
@@ -21,6 +36,11 @@ export default function JobPostFrontPage(props) {
             <div className="description-box overflow">
                 <p>{description}</p>
             </div>
+
+            <div className="row">
+              {creditOne} {creditTwo} {creditThree}
+            </div>
+
             <h6>Posted at - {createdAt}</h6>
           </div>
         </Link>

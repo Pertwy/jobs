@@ -70,3 +70,21 @@ html {
   height: 1rem;
   background: white;
 }
+
+.credit{
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+  margin-left: 10px;
+  margin-top: 20px;
+}
+
+.yellow{
+  background-color: yellow;
+}
+.blue{
+  background-color: blue;
+}
+.red{
+  background-color: red;
+}

@@ -12,6 +12,9 @@ import CreateAccount from "./pages/CreateAccount"
 import Footer from "./components/Footer"
 // import TestForm from "./pages/TestForm"
 
+import JobSearch from "./pages/JobSearch"
+
+
 axios.defaults.withCredentials = true
 
 function App() {
@@ -29,6 +32,7 @@ function App() {
         <Route path="/profile" component={Profile} />
         <Route path="/recruiterProfile" component={RecruiterProfile} />
         <Route path="/jobPosts/:id" component={ViewJobPost} />
+        <Route path="/jobSearch" component={JobSearch} />
         {/* <Route path="/testForm" component={TestForm}></Route> */}
       </div>
 
