@@ -47,6 +47,16 @@ if (process.env.NODE_ENV === 'production') {
   })
 }
 
+
+app.get("https://api.indeed.com/ads/apisearch?publisher=123412341234123&q=java+developer&l=austin%2C+tx&sort=&radius=&st=&jt=&start=&limit=&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2"
+, function (req, res) {
+  res.header("Access-Control-Allow-Origin", "*");
+  console.log('Hello World');
+})
+
+
+
+
 app.listen(port, () => {
   console.log('working')
     console.log(`Server is running on port: ${port}`)
