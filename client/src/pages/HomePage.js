@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import JobPostFrontPage from "../components/JobPostFrontPage"
+import {useHistory} from 'react-router-dom';
 
 export default function HomePage(){
   const [books, setBooks] = useState([])  
@@ -34,13 +35,10 @@ console.log(process.env.NODE_ENV);
 
 
 
-  //Display all jobs
-  function JobList() {
-    return jobPostList && jobPostList.map(currentJobPost => {
-      return (
-        <JobPostFrontPage props={currentJobPost}/>
-      )
-    })
+  const history = useHistory();
+
+  function moveToSearch(){    
+    history.push("/jobSearch")
   }
 
 
@@ -65,36 +63,16 @@ console.log(process.env.NODE_ENV);
       <div id="example-box">
         <div id="example1">
           <div className="central-box">
-            <h3>Find your dream job and let's move on</h3>
+            <h3>Find jobs with environmental accreditations</h3>
             
-            <form className={classes.root, "col-sm-6"} noValidate autoComplete="off" >
+            <Button onClick={()=>moveToSearch()} variant="outlined">
+              search
+            </Button>
 
-              {/* <div className={"col-sm-3"}>...</div> */}
-
-              <TextField className={"col-sm-3 form-text"} id="standard-search" label="Job" type="search" 
-                          onChange={({ target }) => setJob(target.value)} />
-
-
-              <TextField className={"col-sm-3 form-text"} id="standard-search" onChange={({ target }) =>     
-                    setPostCode(target.value)} label="Post Code" />
-
-              <TextField className={"col-sm-3 form-text"} id="standard-search" onChange={({ target }) =>     
-                    setSalary(target.value)} label="Salary" />
-
-              {/* <Button onClick={() => handleSearch()} variant="outlined">
-                search
-              </Button> */}
-            </form>
           </div>
         </div>
       </div>
 
-      <div className="container mt-5 mb-5 ">
-          <h2 className="book-row-title pb-5">OPEN POSITONS</h2>
-          <div className="row d-flex justify-content-between">
-            <JobList/>
-          </div>
-      </div>
     </div>
   )
 }

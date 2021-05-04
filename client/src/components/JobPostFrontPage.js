@@ -30,18 +30,18 @@ export default function JobPostFrontPage(props) {
         
         <Link className="link" to={"/jobPosts/"+_id}>
           <div className="job-box  p-4">
-            <h4>{title}</h4>
-            <h5>{location}</h5>
+            <h4 className="title">{title}</h4>
+            <h5 className="location">{location}</h5>
             <h5 className="salary">£{salary} per Annum</h5>
             <div className="description-box overflow">
-                <p>{description}</p>
+                <p className="description">{description}</p>
             </div>
 
             <div className="row">
               {creditOne} {creditTwo} {creditThree}
             </div>
 
-            <h6>Posted at - {createdAt}</h6>
+            <h6 className="createdAt">Posted at - {createdAt}</h6>
           </div>
         </Link>
         

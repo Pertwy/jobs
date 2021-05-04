@@ -43,7 +43,20 @@ export default function ViewJobPost(props){
       .then(response => console.log(response))
   }
 
+  let creditOne
+  if(jobPost.credit1){
+    creditOne=<div className="credit red"></div>
+  }else{creditOne=<></>}
 
+  let creditTwo
+  if(jobPost.credit2){
+    creditTwo=<div className="credit blue"></div>
+  }else{creditTwo=<></>}
+
+  let creditThree
+  if(jobPost.credit3){
+    creditThree=<div className="credit yellow"></div>
+  }else{creditThree=<></>}
 
   return (
     <div >
@@ -51,22 +64,27 @@ export default function ViewJobPost(props){
 
       <h1>{jobPost.title}</h1>
       <h3>Salary: {jobPost.salary}</h3>
-      <p>{jobPost.description}</p>
-      <br></br>
-      <br></br>
-      <br></br>
-      
-      <h5>Company: {jobPost.company}</h5>
-      <h5>Location: {jobPost.location}</h5>
-      
-      <h5>Industry: {jobPost.industry}</h5>
-      <h5>{jobPost.remote}</h5>
-      <h5>Easy apply? {jobPost.easyApplyBool}</h5>
-      <h5>Cover Letter Needed? {jobPost.coverLetterBool}</h5>
-      <h5>Apply on Company site? {jobPost.applyOnCompanySiteBool}</h5>
-      <h5>Company site Link: {jobPost.applyOnCompanySiteLink}</h5>
-      <h5>Type: {jobPost.type}</h5>
 
+      <div className="row">
+        {creditOne} {creditTwo} {creditThree}
+      </div>
+
+      <div>
+        {jobPost.description}
+      </div>
+
+      <div>
+        <h5>Company: {jobPost.company}</h5>
+        <h5>Location: {jobPost.location}</h5>
+        
+        <h5>Industry: {jobPost.industry}</h5>
+        <h5>{jobPost.remote}</h5>
+        <h5>Easy apply? {jobPost.easyApplyBool}</h5>
+        <h5>Cover Letter Needed? {jobPost.coverLetterBool}</h5>
+        <h5>Apply on Company site? {jobPost.applyOnCompanySiteBool}</h5>
+        <h5>Company site Link: {jobPost.applyOnCompanySiteLink}</h5>
+        <h5>Type: {jobPost.type}</h5>
+      </div>
       <button onClick={()=>handleSave()}>SAVE</button>
       <button onClick={()=>handleApply()}>APPLY</button>
 

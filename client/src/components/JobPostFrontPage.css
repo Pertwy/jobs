@@ -1,23 +1,23 @@
-h4{
+.title{
   font-size: 1.5rem;
   font-weight: bold;
   color: black;
   line-height: 20px;
 }
 
-h5{
+.location{
   font-size: 1rem;
   color: black;
   line-height: 14px;
 }
 
-h6{
+.createdAt{
   padding-top: 1.8em;
   font-size: 0.7rem;
   color: black;
 }
 
-p{
+.description{
   font-size: 1rem;
   color: black;
   display: -webkit-box;
