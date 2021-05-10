@@ -2,7 +2,7 @@ import './App.css';
 import { BrowserRouter as Router, Route} from "react-router-dom";
 import axios from "axios"
 
-import Navbar2 from "./components/Navbar"
+// import Navbar2 from "./components/Navbar"
 import HomePage from "./pages/HomePage"
 import SignIn from "./pages/SignIn"
 import Profile from "./pages/Profile"
@@ -11,6 +11,7 @@ import ViewJobPost from "./idPages/ViewJobPost"
 import CreateAccount from "./pages/CreateAccount"
 import Footer from "./components/Footer"
 // import TestForm from "./pages/TestForm"
+import Navbar from "./components/NavbarOld"
 
 import JobSearch from "./pages/JobSearch"
 
@@ -21,7 +22,7 @@ function App() {
   return (
     <Router>
       <div >
-        <Navbar2 />
+        <Navbar />
       </div>
 
       <div>
